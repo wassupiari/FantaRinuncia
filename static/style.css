@@ -1,0 +1,26 @@
+/* CSS per il layout flessibile delle card */
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card-item {
+    flex: 1 1 calc(33.33% - 20px); /* Imposta larghezza flessibile per adattarsi a 3 card per riga, con 20px di margine tra le card */
+    margin-bottom: 20px;
+    /* Aggiungi altri stili se necessario */
+}
+.input-group {
+    width: 100%; /* Imposta la larghezza al 100% per occupare tutto lo spazio disponibile */
+}
+
+.input-group .form-control {
+    border-top-right-radius: 0; /* Rimuove il bordo arrotondato in alto a destra */
+    border-bottom-right-radius: 0; /* Rimuove il bordo arrotondato in basso a destra */
+}
+
+.input-group .btn {
+    border-top-left-radius: 0; /* Rimuove il bordo arrotondato in alto a sinistra */
+    border-bottom-left-radius: 0; /* Rimuove il bordo arrotondato in basso a sinistra */
+}
+
