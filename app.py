@@ -10,6 +10,39 @@ squadra_json_file = 'squadra.json'
 utenti_json_file = 'utenti.json'
 db_json_file = 'people.json'
 
+# Funzione per leggere i dati dal file JSON
+def leggi_dati_da_file_json(nome_file):
+    with open(nome_file, 'r') as file:
+        dati = json.load(file)
+    return dati
+
+# Middleware per nascondere la richiesta GET /people
+@app.before_request
+def nascondi_get_people():
+    if request.path == '/people':
+        return "Accesso non consentito", 403
+@app.before_request
+
+# Percorso per ottenere i dati senza mostrare i parametri GET
+@app.route('/api/people', methods=['GET'])
+def get_people():
+    # Leggi i dati dal file JSON
+    dati = leggi_dati_da_file_json(db_json_file)
+    return jsonify(dati)
+
+# Funzione per caricare gli utenti dal file JSON
+def carica_utenti():
+    if os.path.exists(utenti_json_file):
+        with open(utenti_json_file, 'r') as file:
+            return json.load(file)
+    else:
+        return {}
+
+# Funzione per salvare gli utenti nel file JSON
+def salva_utenti(utenti):
+    with open(utenti_json_file, 'w') as file:
+        json.dump(utenti, file)
+
 @app.route('/auth/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -41,10 +74,6 @@ def index():
     if 'username' in session:
         return render_template('index.html', data=people)
     return 'Non sei loggato <a href="/auth/login">Login</a>'
-
-@app.route('/people', methods=['GET'])
-def get_people():
-    return jsonify(people)
 
 @app.route('/crea-squadra', methods=['POST'])
 def crea_squadra():
@@ -88,19 +117,6 @@ def visualizza_squadre():
         else:
             return 'Nessuna squadra trovata'
     return 'Non sei loggato <a href="/auth/login">Login</a>'
-
-# Funzione per caricare gli utenti dal file JSON
-def carica_utenti():
-    if os.path.exists(utenti_json_file):
-        with open(utenti_json_file, 'r') as file:
-            return json.load(file)
-    else:
-        return {}
-
-# Funzione per salvare gli utenti nel file JSON
-def salva_utenti(utenti):
-    with open(utenti_json_file, 'w') as file:
-        json.dump(utenti, file)
 
 @app.route('/auth/register', methods=['GET', 'POST'])
 def registrazione():
