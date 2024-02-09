@@ -21,7 +21,7 @@ def leggi_dati_da_file_json(nome_file):
 def nascondi_get_people():
     if request.path == '/people':
         return "Accesso non consentito", 403
-@app.before_request
+
 
 # Percorso per ottenere i dati senza mostrare i parametri GET
 @app.route('/api/people', methods=['GET'])
