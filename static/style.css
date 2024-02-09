@@ -1,26 +1,170 @@
+html,body {
+  font-family: Montserrat, sans-serif;
+    max-width: 100%;
+  overflow-x: hidden;
+
+}
+
+.navbar-brand {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 48px;
+  height: 48px;
+}
+
+
+/*
+NAVBAR
+*/
+
+.navbar-nav .nav-item:hover {
+  background-color: #B2A59B;
+}
+
+
+
+
+/*
+SQUAD BUILDER
+*/
+
+
+/* Stile generale per il contenitore principale */
+#squad-maker {
+  margin: 20px auto;
+  padding: 20px;
+  width: 300px;
+  text-align: justify;
+  margin-top: 75px;
+
+}
+
+/* Stile per il paragrafo "La tua squadra" */
+#squad-maker p {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Stile per il contenitore della squadra */
+#squadra-container {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* Stile per il contenitore degli avvisi */
+#alert-container {
+  margin-bottom: 10px;
+}
+
+/* Stile per il pulsante "Salva Squadra" */
+#salva-squadra-button {
+  background-color: #2D3250;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Stile per il pulsante "Salva Squadra" al passaggio del mouse */
+#salva-squadra-button:hover {
+  background-color: #7077A1;
+}
+
+/*
+CARDS
+*/
+
 /* CSS per il layout flessibile delle card */
 #cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
+    text-align: center;
 }
 
 .card-item {
-    flex: 1 1 calc(33.33% - 20px); /* Imposta larghezza flessibile per adattarsi a 3 card per riga, con 20px di margine tra le card */
-    margin-bottom: 20px;
-    /* Aggiungi altri stili se necessario */
-}
-.input-group {
-    width: 100%; /* Imposta la larghezza al 100% per occupare tutto lo spazio disponibile */
+    flex: 1 1 calc(33.33% - 20px);
+    margin-bottom: 10px;
 }
 
-.input-group .form-control {
-    border-top-right-radius: 0; /* Rimuove il bordo arrotondato in alto a destra */
-    border-bottom-right-radius: 0; /* Rimuove il bordo arrotondato in basso a destra */
+
+/* Stile generale per il contenitore delle carte */
+#cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.input-group .btn {
-    border-top-left-radius: 0; /* Rimuove il bordo arrotondato in alto a sinistra */
-    border-bottom-left-radius: 0; /* Rimuove il bordo arrotondato in basso a sinistra */
+/* Stile per le carte individuali */
+.card-item {
+  margin: 2px;
 }
+
+/* Stile per il testo delle carte */
+.card-text {
+  font-weight: bold;
+}
+
+/* Stile per il valore dei punti */
+.points-value {
+  color: #B80000;
+  font-weight: bold;
+}
+
+
+/*
+FOOTER
+*/
+
+.footer-heart{text-align:center;
+  font-family: open sans, sans-serif;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-heart a{border-bottom: 1px solid #453886;color: #453886;padding-bottom: .25em; text-decoration: none;}
+
+.footer-heart a:hover{color:#2196f3; background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: 20%;
+  border-bottom: 0;
+  padding-bottom: .3em;
+  text-decoration: none;}
+
+.emoji{vertical-align: middle;}
+
+
+/*
+SCROLLBAR
+*/
+
+
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: #ccc #cccccc;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #cccccc;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+    border: 3px solid #ccc;
+  }
 

@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Funzione per aggiornare la griglia delle persone selezionate
     function updateSquadraGrid() {
         var squadraContainer = document.getElementById("squadra-container");
-        squadraContainer.innerHTML = "";
+        squadraContainer.innerHTML = '<div class="card-body"></div>';
 
         squadra.forEach(function(person) {
             var cardElement = document.createElement("div");
-            cardElement.classList.add("card");
-            cardElement.innerHTML = '<div class="card-body"><p class="card-text">' + person + '</p></div>';
+            cardElement.innerHTML = '<div class="card-body" ><p class="card-text">' + person  + '</p>';
             squadraContainer.appendChild(cardElement);
         });
     }
