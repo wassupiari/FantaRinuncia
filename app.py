@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import json
 import os
+import bcrypt
+
 
 app = Flask(__name__)
 app.secret_key = 'il_tuo_segreto'
@@ -46,8 +48,13 @@ def salva_utenti(utenti):
     with open(utenti_json_file, 'w') as file:
         json.dump(utenti, file)
 
+
 @app.route('/auth/login', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:
+        # Se l'utente è già loggato, reindirizzalo alla pagina principale
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -56,12 +63,15 @@ def login():
         utenti = carica_utenti()
 
         # Verifica se l'utente esiste e le credenziali sono corrette
-        if username in utenti and utenti[username] == password:
+        if username in utenti and bcrypt.checkpw(password.encode('utf-8'), utenti[username].encode('utf-8')):
             session['username'] = username
             return redirect(url_for('index'))
         else:
             return 'Credenziali non valide. <a href="/auth/login">Riprova</a>'
+
+    # Se la richiesta non è di tipo POST, mostra la pagina di login
     return render_template('auth/login.html')
+
 
 @app.route('/logout')
 def logout():
@@ -137,12 +147,18 @@ def registrazione():
         if username in utenti:
             return 'Username già esistente. <a href="/auth/register">Riprova</a>'
         else:
-            # Aggiunge il nuovo utente al dizionario
-            utenti[username] = password
+            # Cripta la password prima di salvarla
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+            # Aggiunge il nuovo utente al dizionario con la password criptata
+            utenti[username] = hashed_password.decode('utf-8')
+
             # Salva il dizionario aggiornato nel file JSON
             salva_utenti(utenti)
+
             return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
     return render_template('auth/register.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
