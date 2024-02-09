@@ -19,16 +19,19 @@ def leggi_dati_da_file_json(nome_file):
 # Middleware per nascondere la richiesta GET /people
 @app.before_request
 def nascondi_get_people():
-    if request.path == '/people':
+    if request.path == '/people' and 'username' not in session:
         return "Accesso non consentito", 403
 
-
-# Percorso per ottenere i dati senza mostrare i parametri GET
 @app.route('/api/people', methods=['GET'])
 def get_people():
-    # Leggi i dati dal file JSON
-    dati = leggi_dati_da_file_json(db_json_file)
-    return jsonify(dati)
+    # Assicurati che l'utente sia autenticato per accedere all'API
+    if 'username' in session:
+        # Leggi i dati dal file JSON
+        dati = leggi_dati_da_file_json(db_json_file)
+        return jsonify(dati)
+    else:
+        return "Accesso non consentito", 403
+
 
 # Funzione per caricare gli utenti dal file JSON
 def carica_utenti():
@@ -109,6 +112,7 @@ def crea_squadra():
 @app.route('/visualizza-squadre')
 def visualizza_squadre():
     if 'username' in session:
+        # Visualizza le squadre solo se l'utente è autenticato
         if os.path.exists(squadra_json_file):
             with open(squadra_json_file, 'r') as file:
                 squadre = json.load(file)
@@ -116,7 +120,9 @@ def visualizza_squadre():
                 return render_template('/src/views.html', squadre=squadre, username=username)
         else:
             return 'Nessuna squadra trovata'
-    return 'Non sei loggato <a href="/auth/login">Login</a>'
+    # Se l'utente non è autenticato, reindirizzalo alla pagina di login
+    return redirect(url_for('login'))
+
 
 @app.route('/auth/register', methods=['GET', 'POST'])
 def registrazione():
