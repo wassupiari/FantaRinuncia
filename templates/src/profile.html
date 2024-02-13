@@ -44,15 +44,20 @@
     <div class="card mb-4">
         <div class="card-body text-center">
 
-            {% if username==session['username'] %}
+            {% if username == session['username'] %}
             <h5 class="my-3">{{ username }}</h5>
-            {% endif %}
-            <p class="text-muted mb-1">La bucchina di tua mamma</p>
+
+            <p class="text-muted mb-1">{{ bio }}</p>
+
             <div class="d-flex justify-content-center mb-2">
-            <span class="badge custom-badge badge-dark">FOUNDER</span>
+                {% for badge in badges %}
+               <span class="badge custom-badge badge-dark mr-2 mb-2">{{ badge }}</span>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
     </div>
+
 
 </div>
 

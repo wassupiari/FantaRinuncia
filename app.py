@@ -64,7 +64,7 @@ def login():
         utenti = carica_utenti()
 
         # Verifica se l'utente esiste e le credenziali sono corrette
-        if username in utenti and bcrypt.checkpw(password.encode('utf-8'), utenti[username].encode('utf-8')):
+        if username in utenti and bcrypt.checkpw(password.encode('utf-8'), utenti[username]['password'].encode('utf-8')):
             session['username'] = username
             return redirect(url_for('index'))
         else:
@@ -120,19 +120,33 @@ def crea_squadra():
         return 'Squadra creata e salvata.'
     return 'Non sei loggato <a href="/auth/login">Login</a>'
 
+
 @app.route('/profile')
 def profile():
     if 'username' in session:
-        # Visualizza le squadre solo se l'utente è autenticato
-        if os.path.exists(squadra_json_file):
-            with open(squadra_json_file, 'r') as file:
-                squadre = json.load(file)
+        # Verifica se il file utenti_json_file esiste
+        if os.path.exists(utenti_json_file):
+            with open(utenti_json_file, 'r') as file:
+                squadre = leggi_dati_da_file_json(squadra_json_file)
+                utenti = json.load(file)
                 username = session['username']
-                return render_template('/src/profile.html', username=session['username'], squadre=squadre)
+                # Verifica se l'utente corrente esiste nel file utenti_json_file
+                if username in utenti:
+                    bio = utenti[username]['bio']
+                    badges = utenti[username]['badges']
+                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,squadre=squadre)
+                else:
+                    return 'Utente non trovato nel file utenti.json'
         else:
-            return 'Nessuna squadra trovata'
-    # Se l'utente non è autenticato, reindirizzalo alla pagina di login
-    return redirect(url_for('login'))
+            return 'Il file utenti.json non esiste'
+    else:
+        # Se l'utente non è autenticato, reindirizzalo alla pagina di login
+        return redirect(url_for('login'))
+
+
+if os.path.exists(squadra_json_file):
+    with open(squadra_json_file, 'r') as file:
+        squadre = json.load(file)
 
 
 @app.route('/auth/register', methods=['GET', 'POST'])
@@ -152,7 +166,7 @@ def registrazione():
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
             # Aggiunge il nuovo utente al dizionario con la password criptata
-            utenti[username] = hashed_password.decode('utf-8')
+            utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': '', 'badges': []}
 
             # Salva il dizionario aggiornato nel file JSON
             salva_utenti(utenti)

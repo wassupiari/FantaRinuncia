@@ -7,10 +7,8 @@ PROFILE
     .badge-dark {
       background-color: #343a40;
     }
-        .custom-badge {
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      color: white;
-    }
+/* Spazio tra i badge */
+.custom-badge {
+    margin-right: 5px; /* Regola la distanza orizzontale tra i badge */
+    margin-bottom: 5px; /* Regola la distanza verticale tra i badge */
+}
