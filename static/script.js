@@ -155,4 +155,15 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+// FAVICON TO ALL PAGES
+// Ottieni l'elemento <head>
+var head = document.head || document.getElementsByTagName('head')[0];
+
+// Crea un nuovo elemento <link> per la favicon
+var faviconLink = document.createElement('link');
+faviconLink.rel = 'icon';
+faviconLink.href = 'public/icon.ico';
+
+// Aggiungi il link della favicon all'elemento <head>
+head.appendChild(faviconLink);
 
