@@ -1,0 +1,16 @@
+/*
+PROFILE
+*/
+
+
+
+    .badge-dark {
+      background-color: #343a40;
+    }
+        .custom-badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+    }
