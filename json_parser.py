@@ -12,6 +12,6 @@ def aggiungi_punti(json_file, nuovo_json_file):
         json.dump(data, file, indent=4)
 
 # Utilizzo dello script
-json_file = "people.json"  # Imposta il percorso del file JSON da leggere
-nuovo_json_file = "people.json"  # Imposta il percorso del nuovo file JSON
+json_file = "private/people.json"  # Imposta il percorso del file JSON da leggere
+nuovo_json_file = "private/people.json"  # Imposta il percorso del nuovo file JSON
 aggiungi_punti(json_file, nuovo_json_file)
