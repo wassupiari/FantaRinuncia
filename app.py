@@ -4,13 +4,14 @@ import os
 import bcrypt
 
 
-app = Flask(__name__)
-app.secret_key = 'il_tuo_segreto'
+app = Flask(__name__, static_url_path='/static')
+
+app.secret_key = '8a6sd-a9s66d8as86d-9asd'
 
 # Percorso del file JSON per le squadre
-squadra_json_file = 'squadra.json'
-utenti_json_file = 'utenti.json'
-db_json_file = 'people.json'
+squadra_json_file = 'private/squadra.json'
+utenti_json_file = 'private/utenti.json'
+db_json_file = 'private/people.json'
 
 # Funzione per leggere i dati dal file JSON
 def leggi_dati_da_file_json(nome_file):
@@ -107,7 +108,7 @@ def crea_squadra():
 
         # Verifica se l'utente ha già una squadra e restituisci un messaggio di errore se è così
         if username in squadre:
-            return 'Hai già creato una squadra. Per creare una nuova squadra, cancella prima quella esistente.'
+            return {}
 
         # Aggiungi la nuova squadra per l'utente
         squadre[username] = selected_names
@@ -119,15 +120,15 @@ def crea_squadra():
         return 'Squadra creata e salvata.'
     return 'Non sei loggato <a href="/auth/login">Login</a>'
 
-@app.route('/visualizza-squadre')
-def visualizza_squadre():
+@app.route('/profile')
+def profile():
     if 'username' in session:
         # Visualizza le squadre solo se l'utente è autenticato
         if os.path.exists(squadra_json_file):
             with open(squadra_json_file, 'r') as file:
                 squadre = json.load(file)
                 username = session['username']
-                return render_template('/src/views.html', squadre=squadre, username=username)
+                return render_template('/src/profile.html', username=session['username'], squadre=squadre)
         else:
             return 'Nessuna squadra trovata'
     # Se l'utente non è autenticato, reindirizzalo alla pagina di login
@@ -159,6 +160,9 @@ def registrazione():
             return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
     return render_template('auth/register.html')
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
