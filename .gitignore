@@ -78,3 +78,6 @@ fabric.properties
 
 # parser json file
 json_parser.py
+
+# folder of json db
+private/*
