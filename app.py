@@ -2,13 +2,15 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 import json
 import os
 import bcrypt
+import base64
+import requests
 
 
 app = Flask(__name__, static_url_path='/static')
 
 app.secret_key = '8a6sd-a9s66d8as86d-9asd'
 
-# Percorso del file JSON per le squadre
+
 squadra_json_file = 'private/squadra.json'
 utenti_json_file = 'private/utenti.json'
 db_json_file = 'private/people.json'
@@ -24,6 +26,43 @@ def leggi_dati_da_file_json(nome_file):
 def nascondi_get_people():
     if request.path == '/people' and 'username' not in session:
         return "Accesso non consentito", 403
+
+def get_base64_from_image_url(image_url):
+    response = requests.get(image_url)
+    if response.status_code == 200:
+        image_data = response.content
+        base64_encoded_image = base64.b64encode(image_data).decode('utf-8')
+        return base64_encoded_image
+    else:
+        return None
+@app.route('/api/get_image')
+def get_image_base64():
+    utenti = leggi_dati_da_file_json(utenti_json_file)
+
+    # Dizionario per contenere i dati dell'immagine di ogni utente
+    immagini_utenti = {}
+
+    # Ciclo attraverso ogni utente nel file JSON
+    for username, user_data in utenti.items():
+        # Recupera i dati dell'immagine per l'utente corrente
+        image_data = user_data.get("image_data", {'base64_encoded_image'})
+        image_link = image_data.get("image_link", "")
+
+        # Se l'URL dell'immagine è vuoto, passa al prossimo utente
+        if not image_link:
+            continue
+
+        # Ottieni l'encoding Base64 dell'immagine
+        base64_encoded_image = get_base64_from_image_url(image_link)
+
+        # Aggiorna l'oggetto JSON con l'encoding Base64 dell'immagine
+        image_data["base64_encoded_image"] = base64_encoded_image
+
+        # Aggiungi i dati dell'immagine dell'utente al dizionario
+        immagini_utenti[username] = image_data
+
+        # Restituisci i dati dell'immagine con l'encoding Base64 per tutti gli utenti
+    return jsonify(immagini_utenti)
 
 @app.route('/api/people', methods=['GET'])
 def get_people():
@@ -136,7 +175,7 @@ def profile():
                     badges = utenti[username]['badges']
                     return render_template('/src/profile.html', username=username, bio=bio, badges=badges,squadre=squadre)
                 else:
-                    return 'Utente non trovato nel file utenti.json'
+                    return 'Questo utente non esiste'
         else:
             return 'Il file utenti.json non esiste'
     else:
@@ -154,6 +193,7 @@ def registrazione():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        image_link = request.form['image_link']
 
         # Carica gli utenti esistenti
         utenti = carica_utenti()
@@ -161,22 +201,35 @@ def registrazione():
         # Controlla se l'username è già presente
         if username in utenti:
             return 'Username già esistente. <a href="/auth/register">Riprova</a>'
-        else:
-            # Cripta la password prima di salvarla
-            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-            # Aggiunge il nuovo utente al dizionario con la password criptata
-            utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': '', 'badges': []}
+        # Cripta la password prima di salvarla
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-            # Salva il dizionario aggiornato nel file JSON
-            salva_utenti(utenti)
+        # Aggiunge il nuovo utente al dizionario con la password criptata
+        utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': '', 'badges': []}
 
-            return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
+        # Verifica se l'URL dell'immagine è fornito
+        if image_link:
+            # Ottiene l'immagine da un URL e ne codifica l'encoding Base64
+            base64_encoded_image = get_base64_from_image_url(image_link)
+
+            if base64_encoded_image:
+                utenti[username]['image_data'] = {
+                    'image_link': image_link,
+                    'base64_encoded_image': base64_encoded_image
+                }
+            else:
+                return 'Errore durante il caricamento dell\'immagine. <a href="/auth/register">Riprova</a>'
+
+        # Salva gli utenti aggiornati nel file JSON
+        salva_utenti(utenti)
+
+        return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
+
     return render_template('auth/register.html')
-
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
