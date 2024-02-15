@@ -31,10 +31,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-md-auto gap-2">
                 <li class="nav-item rounded">
-                    <a class="nav-link active" aria-current="page" href="/profile"><i
-                            class="bi bi-house-fill me-2"></i>Squadre</a>
-                </li>
-                <li class="nav-item rounded">
                     <a class="nav-link" href="#"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
                 </li>
                 <li class="nav-item rounded">
@@ -44,11 +40,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill me-2"></i>Profile</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Account</a></li>
-
-                        <!--              REMINDER      ACCOUNT                           -->
-
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="/profile">Account</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -97,10 +89,12 @@
                 <!-- Qui verranno aggiunti dinamicamente gli elementi della squadra -->
             </div>
             <div id="alert-container"></div>
+            <div id="team-points" class="mb-3"></div>
             <button id="salva-squadra-button" class="btn btn-success" onclick="salvaSquadra()">Salva Squadra</button>
             <button onclick="topFunction()" id="myBtn" title="Go to top">
                 <i class="fa-solid fa-arrow-up"></i>
             </button>
+
         </div>
     </div>
 
