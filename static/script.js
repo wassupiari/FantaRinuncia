@@ -1,4 +1,5 @@
-let squadra = [];
+var squadra = [];
+var maxPoints =  100;
 console.clear();
  function salvaSquadra() {
         fetch('/crea-squadra', {
@@ -46,17 +47,25 @@ console.clear();
     }
 document.addEventListener("DOMContentLoaded", function() {
 
+
     // Funzione per aggiornare la griglia delle persone selezionate
     function updateSquadraGrid() {
         var squadraContainer = document.getElementById("squadra-container");
-        squadraContainer.innerHTML = '<div class="card-body"></div>';
+        squadraContainer.innerHTML = '';
+        var totalPoints = 0; // Inizializza il conteggio totale dei punti della squadra
 
         squadra.forEach(function(person, index) {
             var cardElement = document.createElement("div");
             cardElement.classList.add("card");
-            cardElement.innerHTML = '<div class="card-body"><p class="card-text">' + person + '</p><button class="btn btn-danger btn-sm delete-btn" data-index="' + index + '">Elimina</button></div>';
+            cardElement.innerHTML = '<div class="card-body"><p class="card-text">' + person.name + '</p><p class="points-text">Punti: ' + person.points + '</p><button class="btn btn-danger btn-sm delete-btn" data-index="' + index + '">Elimina</button></div>';
             squadraContainer.appendChild(cardElement);
+
+            totalPoints += person.points; // Aggiungi i punti della persona al conteggio totale
         });
+
+        // Mostra il punteggio totale della squadra
+        var pointsContainer = document.getElementById("team-points");
+        pointsContainer.innerText = "Punteggio totale squadra: " + totalPoints;
 
         // Aggiungi gestore di eventi per i pulsanti di eliminazione
         var deleteButtons = document.querySelectorAll('.delete-btn');
@@ -65,21 +74,45 @@ document.addEventListener("DOMContentLoaded", function() {
                 var indexToRemove = event.target.getAttribute('data-index');
                 squadra.splice(indexToRemove, 1);
                 updateSquadraGrid();
+
+                // Trova il checkbox corrispondente e deselezionalo
+                var checkboxId = "btn-check-" + indexToRemove;
+                console.log("Checkbox ID:", checkboxId); // Controlla l'ID dell'elemento checkbox
+                var checkbox = document.getElementById(checkboxId);
+                if (checkbox) {
+                    checkbox.checked = false;
+                }
             });
         });
+
+        // Controlla se la somma dei punti della squadra supera 100 e aggiungi una classe di avviso se necessario
+        if (totalPoints > 50) {
+            pointsContainer.classList.add("text-danger");
+        } else {
+            pointsContainer.classList.remove("text-danger");
+        }
     }
 
-    // Selezionatore per le card e gestione degli eventi
     var cardsContainer = document.getElementById("cards-container");
     cardsContainer.addEventListener("change", function(event) {
         var checkbox = event.target;
         var card = checkbox.closest(".card");
         var cardText = card.querySelector(".card-text").textContent;
+        var pointsValue = parseInt(card.querySelector(".points-value").innerText);
 
         if (checkbox.checked) {
-            squadra.push(cardText);
+            // Controlla se aggiungere questa persona alla squadra supera il limite massimo di 100 punti
+            var totalPoints = squadra.reduce((total, person) => total + person.points, 0) + pointsValue;
+            if (totalPoints <= 50 && squadra.length < 5) {
+                squadra.push({ name: cardText, points: pointsValue });
+            } else {
+                checkbox.checked = false; // Annulla la selezione se supera il limite di 100 punti o il massimo di 5 persone
+                var alertContainer = document.getElementById("alert-container-2");
+                alertContainer.innerHTML = '<div class="alert alert-danger" role="alert">La tua squadra ha già raggiunto il massimo punteggio consentito di 100 punti o il numero massimo di 5 persone!</div>';
+            }
         } else {
-            var index = squadra.indexOf(cardText);
+            // Rimuovi la persona dalla squadra
+            var index = squadra.findIndex(person => person.name === cardText);
             if (index !== -1) {
                 squadra.splice(index, 1);
             }
@@ -89,13 +122,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
+// Funzione per salvare la squadra su un file JSON
 
-    // Funzione per salvare la squadra su un file JSON
+// Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
+document.getElementById("salva-squadra-button").addEventListener("click", function() {
+    salvaSquadra();
+});
 
-        // Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
-    document.getElementById("salva-squadra-button").addEventListener("click", function() {
-        salvaSquadra();
-    });
+
+// Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
+document.getElementById("salva-squadra-button").addEventListener("click", function() {
+    salvaSquadra();
+});
+
 
     // Funzione per gestire l'evento di clic sul pulsante di ricerca
 document.getElementById("search-form").addEventListener("submit", function(event) {
@@ -129,7 +168,6 @@ function searchCards() {
         searchMessage.style.display = "block"; // Mostra il messaggio se nessuna persona è stata trovata
     }
 }
-
 
 });
 
@@ -166,4 +204,10 @@ faviconLink.href = 'public/icon.ico';
 
 // Aggiungi il link della favicon all'elemento <head>
 head.appendChild(faviconLink);
+
+
+
+
+// Aggiungi un gestore di eventi a ciascun pulsante "Elimina"
+
 

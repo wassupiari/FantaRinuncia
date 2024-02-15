@@ -4,9 +4,18 @@ PROFILE
 
 
 
-    .badge-dark {
-      background-color: #343a40;
-    }
+
+html,body {
+  font-family: Montserrat, sans-serif;
+    max-width: 100%;
+  overflow-x: hidden;
+
+}
+
+.badge-dark {
+    background-color: #343a40;
+}
+
 /* Spazio tra i badge */
 .custom-badge {
     margin-right: 5px; /* Regola la distanza orizzontale tra i badge */
