@@ -1,12 +1,17 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
 import json
 import os
 import bcrypt
 import base64
 import requests
+from logger import setup_logger
+
+# logging system
+logger = setup_logger('app.log')
 
 
-app = Flask(__name__, static_url_path='/static')
+
+app = Flask(__name__, static_url_path='/static',static_folder='static')
 
 app.secret_key = '8a6sd-a9s66d8as86d-9asd'
 
@@ -14,6 +19,11 @@ app.secret_key = '8a6sd-a9s66d8as86d-9asd'
 squadra_json_file = 'private/squadra.json'
 utenti_json_file = 'private/utenti.json'
 db_json_file = 'private/people.json'
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico',memetype=' ')
 
 # Funzione per leggere i dati dal file JSON
 def leggi_dati_da_file_json(nome_file):
