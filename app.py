@@ -23,7 +23,7 @@ db_json_file = 'private/people.json'
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico',memetype=' ')
+    return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico')
 
 # Funzione per leggere i dati dal file JSON
 def leggi_dati_da_file_json(nome_file):

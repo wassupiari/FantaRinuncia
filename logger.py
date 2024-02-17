@@ -1,5 +1,6 @@
 import logging
 import colorlog
+from logging.handlers import TimedRotatingFileHandler
 
 def setup_logger(log_file):
     # Configurazione del logger
@@ -8,14 +9,14 @@ def setup_logger(log_file):
 
     # Formattatore per i log colorati
     formatter = colorlog.ColoredFormatter(
-        '%(log_color)s%(asctime)s - %(levelname)s - %(message)s',
+        '%(log_color)s %(asctime)s - %(module)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S',
         log_colors={
-            'DEBUG': 'cyan',
-            'INFO': 'green',
-            'WARNING': 'yellow',
-            'ERROR': 'red',
-            'CRITICAL': 'red,bg_white',
+            'DEBUG': '\x1b[36m',  # Cyan
+            'INFO': '\x1b[32m',   # Green
+            'WARNING': '\x1b[33m',  # Yellow
+            'ERROR': '\x1b[31m',  # Red
+            'CRITICAL': '\x1b[41m\x1b[37m',  # White on Red
         }
     )
 
@@ -27,8 +28,8 @@ def setup_logger(log_file):
     logger.addHandler(console_handler)
 
     try:
-        # Gestore per i log su file
-        file_handler = logging.FileHandler(log_file)
+        # Gestore per i log su file con rotazione oraria
+        file_handler = TimedRotatingFileHandler(log_file, when='H', interval=1, backupCount=0)
         file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
         logger.addHandler(file_handler)
     except Exception as e:
@@ -38,4 +39,3 @@ def setup_logger(log_file):
     logging.basicConfig(filename=log_file, level=logging.DEBUG)
 
     return logger
-
