@@ -56,8 +56,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         squadra.forEach(function(person, index) {
             var cardElement = document.createElement("div");
-            cardElement.classList.add("card");
-            cardElement.innerHTML = '<div class="card-body"><p class="card-text">' + person.name + '</p><p class="points-text">Punti: ' + person.points + '</p><button class="btn btn-danger btn-sm delete-btn" data-index="' + index + '">Elimina</button></div>';
+            cardElement.classList.add("card","mb-3");
+            cardElement.innerHTML = '<div class="card-body p-3" > ' +
+                '<p class="card-text">' + person.name + '</p><p class="points-text">Punti: ' + person.points + '</p> ' +
+                '<button class="btn btn-danger btn-sm delete-btn" data-index="' + index + '">Elimina</button>' +
+                '</div>';
             squadraContainer.appendChild(cardElement);
 
             totalPoints += person.points; // Aggiungi i punti della persona al conteggio totale
@@ -129,14 +132,7 @@ document.getElementById("salva-squadra-button").addEventListener("click", functi
     salvaSquadra();
 });
 
-
-// Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
-document.getElementById("salva-squadra-button").addEventListener("click", function() {
-    salvaSquadra();
-});
-
-
-    // Funzione per gestire l'evento di clic sul pulsante di ricerca
+// Funzione per gestire l'evento di clic sul pulsante di ricerca
 document.getElementById("search-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Evita l'invio del modulo predefinito (che ricarica la pagina)
     searchCards();
@@ -193,21 +189,5 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-// FAVICON TO ALL PAGES
-// Ottieni l'elemento <head>
-var head = document.head || document.getElementsByTagName('head')[0];
-
-// Crea un nuovo elemento <link> per la favicon
-var faviconLink = document.createElement('link');
-faviconLink.rel = 'icon';
-faviconLink.href = 'public/icon.ico';
-
-// Aggiungi il link della favicon all'elemento <head>
-head.appendChild(faviconLink);
-
-
-
-
-// Aggiungi un gestore di eventi a ciascun pulsante "Elimina"
 
 

@@ -179,11 +179,12 @@ def profile():
                 squadre = leggi_dati_da_file_json(squadra_json_file)
                 utenti = json.load(file)
                 username = session['username']
+                total_points = sum(membro['points'] for membro in squadre[username])
                 # Verifica se l'utente corrente esiste nel file utenti_json_file
                 if username in utenti:
                     bio = utenti[username]['bio']
                     badges = utenti[username]['badges']
-                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,squadre=squadre)
+                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,squadre=squadre,total_points=total_points)
                 else:
                     return 'Questo utente non esiste'
         else:

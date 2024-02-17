@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Squadre</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <div class="container-fluid">
-            <a href="/"> FantaRinuncia</a>
+<body class="bg-dark">
+    <nav id="nav-box" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-lg p-3 mb-5  rounded" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);">
+        <div class="container-fluid ">
+              <ol class="breadcrumb mt-1">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active  text-white" aria-current="page">Profile</li>
+              </ol>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,20 +79,32 @@
                     </div>
                 </div>
             </div>
-          <div class="col-lg-8">
-            <div class="card mb-4">
-              <div class="card-body">
-                <div class="row">
-                    <h2>La tua squadra</h2>
-                    <ul class="list-group mb-4">
-                        {% for membro in squadre[username] %}
-                        <li class="list-group-item">{{ membro }}</li>
-                        {% endfor %}
-                    </ul>
+                <div class="col-lg-6 mx-5">
+                  <div class="card text-dark mb-1">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col">
+                          <h2 class="text mb-3">La tua squadra</h2>
+                        </div>
+                        <div class="col text-end">
+                          <span class="badge bg-light text-dark mb-3">totale distasi spesi: {{total_points}}</span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <ul class="list-group mb-auto">
+                          {% for membro in squadre[username] %}
+                          <div class="list-group mb-2">
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0">
+                              <span class="fw-bold">{{ membro.name }}</span>
+                              <span class="badge bg-warning text-light">{{ membro.points }} distasi</span>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
         </div>
     </div>
 

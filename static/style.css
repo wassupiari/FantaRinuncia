@@ -5,10 +5,18 @@ html,body {
 
 }
 
-
 /*
 NAVBAR
 */
+#nav-box{
+  padding: 10px;
+
+  width: 100%;
+
+
+  position: sticky;
+  top: 0px;
+}
 .navbar-brand {
   background-position: center;
   background-repeat: no-repeat;
@@ -19,9 +27,11 @@ NAVBAR
 
 
 
-.navbar-nav .nav-item:hover {
-  background-color: #B2A59B;
+.navbar-nav .nav-item:hover .a {
+  background-color: #ffffff;
+  color: #000;
 }
+
 
 /*
 SEARCH BAR
@@ -162,6 +172,13 @@ CARDS
 .points-value {
   color: #B80000;
   font-weight: bold;
+  font-family: 'Arial', sans-serif; /* Cambia il font */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Aggiunge un effetto ombra */
+  transition: transform 0.2s ease-in-out; /* Aggiunge una transizione */
+}
+
+.points-value:hover {
+  transform: scale(1.1); /* Effetto di ingrandimento al passaggio del mouse */
 }
 
 
@@ -174,6 +191,7 @@ FOOTER
   left: 0;
   bottom: 0;
   width: 100%;
+  position: sticky;
 }
 
 .footer-heart a{border-bottom: 1px solid #453886;color: #453886;padding-bottom: .25em; text-decoration: none;}
@@ -234,4 +252,23 @@ SCROLLBAR
 
 #myBtn:hover {
   background-color: #7077A1;
+}
+
+
+/*
+PROFILE
+*/
+
+.membro-name {
+  font-weight: bold;
+  color: #fff;
+
+}
+.badge-dark {
+    background-color: #343a40;
+}
+
+.custom-badge {
+    margin-right: 5px; /* Regola la distanza orizzontale tra i badge */
+    margin-bottom: 5px; /* Regola la distanza verticale tra i badge */
 }
