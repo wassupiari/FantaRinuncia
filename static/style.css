@@ -272,3 +272,108 @@ PROFILE
     margin-right: 5px; /* Regola la distanza orizzontale tra i badge */
     margin-bottom: 5px; /* Regola la distanza verticale tra i badge */
 }
+
+/* FAQ page */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Stile generale della sezione FAQ */
+.section-faq {
+  padding-top: 24px;
+  padding-bottom: 32px;
+  background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+/* Stile del titolo */
+.section-faq h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stile dei paragrafi */
+.section-faq p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666666;
+}
+
+/* Stile dei collegamenti */
+.section-faq a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.section-faq a:hover {
+  text-decoration: underline;
+}
+
+/* Stile delle domande */
+.section-faq .faq-question {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* Stile delle risposte */
+.section-faq .faq-answer {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+.section-faq .contact-link p {
+  margin-bottom: 5px;
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
+.text-center {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+/* Stile dei margini inferiori per le colonne */
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}

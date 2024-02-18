@@ -185,13 +185,15 @@ def profile():
     else:
         return redirect(url_for('login'))
 
+@app.route('/regolamento')
+def regolamento():
+    utenti = leggi_dati_da_file_json(utenti_json_file)
+    if 'username' in session:
+        logged = True
+    else:
+        logged = False
+    return render_template('/src/regolamento.html', logged=logged)
 
-if os.path.exists(squadra_json_file):
-    with open(squadra_json_file, 'r') as file:
-        squadre = json.load(file)
-
-
-from flask import jsonify  # Importa jsonify per restituire un JSON in Flask
 
 @app.route('/auth/register', methods=['GET', 'POST'])
 def registrazione():
@@ -231,4 +233,4 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
