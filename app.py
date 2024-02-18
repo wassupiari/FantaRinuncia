@@ -37,55 +37,41 @@ def nascondi_get_people():
     if request.path == '/people' and 'username' not in session:
         return "Accesso non consentito", 403
 
-def get_base64_from_image_url(image_url):
-    response = requests.get(image_url)
-    if response.status_code == 200:
-        image_data = response.content
-        base64_encoded_image = base64.b64encode(image_data).decode('utf-8')
-        return base64_encoded_image
+
+# Nuova route per ottenere l'URL dell'immagine dell'utente
+@app.route('/api/get_user_image')
+def get_user_image():
+    utenti = carica_utenti()
+    username = session.get('username')
+    if username and username in utenti:
+        image_link = utenti[username].get('image_data', {}).get('image_link', '')
+        return image_link
     else:
-        return None
-@app.route('/api/get_image')
-def get_image_base64():
-    utenti = leggi_dati_da_file_json(utenti_json_file)
+        return ''  # Restituisci un URL vuoto se l'utente non ha un'immagine
 
-    # Dizionario per contenere i dati dell'immagine di ogni utente
-    immagini_utenti = {}
 
-    # Ciclo attraverso ogni utente nel file JSON
-    for username, user_data in utenti.items():
-        # Recupera i dati dell'immagine per l'utente corrente
-        image_data = user_data.get("image_data", {'base64_encoded_image'})
-        image_link = image_data.get("image_link", "")
+import json
 
-        # Se l'URL dell'immagine è vuoto, passa al prossimo utente
-        if not image_link:
-            continue
-
-        # Ottieni l'encoding Base64 dell'immagine
-        base64_encoded_image = get_base64_from_image_url(image_link)
-
-        # Aggiorna l'oggetto JSON con l'encoding Base64 dell'immagine
-        image_data["base64_encoded_image"] = base64_encoded_image
-
-        # Aggiungi i dati dell'immagine dell'utente al dizionario
-        immagini_utenti[username] = image_data
-
-        # Restituisci i dati dell'immagine con l'encoding Base64 per tutti gli utenti
-    return jsonify(immagini_utenti)
 
 @app.route('/api/people', methods=['GET'])
 def get_people():
     # Assicurati che l'utente sia autenticato per accedere all'API
     if 'username' in session:
-        # Leggi i dati dal file JSON
-        dati = leggi_dati_da_file_json(db_json_file)
-        return jsonify(dati)
+
+        utenti = leggi_dati_da_file_json(utenti_json_file)
+
+
+        if session['username'] in utenti:
+            if 'ADMIN' in utenti[session['username']].get('badges', []):
+                dati = leggi_dati_da_file_json(db_json_file)
+                return jsonify(dati)
+
+        return "Accesso non consentito: badge utente non autorizzato", 403
     else:
-        return "Accesso non consentito", 403
+        return "Accesso non consentito: utente non autenticato", 401
 
 
-# Funzione per caricare gli utenti dal file JSON
+
 def carica_utenti():
     if os.path.exists(utenti_json_file):
         with open(utenti_json_file, 'r') as file:
@@ -93,7 +79,7 @@ def carica_utenti():
     else:
         return {}
 
-# Funzione per salvare gli utenti nel file JSON
+
 def salva_utenti(utenti):
     with open(utenti_json_file, 'w') as file:
         json.dump(utenti, file)
@@ -179,18 +165,24 @@ def profile():
                 squadre = leggi_dati_da_file_json(squadra_json_file)
                 utenti = json.load(file)
                 username = session['username']
-                total_points = sum(membro['points'] for membro in squadre[username])
-                # Verifica se l'utente corrente esiste nel file utenti_json_file
+
+                # Verifica se l'utente ha una squadra
+                if username in squadre:
+                    total_points = sum(membro['points'] for membro in squadre[username])
+                else:
+                    total_points = 0
+                    squadre = {}  # Imposta una lista vuota per le squadre
+
                 if username in utenti:
                     bio = utenti[username]['bio']
                     badges = utenti[username]['badges']
-                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,squadre=squadre,total_points=total_points)
+                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,
+                                           squadre=squadre, total_points=total_points)
                 else:
                     return 'Questo utente non esiste'
         else:
             return 'Il file utenti.json non esiste'
     else:
-        # Se l'utente non è autenticato, reindirizzalo alla pagina di login
         return redirect(url_for('login'))
 
 
@@ -198,6 +190,8 @@ if os.path.exists(squadra_json_file):
     with open(squadra_json_file, 'r') as file:
         squadre = json.load(file)
 
+
+from flask import jsonify  # Importa jsonify per restituire un JSON in Flask
 
 @app.route('/auth/register', methods=['GET', 'POST'])
 def registrazione():
@@ -221,16 +215,9 @@ def registrazione():
 
         # Verifica se l'URL dell'immagine è fornito
         if image_link:
-            # Ottiene l'immagine da un URL e ne codifica l'encoding Base64
-            base64_encoded_image = get_base64_from_image_url(image_link)
-
-            if base64_encoded_image:
-                utenti[username]['image_data'] = {
-                    'image_link': image_link,
-                    'base64_encoded_image': base64_encoded_image
-                }
-            else:
-                return 'Errore durante il caricamento dell\'immagine. <a href="/auth/register">Riprova</a>'
+            utenti[username]['image_data'] = {
+                'image_link': image_link
+            }
 
         # Salva gli utenti aggiornati nel file JSON
         salva_utenti(utenti)
@@ -238,6 +225,7 @@ def registrazione():
         return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
 
     return render_template('auth/register.html')
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404

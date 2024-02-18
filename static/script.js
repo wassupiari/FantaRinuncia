@@ -45,7 +45,7 @@ console.clear();
             console.error('Errore:', error);
         });
     }
-document.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function() {
 
 
     // Funzione per aggiornare la griglia delle persone selezionate
