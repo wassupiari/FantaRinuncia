@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" data-bs-theme="dark" class="text-white">
 <head>
     <meta charset="UTF-8">
     <title>Regolamento</title>
@@ -12,9 +12,9 @@
 <body>
 
 
-<nav class="navbar navbar-expand-lg  mb-4">
-    <div class="container-fluid">
-        <a href="/"> FantaRinuncia</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top mb-4">
+    <div class="container px-3">
+        <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,6 @@
                 </li>
                 {% if logged %}
                 <li class="nav-item dropdown rounded">
-
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill me-2"></i>Profile</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -39,7 +38,6 @@
                         </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                     </ul>
-
                 </li>
                 {% else %}
                 <li class="nav-item rounded">
@@ -52,13 +50,13 @@
 </nav>
 
 
-<section class="pt-24 pb-32 bg-white overflow-hidden"">
-  <div class="container">
+<section class="pt-24 pb-32 overflow-hidden">
+  <div class="container px-3">
     <div class="mw-md-md mx-auto text-center mb-20">
       <h2 class="fs-10 fw-semibold text-center mb-4">Il Regolamento del FantaRinuncia</h2>
       <p class="fs-17 text-muted mb-0">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</p>
     </div>
-    <div class="mw-md-6xl mx-auto">
+    <div class="mw-md-6xl mx-auto text-justify">
       <div class="row g-20 mb-10">
         <div class="col-12 col-md-6">
           <h3 class="fs-15 fw-medium mb-4">Is it really unlimited downloads?</h3>

@@ -8,29 +8,7 @@ html,body {
 /*
 NAVBAR
 */
-#nav-box{
-  padding: 10px;
 
-  width: 100%;
-
-
-  position: sticky;
-  top: 0px;
-}
-.navbar-brand {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 48px;
-  height: 48px;
-}
-
-
-
-.navbar-nav .nav-item:hover .a {
-  background-color: #ffffff;
-  color: #000;
-}
 
 
 /*
@@ -91,24 +69,11 @@ SQUAD BUILDER
   margin: 20px auto;
   padding: 20px;
   width: 300px;
-  text-align: justify;
+  text-align: center;
   margin-top: 75px;
-
 }
 
-/* Stile per il paragrafo "La tua squadra" */
-#squad-maker p {
-  font-weight: bold;
-  font-size: 18px;
-}
 
-/* Stile per il contenitore della squadra */
-#squadra-container {
-  background-color: #f8f9fa;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-}
 
 /* Stile per il contenitore degli avvisi */
 #alert-container {
@@ -262,7 +227,6 @@ PROFILE
 .membro-name {
   font-weight: bold;
   color: #fff;
-
 }
 .badge-dark {
     background-color: #343a40;
@@ -377,3 +341,4 @@ body {
 .mb-24 {
   margin-bottom: 24px;
 }
+

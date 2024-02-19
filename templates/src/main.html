@@ -11,9 +11,9 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg  mb-4">
-    <div class="container-fluid">
-        <a href="/"> FantaRinuncia</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top mb-4">
+    <div class="container px-3">
+        <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,13 +51,13 @@
 </nav>
 
 
-
+<div class="container px-3">
     <div class="row">
       <div class="col-8">
         <div class="container" id="cards-container">
             {% for person in data %}
-                <div class="col-md-4 card-item">
-                    <div class="card">
+                <div class="col-md-5 card-item">
+                    <div class="card h-100">
                         <div class="card-body">
                             <p class="card-text">{{ person.firstname }} {{ person.lastname }} </p>
                             <p class ="points-value">{{ person.points }} distasi</p>
@@ -70,21 +70,27 @@
             <div id="search-message" style="display: none;">Nessuna persona trovata con questo nome</div>
         </div>
       </div>
-        <div class="col-5" id="squad-maker">
-            <p>La tua squadra</p>
-            <div id="squadra-container" class="card-body bg-dark border-0">
+        <div class="col-4" id="squad-maker">
+              <figure>
+              <blockquote class="blockquote">
+                <h2>La tua squadra</h2>
+              </blockquote>
+              <figcaption class="blockquote-footer">
+              <cite title="Source Title">  Fai la scelta giusta </cite>
+              </figcaption>
+            </figure>
+            <div id="squadra-container" class="card-body border-0">
                 <!-- Qui verranno aggiunti dinamicamente gli elementi della squadra -->
             </div>
             <div id="alert-container"></div>
             <div id="team-points" class="mb-2"></div>
-            <button id="salva-squadra-button" class="btn btn-success" onclick="salvaSquadra()">Salva Squadra</button>
+            <button id="salva-squadra-button" class="btn btn-success invisible" onclick="salvaSquadra()">Salva Squadra</button>
             <button onclick="topFunction()" id="myBtn" title="Go to top">
                 <i class="fa-solid fa-arrow-up"></i>
             </button>
-
         </div>
     </div>
-
+</div>
     <footer><p class="footer-heart">
       Made with <g-emoji class="g-emoji" alias="heart" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png">
     <img class="emoji" alt="heart" height="15" width="15" src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"></g-emoji> by <a class="text-white" href="https://github.com/wassupiari">me</a>
