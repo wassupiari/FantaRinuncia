@@ -101,7 +101,7 @@ def login():
         # Verifica se l'utente esiste e le credenziali sono corrette
         if username in utenti and bcrypt.checkpw(password.encode('utf-8'), utenti[username]['password'].encode('utf-8')):
             session['username'] = username
-            return redirect(url_for('index'))
+            return redirect(url_for('user', username=username))
         else:
             return 'Credenziali non valide. <a href="/auth/login">Riprova</a>'
 
@@ -120,10 +120,14 @@ with open(db_json_file, 'r') as file:
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return render_template('index.html', data=people)
-    return 'Non sei loggato <a href="/auth/login">Login</a>'
+        return render_template('index.html')
 
+@app.route('/user/<username>')
+def user(username):
+    if 'username' in session:
+        return render_template('src/main.html', data=people, username=username)
+    else:
+        return redirect(url_for('login'))
 @app.route('/crea-squadra', methods=['POST'])
 def crea_squadra():
     if 'username' in session:
