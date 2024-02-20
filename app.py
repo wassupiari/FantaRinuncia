@@ -118,7 +118,7 @@ with open(db_json_file, 'r') as file:
 
 @app.route('/')
 def index():
-    repo = git.Repo('/mnt/c/Users/capua/Desktop/FantaRinuncia/')
+    repo = git.Repo('/home/jarvis/FantaRinuncia/')
     commits = list(repo.iter_commits('main'))[:3]
     return render_template('index.html', commits=commits)
 
