@@ -51,9 +51,10 @@ window.addEventListener("DOMContentLoaded", function() {
     // Funzione per aggiornare la griglia delle persone selezionate
     function updateSquadraGrid() {
         var squadraContainer = document.getElementById("squadra-container");
+        var buttonHidden = document.getElementById("salva-squadra-button");
         squadraContainer.innerHTML = '';
         var totalPoints = 0; // Inizializza il conteggio totale dei punti della squadra
-
+        var buttonVisible = false;
         squadra.forEach(function(person, index) {
             var cardElement = document.createElement("div");
             cardElement.classList.add("card","mb-3");
@@ -62,13 +63,23 @@ window.addEventListener("DOMContentLoaded", function() {
                 '<button class="btn btn-danger btn-sm delete-btn" data-index="' + index + '">Elimina</button>' +
                 '</div>';
             squadraContainer.appendChild(cardElement);
-
+            buttonVisible = true;
             totalPoints += person.points; // Aggiungi i punti della persona al conteggio totale
         });
+
+
 
         // Mostra il punteggio totale della squadra
         var pointsContainer = document.getElementById("team-points");
         pointsContainer.innerText = "Punteggio totale squadra: " + totalPoints;
+
+        if (buttonVisible) {
+            buttonHidden.classList.remove("invisible");
+            pointsContainer.style.display = "block";
+        } else {
+            buttonHidden.classList.add("invisible");
+            pointsContainer.style.display = "none";
+        }
 
         // Aggiungi gestore di eventi per i pulsanti di eliminazione
         var deleteButtons = document.querySelectorAll('.delete-btn');
@@ -120,6 +131,8 @@ window.addEventListener("DOMContentLoaded", function() {
                 squadra.splice(index, 1);
             }
         }
+
+
 
         updateSquadraGrid();
     });
@@ -188,6 +201,11 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+
+// dark mode try
+
+
 
 
 

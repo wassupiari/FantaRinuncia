@@ -32,6 +32,9 @@
                   <Item>
                     <option name="path" value="private/utenti.json" />
                   </Item>
+                  <Item>
+                    <option name="path" value="private/people.json" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>
