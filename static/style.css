@@ -342,3 +342,26 @@ body {
   margin-bottom: 24px;
 }
 
+
+/* Stile .LIVE */
+.typewriter-text{
+  width: 18ch;
+  animation: typing 2s steps(18), blink .6s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 3em;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+
+@keyframes blink {
+  40% {
+    border-color: transparent
+  }
+}
