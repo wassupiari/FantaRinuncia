@@ -8,12 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 
 
-<body class="bg-gray-100 font-sans">
-<nav class="navbar  navbar-expand-md navbar-dark bg-dark fixed-top">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded fixed-top shadow-lg p-3 mb-5">
     <div class="container px-3">
         <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -25,17 +26,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
                 </li>
-                <li class="nav-item rounded">
-                    <a class="nav-link" href="#"><i class="bi bi-telephone-fill me-2"></i>Contact</a>
-                </li>
+
                 <li class="nav-item rounded">
                     <a class="nav-link" href="/auth/login"><i class="bi bi-telephone-fill me-2"></i>Login</a>
+                </li>
+                <li class="nav-item svg-item">
+                    <a class="" href="https://github.com/wassupiari">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                        </svg>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container-fluid bg-dark text-light">
+
+<div class="container-fluid bg-dark text-white">
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
         <div class="row">
             <div class="col-xs-12 col-md-6 p-3">
@@ -44,118 +52,108 @@
                 <p class="fst-italic fw-light">Indovina chi lascerà gli studi per primo con FantaRinuncia</p>
                 <hr class="my-4">
                 <p class="text-muted text-white">Segui da vicino le scelte audaci degli studenti e scommetti su chi lascerà gli studi per primo con FantaRinuncia. Metti alla prova la tua capacità di prevedere il futuro accademico e chi sarà il primo a fare la grande rinuncia agli studi.</p>
-                <p class="lead my-4">
-                    <a class="btn btn-warning btn-lg" href="#" role="button">Crea la tua squadra</a>
+                <p class="lead my-5">
+                    <a class="btn btn-warning btn-lg" href="/auth/login" role="button">Crea la tua squadra</a>
                 </p>
             </div>
             <div class="col-xs-12 col-md-6">
-                <svg width="650px" height="350px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff">
+                <svg fill="#000" width="650px" height="300px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
 
                 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
 
-                <g id="SVGRepo_iconCarrier"> <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools --> <title>ic_fluent_people_community_add_24_filled</title> <desc>Created with Sketch.</desc> <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="ic_fluent_people_community_add_24_filled" fill="#ffffff" fill-rule="nonzero"> <path d="M17.5,12 C20.5375661,12 23,14.4624339 23,17.5 C23,20.5375661 20.5375661,23 17.5,23 C14.4624339,23 12,20.5375661 12,17.5 C12,14.4624339 14.4624339,12 17.5,12 Z M17.5,13.9992349 L17.4101244,14.0072906 C17.2060313,14.0443345 17.0450996,14.2052662 17.0080557,14.4093593 L17,14.4992349 L16.9996498,16.9992349 L14.4976498,17 L14.4077742,17.0080557 C14.2036811,17.0450996 14.0427494,17.2060313 14.0057055,17.4101244 L13.9976498,17.5 L14.0057055,17.5898756 C14.0427494,17.7939687 14.2036811,17.9549004 14.4077742,17.9919443 L14.4976498,18 L17.0006498,17.9992349 L17.0011076,20.5034847 L17.0091633,20.5933603 C17.0462073,20.7974534 17.207139,20.9583851 17.411232,20.995429 L17.5011076,21.0034847 L17.5909833,20.995429 C17.7950763,20.9583851 17.956008,20.7974534 17.993052,20.5933603 L18.0011076,20.5034847 L18.0006498,17.9992349 L20.5045655,18 L20.5944411,17.9919443 C20.7985342,17.9549004 20.9594659,17.7939687 20.9965098,17.5898756 L21.0045655,17.5 L20.9965098,17.4101244 C20.9594659,17.2060313 20.7985342,17.0450996 20.5944411,17.0080557 L20.5045655,17 L17.9996498,16.9992349 L18,14.4992349 L17.9919443,14.4093593 C17.9549004,14.2052662 17.7939687,14.0443345 17.5898756,14.0072906 L17.5,13.9992349 Z M12.02195,13.9997937 C11.3750475,15.010137 11,16.21127 11,17.5 C11,18.3838153 11.1763947,19.2264314 11.4958991,19.9945634 C8.94205586,19.8573327 7.5,18.7731072 7.5,16.75 L7.5,15.75 C7.5,14.7835017 8.28350169,14 9.25,14 L12.02195,13.9997937 Z M8.12599558,9.0000851 C8.04374524,9.3196794 8,9.65473108 8,10 C8,11.1155313 8.45664565,12.1244073 9.19320511,12.8498962 L9.35525927,13.0009561 L9.25,13 C8.94865366,13 8.65862814,13.0484702 8.38729437,13.1380397 C7.52254738,13.4234998 6.84765465,14.1264102 6.60122004,15.0081669 L6.5667905,15.0090369 C3.6578611,15.0090369 2,13.9192116 2,11.75 L2,10.75 C2,9.8318266 2.70711027,9.07880766 3.60647279,9.0058012 L3.75,9 L8.12599558,9.0000851 Z M12,7 C13.6568542,7 15,8.34314575 15,10 C15,11.6568542 13.6568542,13 12,13 C10.3431458,13 9,11.6568542 9,10 C9,8.34314575 10.3431458,7 12,7 Z M20.25,9 C21.2164983,9 22,9.78350169 22,10.75 L21.9989377,11.7120717 C22.0185903,12.0809152 21.988724,12.4190637 21.9114947,12.7263897 C20.751839,11.6544204 19.2023435,11 17.5,11 C16.9146982,11 16.3474651,11.077361 15.8079678,11.2224158 C15.9331115,10.8382591 16,10.4269409 16,10 C16,9.65473108 15.9562548,9.3196794 15.8740044,9.0000851 L20.25,9 Z M6.5,2 C8.15685425,2 9.5,3.34314575 9.5,5 C9.5,6.65685425 8.15685425,8 6.5,8 C4.84314575,8 3.5,6.65685425 3.5,5 C3.5,3.34314575 4.84314575,2 6.5,2 Z M17.5,2 C19.1568542,2 20.5,3.34314575 20.5,5 C20.5,6.65685425 19.1568542,8 17.5,8 C15.8431458,8 14.5,6.65685425 14.5,5 C14.5,3.34314575 15.8431458,2 17.5,2 Z" id="🎨Color"> </path> </g> </g> </g>
+                <g id="SVGRepo_iconCarrier">
+
+                <path d="M12 14c1.381 0 2.631-.56 3.536-1.465.904-.904 1.464-2.154 1.464-3.535s-.56-2.631-1.464-3.535c-.905-.905-2.155-1.465-3.536-1.465s-2.631.56-3.536 1.465c-.904.904-1.464 2.154-1.464 3.535s.56 2.631 1.464 3.535c.905.905 2.155 1.465 3.536 1.465zM20 15c.69 0 1.315-.279 1.768-.731.453-.452.732-1.077.732-1.769 0-.69-.279-1.315-.732-1.768-.453-.453-1.078-.732-1.768-.732-.691 0-1.316.279-1.769.732-.452.453-.731 1.078-.731 1.768 0 .691.279 1.316.731 1.769s1.078.731 1.769.731zM20 15.59c-1.331 0-2.332.406-2.917.968-1.115-.917-2.878-1.558-5.083-1.558-2.266 0-3.995.648-5.092 1.564-.596-.565-1.608-.974-2.908-.974-2.188 0-3.5 1.09-3.5 2.182 0 .545 1.312 1.092 3.5 1.092.604 0 1.146-.051 1.623-.133l-.04.27c0 1 2.406 2 6.417 2 3.762 0 6.417-1 6.417-2l-.02-.255c.463.073.995.118 1.603.118 2.051 0 3.5-.547 3.5-1.092 0-1.092-1.373-2.182-3.5-2.182zM4 15c.69 0 1.315-.279 1.768-.732.453-.453.732-1.078.732-1.768 0-.689-.279-1.314-.732-1.768-.453-.452-1.078-.732-1.768-.732-.691 0-1.316.28-1.769.732-.452.454-.731 1.079-.731 1.768 0 .69.279 1.315.731 1.768.453.453 1.078.732 1.769.732z"/>
+
+                </g>
 
                 </svg>
             </div>
+
         </div>
     </div>
+
 </div>
-<div class="container my-5">
-    <div id="carouselId" class="carousel slide m-2" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselId" data-slide-to="1"></li>
-            <li data-target="#carouselId" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <img src="https://images.unsplash.com/photo-1519575706483-221027bfbb31?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80" alt="First slide" class="d-block w-100" style="height: 300px;object-fit: cover;">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80" alt="Second slide" class="d-block w-100" style="height: 300px;object-fit: cover;">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Third slide" class="d-block w-100" style="height: 300px;object-fit: cover;">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
+
 <div class="container my-5">
     <div class="card-group">
-        <div class="card my-4 mx-2">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+        <div class="card border-0 my-4 mx-2 align-items-center text-center ">
+           <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 6C14.3432 6 13 7.34315 13 9C13 10.6569 14.3432 12 16 12C17.6569 12 19 10.6569 19 9C19 7.34315 17.6569 6 16 6ZM11 9C11 6.23858 13.2386 4 16 4C18.7614 4 21 6.23858 21 9C21 10.3193 20.489 11.5193 19.6542 12.4128C21.4951 13.0124 22.9176 14.1993 23.8264 15.5329C24.1374 15.9893 24.0195 16.6114 23.5631 16.9224C23.1068 17.2334 22.4846 17.1155 22.1736 16.6591C21.1979 15.2273 19.4178 14 17 14C13.166 14 11 17.0742 11 19C11 19.5523 10.5523 20 10 20C9.44773 20 9.00001 19.5523 9.00001 19C9.00001 18.308 9.15848 17.57 9.46082 16.8425C9.38379 16.7931 9.3123 16.7323 9.24889 16.6602C8.42804 15.7262 7.15417 15 5.50001 15C3.84585 15 2.57199 15.7262 1.75114 16.6602C1.38655 17.075 0.754692 17.1157 0.339855 16.7511C-0.0749807 16.3865 -0.115709 15.7547 0.248886 15.3398C0.809035 14.7025 1.51784 14.1364 2.35725 13.7207C1.51989 12.9035 1.00001 11.7625 1.00001 10.5C1.00001 8.01472 3.01473 6 5.50001 6C7.98529 6 10 8.01472 10 10.5C10 11.7625 9.48013 12.9035 8.64278 13.7207C9.36518 14.0785 9.99085 14.5476 10.5083 15.0777C11.152 14.2659 11.9886 13.5382 12.9922 12.9945C11.7822 12.0819 11 10.6323 11 9ZM3.00001 10.5C3.00001 9.11929 4.1193 8 5.50001 8C6.88072 8 8.00001 9.11929 8.00001 10.5C8.00001 11.8807 6.88072 13 5.50001 13C4.1193 13 3.00001 11.8807 3.00001 10.5Z" fill="#ffffff"/> </g>
+
+            </svg>
             <div class="card-body">
-                <h4 class="card-title">Title</h4>
+                <h4 class="card-title">Crea la tua squadra</h4>
                 <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, ad!</p>
-                <a href="#" class="btn btn-primary">Click</a>
             </div>
         </div>
-        <div class="card my-4 mx-2">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+        <div class="card border-0 my-4 mx-2 align-items-center text-center">
+            <svg width="250px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <g id="SVGRepo_iconCarrier"> <path d="M15 21H9V12.6C9 12.2686 9.26863 12 9.6 12H14.4C14.7314 12 15 12.2686 15 12.6V21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M20.4 21H15V18.1C15 17.7686 15.2686 17.5 15.6 17.5H20.4C20.7314 17.5 21 17.7686 21 18.1V20.4C21 20.7314 20.7314 21 20.4 21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 21V16.1C9 15.7686 8.73137 15.5 8.4 15.5H3.6C3.26863 15.5 3 15.7686 3 16.1V20.4C3 20.7314 3.26863 21 3.6 21H9Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M10.8056 5.11325L11.7147 3.1856C11.8314 2.93813 12.1686 2.93813 12.2853 3.1856L13.1944 5.11325L15.2275 5.42427C15.4884 5.46418 15.5923 5.79977 15.4035 5.99229L13.9326 7.4917L14.2797 9.60999C14.3243 9.88202 14.0515 10.0895 13.8181 9.96099L12 8.96031L10.1819 9.96099C9.94851 10.0895 9.67568 9.88202 9.72026 9.60999L10.0674 7.4917L8.59651 5.99229C8.40766 5.79977 8.51163 5.46418 8.77248 5.42427L10.8056 5.11325Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+
+            </svg>
             <div class="card-body">
-                <h4 class="card-title">Title</h4>
+                <h4 class="card-title"> Scala le classifiche </h4>
                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, odit!</p>
-                <a href="#" class="btn btn-primary">Click</a>
             </div>
         </div>
-        <div class="card my-4 mx-2">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+        <div class="card border-0 my-4 mx-2 align-items-center text-center">
+            <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 2.34315 6.34315 1 8 1H15.9999C17.6568 1 19 2.34314 19 4H20C21.6569 4 23 5.34315 23 7V7.64593C23 8.87265 22.2531 9.97577 21.1142 10.4314L18.031 11.6646C17.5965 12.464 16.958 13.2715 16.0234 13.8946C15.211 14.4361 14.2124 14.8132 13 14.9467V17H15C16.6569 17 18 18.3431 18 20V21C18 22.1046 17.1046 23 16 23H8C6.89543 23 6 22.1046 6 21V20C6 18.3431 7.34315 17 9 17H11V14.9467C9.78757 14.8133 8.7889 14.4361 7.97651 13.8945C7.04188 13.2715 6.40335 12.464 5.9689 11.6646L2.88583 10.4314C1.74685 9.97577 1 8.87265 1 7.64593V7C1 5.34315 2.34315 4 4 4H5ZM5 6H4C3.44772 6 3 6.44772 3 7V7.64593C3 8.05484 3.24895 8.42255 3.62861 8.57441L5.11907 9.1706C5.05194 8.78628 5.00063 8.39214 5 8.00104L5 6ZM19 8V6H20C20.5523 6 21 6.44772 21 7V7.64593C21 8.05484 20.751 8.42255 20.3714 8.57441L18.8809 9.17062C18.9469 8.78361 19 8.39286 19 8ZM8 3C7.44772 3 7 3.44772 7 4V7.99707L7 7.99832C7 7.99996 7 8.00078 7 7.99832C7.00508 8.25761 7.03756 8.51764 7.08014 8.77311C7.16297 9.27012 7.32677 9.91751 7.6444 10.5528C7.96008 11.1842 8.4179 11.7851 9.08591 12.2305C9.74766 12.6716 10.6749 13 12 13C13.325 13 14.2522 12.6716 14.914 12.2304C15.582 11.7851 16.0398 11.1842 16.3555 10.5528C16.6732 9.9175 16.837 9.27011 16.9198 8.7731C16.9624 8.51735 16.993 8.25848 17 7.99909V4C17 3.44772 16.5522 3 15.9999 3H8ZM9 19C8.44772 19 8 19.4477 8 20V21H16V20C16 19.4477 15.5523 19 15 19H9Z" fill="#ffffff"/> </g>
+
+            </svg>
             <div class="card-body">
-                <h4 class="card-title">Title</h4>
+                <h4 class="card-title">Crea la tua lega</h4>
                 <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto, omnis.
                 </p>
-                <a href="#" class="btn btn-primary">Click</a>
             </div>
         </div>
     </div>
+    <hr>
 </div>
-<hr class="my-2 bg-light w-75">
-<div class="container my-5">
-    <div class="row mx-1 my-5 py-4 py-sm-2 my-sm-4 justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-6">
-            <h2>Heading</h2>
-            <p style="font-size: 20px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, ab.
-                Voluptatibus inventore
-                autem molestias qui sapiente vel molestiae aperiam mollitia.</p>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
-        </div>
+
+
+
+
+
+    <div class="container my-5 align-items-center">
+            <div class="row">
+                <div class="col-md-12 text-center my-5">
+                    <h2 class="fw-bolder">Ultimi aggiornamenti</h2>
+                    <p class="fst-italic fw-light">Scopri le ultime novità e aggiornamenti sul progetto FantaRinuncia</p>
+                </div>
+                {% for commit in commits %}
+              <div class="col-md-4 text-center">
+                <h2 class="fw-bolder">{{commit.hexsha[:10]}}</h2>
+                <p class="fst-italic fw-light">{{commit.message}}</p>
+                <p><a class="btn btn-secondary" href="https://github.com/wassupiari/FantaRinuncia/commit/{{commit.hexsha}}" role="button">View details</a></p>
+              </div>
+                {% endfor %}
+             </div>
     </div>
-    <div class="row mx-1 my-5 py-4 py-sm-2 my-sm-4 flex-row-reverse justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-6">
-            <h2>Heading</h2>
-            <p style="font-size: 20px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, ab.
-                Voluptatibus inventore
-                autem molestias qui sapiente vel molestiae aperiam mollitia.</p>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <img src="https://images.unsplash.com/photo-1490535004195-099bc723fa1f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
-        </div>
-    </div>
-</div>
+
+
+    <footer class="container">
+        <hr>
+          <p>© FantaRinuncia 2024</p>
+    </footer>
 
 
 

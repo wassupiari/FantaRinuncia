@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
-import json
 import os
 import bcrypt
-import base64
-import requests
 from logger import setup_logger
+import git
 
 # logging system
 logger = setup_logger('app.log')
@@ -120,7 +118,9 @@ with open(db_json_file, 'r') as file:
 
 @app.route('/')
 def index():
-        return render_template('index.html')
+    repo = git.Repo('/mnt/c/Users/capua/Desktop/FantaRinuncia/')
+    commits = list(repo.iter_commits('main'))[:3]
+    return render_template('index.html', commits=commits)
 
 @app.route('/user/<username>')
 def user(username):
@@ -237,4 +237,4 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000,debug=True)
+    app.run(host='0.0.0.0', port=5000)

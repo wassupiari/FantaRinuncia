@@ -343,7 +343,7 @@ body {
 }
 
 
-/* Stile .LIVE */
+/* Stile .LIVE also css to index*/
 .typewriter-text{
   width: 18ch;
   animation: typing 2s steps(18), blink .6s step-end infinite alternate;
@@ -365,3 +365,19 @@ body {
     border-color: transparent
   }
 }
+
+
+.svg-item {
+    display: flex;
+    align-items: center;
+    padding-left: 25px; /* Spazio tra l'SVG e il testo accanto */
+}
+
+.svg-item a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+
+
+
