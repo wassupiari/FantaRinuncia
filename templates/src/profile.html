@@ -10,8 +10,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded fixed-top shadow-lg p-3 mb-5">
+<div class="container-fluid fixed">
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv alert alert-danger text-center w-100">
+        Fantarinuncia è in fase di sviluppo.
+      </div>
+    </div>
+  </div>
+</div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5">
             <div class="container px-3 text-white">
                 <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -25,7 +33,7 @@
                         </li>
 
                         <li class="nav-item rounded">
-                            <a class="nav-link" href="/"><i class="bi bi-telephone-fill me-2"></i>Home</a>
+                            <a class="nav-link" href="/home"><i class="bi bi-telephone-fill me-2"></i>Home</a>
                         </li>
                     <li class="nav-item dropdown rounded">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -40,7 +48,7 @@
     </nav>
 
 
-<div class="container px-4 py-5" id="custom-cards">
+<div class="container px-4 " id="custom-cards">
     <h2 class="pb-2 border-bottom my-5">Benvenuto - {{username}}</h2>
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col">
@@ -73,7 +81,7 @@
                     </li>
                     <li class="d-flex align-items-center">
                         <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                        <small>4d</small> <!-- Questo è il testo che deve essere sostituito -->
+                        <small>{{differenza}} giorni fa</small> <!-- Questo è il testo che deve essere sostituito -->
                     </li>
                     {% endif %}
                 </ul>
@@ -90,7 +98,7 @@
                     </div>
                     {% if username is not in squadre %}
                             <span class="fw-bold list-item mb-3 text-center">Non hai ancora una squadra</span>
-                            <a class="btn btn-outline-primary" href="/user/{{username}}">Fallo adesso</a>
+                            <a class="btn btn-outline-primary" href="/home">Fallo adesso</a>
                             {% endif %}
                     {% for membro in squadre[username] %}
                     <div class="list-group text-center mb-2">
@@ -100,6 +108,8 @@
                         </div>
                     </div>
                     {% endfor %}
+                    <div id="alert-del"></div>
+                    <button id="cancellaSquadra" class="btn btn-success" onclick="cancellaSquadra()">Cancella Squadra</button>
                 </div>
             </div>
 
@@ -107,7 +117,7 @@
 </div>
 
 
-    <footer class="container fixed-bottom">
+    <footer class="container fixed">
         <hr>
           <p>© FantaRinuncia 2024</p>
     </footer>

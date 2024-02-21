@@ -1,5 +1,4 @@
 var squadra = [];
-var maxPoints =  100;
 console.clear();
  function salvaSquadra() {
         fetch('/crea-squadra', {
@@ -11,7 +10,6 @@ console.clear();
         })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
                 var alertContainer = document.getElementById("alert-container");
                 alertContainer.innerHTML = '';
 
@@ -19,25 +17,19 @@ console.clear();
                 var alertDiv = document.createElement("div");
                 alertDiv.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
                 alertDiv.setAttribute("role", "alert");
-                alertDiv.innerHTML = `
-                    Squadra creata e salvata.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                `;
-                       if (data.error) {
-            // Squadra già esistente: mostra un messaggio di avviso rosso
-            alertDiv.classList.add("alert-danger");
-            alertDiv.innerHTML = `
-                ${data.error}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-        } else {
-            // Squadra creata e salvata con successo: mostra un messaggio di successo verde
-            alertDiv.classList.add("alert-success");
-            alertDiv.innerHTML = `
-                Squadra creata e salvata.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-        }
+                if (data) {
+                    alertDiv.classList.add("alert-danger");
+                    alertDiv.innerHTML = `
+                        ${data}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    `;
+                } else {
+                    alertDiv.classList.add("alert-success");
+                    alertDiv.innerHTML = `
+                        ${data}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    `;
+                }
 
         alertContainer.appendChild(alertDiv);
     })
@@ -45,7 +37,40 @@ console.clear();
             console.error('Errore:', error);
         });
     }
-window.addEventListener("DOMContentLoaded", function() {
+
+
+    function cancellaSquadra() {
+    fetch('/cancella-squadra', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        var alertContainer = document.getElementById("alert-del");
+        alertContainer.innerHTML = '';
+
+        // Crea e aggiungi l'alert Bootstrap al container
+        var alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+        alertDiv.innerHTML = `
+            ${data}
+            <button type="button" onclick="window.location.reload();" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        `;
+
+        alertContainer.appendChild(alertDiv);
+
+    })
+    .catch(error => {
+        console.error('Errore:', error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
 
 
     // Funzione per aggiornare la griglia delle persone selezionate
@@ -99,7 +124,7 @@ window.addEventListener("DOMContentLoaded", function() {
             });
         });
 
-        // Controlla se la somma dei punti della squadra supera 100 e aggiungi una classe di avviso se necessario
+
         if (totalPoints > 50) {
             pointsContainer.classList.add("text-danger");
         } else {
@@ -122,7 +147,7 @@ window.addEventListener("DOMContentLoaded", function() {
             } else {
                 checkbox.checked = false; // Annulla la selezione se supera il limite di 100 punti o il massimo di 5 persone
                 var alertContainer = document.getElementById("alert-container-2");
-                alertContainer.innerHTML = '<div class="alert alert-danger" role="alert">La tua squadra ha già raggiunto il massimo punteggio consentito di 100 punti o il numero massimo di 5 persone!</div>';
+                alertContainer.innerHTML = '<div class="alert alert-danger" role="alert">La tua squadra ha già raggiunto il massimo punteggio consentito di 50 punti o il numero massimo di 5 persone!</div>';
             }
         } else {
             // Rimuovi la persona dalla squadra
@@ -138,7 +163,7 @@ window.addEventListener("DOMContentLoaded", function() {
     });
 
 
-// Funzione per salvare la squadra su un file JSON
+
 
 // Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
 document.getElementById("salva-squadra-button").addEventListener("click", function() {
@@ -147,11 +172,10 @@ document.getElementById("salva-squadra-button").addEventListener("click", functi
 
 // Funzione per gestire l'evento di clic sul pulsante di ricerca
 document.getElementById("search-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita l'invio del modulo predefinito (che ricarica la pagina)
+    event.preventDefault();
     searchCards();
 });
 
-// Funzione per filtrare le card in base alla query di ricerca
 // Funzione per filtrare le card in base alla query di ricerca
 function searchCards() {
     var searchQuery = document.getElementById("search-input").value.trim().toLowerCase(); // Rimuove gli spazi bianchi all'inizio e alla fine della query
@@ -162,7 +186,8 @@ function searchCards() {
 
     cardItems.forEach(function(cardItem) {
         var cardText = cardItem.querySelector(".card-text").textContent.toLowerCase();
-        if (cardText.includes(searchQuery)) {
+        var cardPoints = cardItem.querySelector(".points-value").textContent.toLowerCase();
+        if (cardText.includes(searchQuery) || cardPoints.includes(searchQuery)) {
             cardItem.style.display = "block";
             found = true; // Imposta il flag a true se almeno una persona è stata trovata
         } else {
@@ -172,38 +197,39 @@ function searchCards() {
 
     // Mostra o nasconde il messaggio in base al risultato della ricerca
     if (found) {
-        searchMessage.style.display = "none"; // Nascondi il messaggio se almeno una persona è stata trovata
+        searchMessage.style.display = "none";
     } else {
-        searchMessage.style.display = "block"; // Mostra il messaggio se nessuna persona è stata trovata
+        searchMessage.style.display = "block";
     }
 }
 
 });
 
 
-// GO TO TOP BUTTON FUCTION
-// Get the button
-let mybutton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
+    // Get the button
 
 
-// dark mode try
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        let mybutton = document.getElementById("myBtn");
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+
+
 
 
 

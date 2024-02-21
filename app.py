@@ -4,6 +4,7 @@ import bcrypt
 from logger import setup_logger
 import git
 import json
+from datetime import datetime
 
 # logging system
 logger = setup_logger('app.log')
@@ -44,7 +45,7 @@ def get_user_image():
         image_link = utenti[username].get('image_data', {}).get('image_link', '')
         return jsonify({'image_link': image_link})
     else:
-        return ''  # Restituisci un URL vuoto se l'utente non ha un'immagine
+        return jsonify({'image_link': ''})  # Restituisci un URL vuoto se l'utente non ha un'immagine
 
 
 
@@ -111,18 +112,23 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
     repo = git.Repo('/home/jarvis/FantaRinuncia/')
     commits = list(repo.iter_commits('main'))[:3]
+    if 'username' in session:
+        logout()
+    else:
+        return render_template('index.html', commits=commits)
+
     return render_template('index.html', commits=commits)
 
-@app.route('/user/<username>')
-def user(username):
+@app.route('/home')
+def user():
     if 'username' in session:
-        return render_template('src/main.html', data=people, username=username)
+        return render_template('src/main.html', data=people)
     else:
         return redirect(url_for('login'))
 @app.route('/crea-squadra', methods=['POST'])
@@ -144,7 +150,8 @@ def crea_squadra():
 
         # Verifica se l'utente ha già una squadra e restituisci un messaggio di errore se è così
         if username in squadre:
-            return {}
+            squadraEsinente_message = 'Hai già una squadra. Se vuoi cancellarla, vai alla pagina del tuo profilo.'
+            return squadraEsinente_message , False
 
         # Aggiungi la nuova squadra per l'utente
         squadre[username] = selected_names
@@ -153,8 +160,39 @@ def crea_squadra():
         with open(squadra_json_file, 'w') as file:
             json.dump(squadre, file)
 
-        return 'Squadra creata e salvata.'
-    return 'Non sei loggato <a href="/auth/login">Login</a>'
+        success_message = 'Squadra creata con successo!'
+        return success_message , True
+    return redirect(url_for('login'))
+
+@app.route('/cancella-squadra', methods=['POST'])
+def cancella_squadra():
+    if 'username' in session:
+        username = session['username']
+
+        # Carica le squadre esistenti se il file esiste
+        if os.path.exists(squadra_json_file):
+            with open(squadra_json_file, 'r') as file:
+                squadre = json.load(file)
+        else:
+            squadre = {}
+
+        # Verifica se l'utente ha una squadra e cancellala se esiste
+        if username in squadre:
+            del squadre[username]
+
+            # Salva le squadre aggiornate sul file JSON
+            with open(squadra_json_file, 'w') as file:
+                json.dump(squadre, file)
+
+            delete_message = 'Squadra cancellata con successo.'
+
+            return delete_message , True
+        else:
+            noSq_message = 'Non hai una squadra da cancellare.'
+            return noSq_message , False
+    else:
+        return redirect(url_for('login'))
+
 
 
 @app.route('/profile')
@@ -177,8 +215,12 @@ def profile():
                 if username in utenti:
                     bio = utenti[username]['bio']
                     badges = utenti[username]['badges']
+                    data_creazione = utenti[username]['creation_date']
+                    data_creazione = datetime.strptime(data_creazione, '%Y-%m-%d')
+                    data_corrente = datetime.now()
+                    differenza = data_corrente - data_creazione
                     return render_template('/src/profile.html', username=username, bio=bio, badges=badges,
-                                           squadre=squadre, total_points=total_points)
+                                           squadre=squadre, total_points=total_points,differenza=differenza.days)
                 else:
                     return 'Questo utente non esiste'
         else:
@@ -214,8 +256,15 @@ def registrazione():
         # Cripta la password prima di salvarla
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        # Aggiunge il nuovo utente al dizionario con la password criptata
-        utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': bio, 'badges': []}
+        creation_date = datetime.now().strftime('%Y-%m-%d')
+
+        # Aggiunge il nuovo utente al dizionario con la password criptata e la data di creazione
+        utenti[username] = {
+            'password': hashed_password.decode('utf-8'),
+            'bio': bio,
+            'badges': [],
+            'creation_date': creation_date
+        }
 
         # Verifica se l'URL dell'immagine è fornito
         if image_link:

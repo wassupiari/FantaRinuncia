@@ -42,7 +42,7 @@
             <!-- Search Box -->
             <form class="form-inline my-2 my-lg-0" id="search-form">
                 <div class="d-flex">
-                    <input class="form-control mr-sm-2" type="text" id="search-input" placeholder="Cerca..."
+                    <input class="form-control mr-sm-2" type="text" id="search-input" placeholder="Cerca in base al nome.."
                         aria-label="Cerca" aria-describedby="button-addon2">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="text" id="search-button">Cerca</button>
                 </div>
@@ -52,16 +52,16 @@
 </nav>
 
 
-<div class="container px-3">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-8">
+      <div class="col-xs-12 col-sm-12 col-md-6 my-5">
         <div class="container" id="cards-container">
             {% for person in data %}
                 <div class="col-md-5 card-item">
                     <div class="card h-100">
                         <div class="card-body">
                             <p class="card-text">{{ person.firstname }} {{ person.lastname }} </p>
-                            <p class ="points-value">{{ person.points }} distasi</p>
+                            <p class="points-value">{{ person.points }} distasi</p>
                             <input type="checkbox" class="btn-check" id="btn-check-{{ loop.index }}" autocomplete="off">
                             <label  class="btn btn-outline-light" for="btn-check-{{ loop.index }}">scegli me</label>
                         </div>
@@ -71,7 +71,7 @@
             <div id="search-message" style="display: none;">Nessuna persona trovata con questo nome</div>
         </div>
       </div>
-        <div class="col-4" id="squad-maker">
+        <div class="col-xs-12 col-sm-12 col-md-6 my-5" id="squad-maker">
               <figure>
               <blockquote class="blockquote">
                 <h2>La tua squadra</h2>
@@ -84,6 +84,7 @@
                 <!-- Qui verranno aggiunti dinamicamente gli elementi della squadra -->
             </div>
             <div id="alert-container"></div>
+            <div id="alert-container-2"></div>
             <div id="team-points" class="mb-2"></div>
             <button id="salva-squadra-button" class="btn btn-success invisible" onclick="salvaSquadra()">Salva Squadra</button>
             <button onclick="topFunction()" id="myBtn" title="Go to top">
@@ -92,6 +93,9 @@
         </div>
     </div>
 </div>
+
+
+
     <footer class="container sticky-bottom">
         <hr>
         <p class="footer-heart">
