@@ -361,7 +361,7 @@ body {
 }
 
 @keyframes blink {
-  40% {
+  50% {
     border-color: transparent
   }
 }
@@ -378,6 +378,25 @@ body {
     text-decoration: none;
 }
 
+
+
+/* responsive for mobile */
+
+@media (max-width: 768px) {
+  .container.my-5.justify-content-center.align-items-center {
+    min-height: 100vh;
+  }
+  .typewriter-text {
+    font-size: 1.5em;
+    width: 18ch;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .col-xs-12, .col-sm-12 {
+    text-align: center;
+  }
+}
 
 
 
