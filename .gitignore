@@ -82,7 +82,7 @@ json_parser.py
 
 # folder of json db
 app.log
-
+private/*.json
 
 
 # End of https://www.gitignore.io/api/intellij
