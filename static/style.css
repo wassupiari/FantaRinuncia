@@ -224,18 +224,19 @@ SCROLLBAR
 PROFILE
 */
 
-.membro-name {
-  font-weight: bold;
-  color: #fff;
-}
+
 .badge-dark {
-    background-color: #343a40;
+    background-color: #ffff;
+    color: #000;
 }
 
 .custom-badge {
     margin-right: 5px; /* Regola la distanza orizzontale tra i badge */
     margin-bottom: 5px; /* Regola la distanza verticale tra i badge */
 }
+    #content-wrapper {
+        background: linear-gradient(200deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* Applica uno sfondo con un gradiente che sfuma da trasparente a nero */
+    }
 
 /* FAQ page */
 body {

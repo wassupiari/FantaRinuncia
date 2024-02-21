@@ -120,7 +120,7 @@
                 </div>
                 {% for commit in commits %}
               <div class="col-md-4 text-center">
-                <h2 class="fw-bold text-success">{{commit.hexsha[:10]}}</h2>
+                <h2 class="fw-bold text-success">{{commit.hexsha[:6]}}</h2>
                    <br>
                 <p class="fst-italic fw-light text-white">{{commit.message}}</p>
                 <p class="justify-content-center my-4 sticky"><a class="btn btn-primary" href="https://github.com/wassupiari/FantaRinuncia/commit/{{commit.hexsha}}" role="button">View details</a></p>

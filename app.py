@@ -3,11 +3,10 @@ import os
 import bcrypt
 from logger import setup_logger
 import git
+import json
 
 # logging system
 logger = setup_logger('app.log')
-
-
 
 app = Flask(__name__, static_url_path='/static',static_folder='static')
 
@@ -41,14 +40,12 @@ def nascondi_get_people():
 def get_user_image():
     utenti = carica_utenti()
     username = session.get('username')
-    if username and username in utenti:
+    if username in utenti:
         image_link = utenti[username].get('image_data', {}).get('image_link', '')
-        return image_link
+        return jsonify({'image_link': image_link})
     else:
         return ''  # Restituisci un URL vuoto se l'utente non ha un'immagine
 
-
-import json
 
 
 @app.route('/api/people', methods=['GET'])
@@ -76,6 +73,10 @@ def carica_utenti():
             return json.load(file)
     else:
         return {}
+
+# Carica dati delle persone
+with open(db_json_file, 'r') as file:
+    people = json.load(file)
 
 
 def salva_utenti(utenti):
@@ -112,13 +113,9 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-# Carica dati delle persone
-with open(db_json_file, 'r') as file:
-    people = json.load(file)
-
 @app.route('/')
 def index():
-    repo = git.Repo('/mnt/c/Users/capua/Desktop/FantaRinuncia/')
+    repo = git.Repo('/home/jarvis/FantaRinuncia/')
     commits = list(repo.iter_commits('main'))[:3]
     return render_template('index.html', commits=commits)
 
@@ -175,7 +172,7 @@ def profile():
                     total_points = sum(membro['points'] for membro in squadre[username])
                 else:
                     total_points = 0
-                    squadre = {}  # Imposta una lista vuota per le squadre
+                    squadre = {}
 
                 if username in utenti:
                     bio = utenti[username]['bio']
@@ -204,6 +201,7 @@ def registrazione():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        bio = request.form['bio']
         image_link = request.form['image_link']
 
         # Carica gli utenti esistenti
@@ -217,7 +215,7 @@ def registrazione():
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         # Aggiunge il nuovo utente al dizionario con la password criptata
-        utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': '', 'badges': []}
+        utenti[username] = {'password': hashed_password.decode('utf-8'), 'bio': bio, 'badges': []}
 
         # Verifica se l'URL dell'immagine è fornito
         if image_link:
@@ -227,8 +225,9 @@ def registrazione():
 
         # Salva gli utenti aggiornati nel file JSON
         salva_utenti(utenti)
+
         alert_message = "Registrazione avvenuta con successo! Ora puoi effettuare il login."
-        return render_template('register.html', alert_message=alert_message)
+        return render_template('auth/register.html', alert_message=alert_message)
 
     return render_template('auth/register.html')
 

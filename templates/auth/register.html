@@ -49,15 +49,19 @@
                 <form method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="username">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">bio</label>
+                        <input type="text" class="form-control" id="bio" name="bio" placeholder="bio">
                     </div>
                     <div class="mb-3">
                         <label for="image_link" class="form-label">Link dell'immagine</label>
-                        <input type="text" class="form-control" id="image_link" name="image_link">
+                        <input type="text" class="form-control" id="image_link" name="image_link" placeholder="image link">
                     </div>
                     <button type="submit" class="btn btn-primary">Registrati</button>
                     <a class="btn btn-outline-primary" href="/auth/login">Login</a>
@@ -66,7 +70,16 @@
         </div>
     </div>
 
-    <footer class="container fixed-bottom">
+    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+            {{alert_message}}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+
+    <footer class="container fixed-bottom px-3">
         <hr>
           <p>© FantaRinuncia 2024</p>
     </footer>

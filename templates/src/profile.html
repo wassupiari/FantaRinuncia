@@ -2,28 +2,30 @@
 <html lang="en" data-bs-theme="dark" >
 <head>
     <meta charset="UTF-8">
-    <title>Squadre</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5" >
-        <div class="container px-3">
-            <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-md-auto gap-2">
-                    <li class="nav-item rounded">
-                        <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
-                    </li>
-                    <li class="nav-item rounded">
-                        <a class="nav-link" href="#"><i class="bi bi-telephone-fill me-2"></i>About</a>
-                    </li>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded fixed-top shadow-lg p-3 mb-5">
+            <div class="container px-3 text-white">
+                <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
+                        </li>
+
+                        <li class="nav-item rounded">
+                            <a class="nav-link" href="/"><i class="bi bi-telephone-fill me-2"></i>Home</a>
+                        </li>
                     <li class="nav-item dropdown rounded">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill me-2"></i>Profile</a>
@@ -37,70 +39,77 @@
     </nav>
 
 
-<div class="container-fluid text-white px-3">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-lg-4">
-            <div class="row gutters-sm">
-                    <div class="container-fluid">
-                      <div class="card mb-4">
-                        <div class="card-body">
-                          <div class="d-flex flex-column align-items-center text-center ">
-                            <img id="user-image" src="" alt="Admin" class="rounded mx-auto d-block" width="200">
-                            <script>
-                                fetch('/api/get_user_image')
-                                    .then(response => response.text()) // Si suppone che l'API restituisca solo l'URL dell'immagine come testo
-                                    .then(imageLink => {
-                                        if (imageLink) {
-                                            document.getElementById('user-image').src = imageLink;
-                                        } else {
-                                            console.error('Nessun URL immagine disponibile.');
-                                        }
-                                    })
-                                    .catch(error => console.error('Errore durante il recupero dell\'immagine:', error));
-                            </script>
-                            <div class="mt-3">
-                                {% if username == session['username'] %}
-                              <h4>{{ username }}</h4>
-                              <p class="text-primary-white mb-1">{{ bio }}</p>
-                                {% for badge in badges %}
-                               <span class="badge custom-badge badge-dark mr-2 mb-2">{{ badge }}</span>
-                                {% endfor %}
-                            </div>
-                               {% endif %}
-                          </div>
-                        </div>
-                      </div>
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom my-5">Benvenuto - {{username}}</h2>
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" id="user-image-container">
+                    <script>
+                        fetch('/api/get_user_image')
+                            .then(response => response.json()) // Analizza la risposta come JSON
+                            .then(data => {
+                                const imageLink = data.image_link;
+                                if (imageLink) {
+                                    // Se viene restituito un URL valido, imposta l'URL dell'immagine come sfondo del div
+                                    document.getElementById('user-image-container').style.backgroundImage = `url('${imageLink}')`;
+                                } else {
+                                    // Se non viene restituito alcun URL immagine, stampa un messaggio di errore nella console
+                                    console.error('Nessun URL immagine disponibile.');
+                                }
+                            })
+                           .catch(error => console.error('Errore durante il recupero dell\'immagine:', error));
+                    </script>
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" id="content-wrapper">
+                {% if username == session['username'] %}
+                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-center">{{ bio }}</h2>
+                <ul class="d-flex list-unstyled mt-auto">
+
+                    <li class="d-flex align-items-center me-3">
+                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                        {% for badge in badges %}
+                        <span class="badge custom-badge badge-dark  mt-2 mb-2 mr-2">{{ badge }}</span>
+                        {% endfor %}
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+                        <small>4d</small> <!-- Questo è il testo che deve essere sostituito -->
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+      </div>
+
+
+            <div class="col p-5 pb-3 h-100 m-auto">
+                <div class=" d-flex flex-column h-100 p-5 pb-3 text-white border rounded-5">
+                    <h2 class="display-6 lh-1 fw-bold text-center mb-3">Squadra</h2>
+                    <div class="col text-center">
+                        <span class="badge bg-light text-dark mb-3">totale distasi spesi: {{total_points}}</span>
                     </div>
+                    {% if username is not in squadre %}
+                            <span class="fw-bold list-item mb-3 text-center">Non hai ancora una squadra</span>
+                            <a class="btn btn-outline-primary" href="/user/{{username}}">Fallo adesso</a>
+                            {% endif %}
+                    {% for membro in squadre[username] %}
+                    <div class="list-group text-center mb-2">
+                        <div class="list-group-item  d-flex flex-column justify-content-center align-items-center border-0 pb-3">
+                            <span class="fw-bold list-item mb-3">{{ membro.name }}</span>
+                            <span class="badge bg-warning text-bold p-2">{{ membro.points }} distasi</span>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-                <div class="col-lg-6">
-                  <div class="card text-dark mb-1">
-                    <div class="card-body">
-                      <div class="row align-items-center">
-                        <div class="col">
-                          <h2 class="text-white mb-3">La tua squadra</h2>
-                        </div>
-                        <div class="col text-end">
-                          <span class="badge bg-light text-dark mb-3">totale distasi spesi: {{total_points}}</span>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <ul class="list-group mb-auto">
-                          {% for membro in squadre[username] %}
-                          <div class="list-group mb-2">
-                            <div class="list-group-item d-flex justify-content-between align-items-center border-0">
-                              <span class="fw-bold">{{ membro.name }}</span>
-                              <span class="badge bg-warning text-light">{{ membro.points }} distasi</span>
-                            </div>
-                          </div>
-                          {% endfor %}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-        </div>
+
     </div>
+</div>
+
+
+    <footer class="container fixed-bottom">
+        <hr>
+          <p>© FantaRinuncia 2024</p>
+    </footer>
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
