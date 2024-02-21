@@ -227,8 +227,8 @@ def registrazione():
 
         # Salva gli utenti aggiornati nel file JSON
         salva_utenti(utenti)
-
-        return 'Registrazione completata. <a href="/auth/login">Effettua il login</a>'
+        alert_message = "Registrazione avvenuta con successo! Ora puoi effettuare il login."
+        return render_template('register.html', alert_message=alert_message)
 
     return render_template('auth/register.html')
 
