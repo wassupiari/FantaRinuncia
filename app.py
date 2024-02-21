@@ -72,7 +72,7 @@ def carica_utenti():
         with open(utenti_json_file, 'r') as file:
             return json.load(file)
     else:
-        return {}
+        return 'il file utenti.json non esiste'
 
 # Carica dati delle persone
 with open(db_json_file, 'r') as file:
