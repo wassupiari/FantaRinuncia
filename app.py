@@ -103,8 +103,8 @@ def login():
             session['username'] = username
             return redirect(url_for('user', username=username))
         else:
-            return 'Credenziali non valide. <a href="/auth/login">Riprova</a>'
-
+            credentials_message = 'Credenziali non valide. Riprova.'
+            return render_template('auth/login.html', credentials_message=credentials_message)
     # Se la richiesta non è di tipo POST, mostra la pagina di login
     return render_template('auth/login.html')
 
@@ -230,7 +230,6 @@ def profile():
 
 @app.route('/regolamento')
 def regolamento():
-    utenti = leggi_dati_da_file_json(utenti_json_file)
     if 'username' in session:
         logged = True
     else:
@@ -250,8 +249,7 @@ def registrazione():
         utenti = carica_utenti()
 
         # Controlla se l'username è già presente
-        if username in utenti:
-            return 'Username già esistente. <a href="/auth/register">Riprova</a>'
+
 
         # Cripta la password prima di salvarla
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())

@@ -12,7 +12,7 @@
 <div class="container-fluid fixed">
   <div class="row justify-content-center mt-3">
     <div class="col-md-6">
-      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv alert alert-danger text-center w-100">
+      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv text-danger text-center w-100">
         Fantarinuncia è in fase di sviluppo.
       </div>
     </div>
@@ -52,38 +52,39 @@
         <div class="row justify-content-center">
             <div class="col-xs-12 col-sm-12 col-md-6 my-5">
                 <h2 class="mb-4">Registrazione</h2>
-                <form method="post">
+                {% if alert_message %}
+                <div class="alert alert-success" role="alert">
+                    {{alert_message}}
+                </div>
+                {%endif%}
+                <form method="post"  onsubmit="return validateForm()" id="register-form">
                     <div class="mb-3">
                         <label class="form-label" for="username">Username</label>
-                        <input placeholder="username" name="username" id="username" class="form-control" type="text">
+                        <input placeholder="Username" name="username" id="username" class="form-control p-2" type="text">
+                            <div class="alert alert-warning d-none" role="alert" id="usernameAlert"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Password</label>
-                        <input placeholder="password" name="password" id="password" class="form-control" type="password">
+                        <input placeholder="Password" name="password" id="password" class="form-control p-2" type="password" autocomplete="current-password webauthn">
+                        <div class="alert alert-warning d-none" role="alert" id="passwordAlert"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="bio">bio</label>
-                        <input placeholder="bio" name="bio" id="bio" class="form-control" type="text">
+                        <input placeholder="Bio" name="bio" id="bio" class="form-control p-2" type="text">
+                        <div class="alert alert-warning d-none" role="alert" id="bioAlert"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="image_link">Link dell'immagine</label>
-                        <input placeholder="image link" name="image_link" id="image_link" class="form-control" type="text">
+                        <input placeholder="image link" name="image_link" id="image_link" class="form-control p-2" type="text">
                     </div>
                     <button class="btn btn-primary" type="submit">Registrati</button>
-                    <a href="/auth/login" class="btn btn-outline-primary">Login</a>
+                    <a href="/auth/login" class="btn btn-outline-primary ">Login</a>
                 </form>
             </div>
         </div>
     </div>
 
-    <div aria-atomic="true" aria-live="assertive" role="alert" class="toast align-items-center text-bg-primary border-0">
-      <div class="d-flex">
-        <div class="toast-body">
-            {{alert_message}}
-        </div>
-        <button aria-label="Close" data-bs-dismiss="toast" class="btn-close btn-close-white me-2 m-auto" type="button"></button>
-      </div>
-    </div>
+
 
     <footer class="container fixed-bottom px-3">
         <hr>
@@ -91,7 +92,6 @@
     </footer>
 
     <script src="{{url_for('static', filename='script.js')}}"></script>
-
     <script src="{{url_for('static', filename='bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='jquery/jquery-3.7.1.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='DOMpurify/purify.min.js')}}"></script>

@@ -67,20 +67,17 @@
                             })
                            .catch(error => console.error('Errore durante il recupero dell\'immagine:', error));
                     </script>
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" id="content-wrapper">
+            <div class="d-flex flex-column h-100 p-5 pb-3  text-shadow-1" id="content-wrapper">
                 {% if username == session['username'] %}
                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-center">{{ bio }}</h2>
-                <ul class="d-flex list-unstyled mt-auto">
-
-                    <li class="d-flex align-items-center me-3">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                <ul class="d-flex list-unstyled">
+                    <li class="d-flex align-items-center mt-5">
                         {% for badge in badges %}
-                        <span class="badge custom-badge badge-dark  mt-2 mb-2 mr-2">{{ badge }}</span>
+                        <span class="badge badge-light bg-dark mx-1">{{ badge }}</span>
                         {% endfor %}
                     </li>
-                    <li class="d-flex align-items-center">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                        <small>{{differenza}} giorni fa</small> <!-- Questo è il testo che deve essere sostituito -->
+                    <li class="d-flex align-items-center mx-auto mt-5 ">
+                        <small class="fst-italic ">creato {{differenza}} giorni fa</small> <!-- Questo è il testo che deve essere sostituito -->
                     </li>
                     {% endif %}
                 </ul>

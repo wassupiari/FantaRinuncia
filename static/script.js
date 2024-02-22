@@ -1,5 +1,44 @@
 var squadra = [];
-console.clear();
+
+
+function userExists() {
+    fetch('/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: user }),
+    })
+    .then(response => response.text())
+    .then(data => {
+        var alertContainer = document.getElementById("alert-container");
+        alertContainer.innerHTML = '';
+
+        // Crea e aggiungi l'alert Bootstrap al container
+        var alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+        if (data) {
+            alertDiv.classList.add("alert-danger");
+            alertDiv.innerHTML = `
+                ${data}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+        } else {
+            alertDiv.classList.add("alert-success");
+            alertDiv.innerHTML = `
+                ${data}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+        }
+
+        alertContainer.appendChild(alertDiv);
+    }
+    )
+    .catch(error => {
+        console.error('Errore:', error);
+    });
+}
  function salvaSquadra() {
         fetch('/crea-squadra', {
             method: 'POST',
@@ -132,49 +171,54 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    var cardsContainer = document.getElementById("cards-container");
-    cardsContainer.addEventListener("change", function(event) {
-        var checkbox = event.target;
-        var card = checkbox.closest(".card");
-        var cardText = card.querySelector(".card-text").textContent;
-        var pointsValue = parseInt(card.querySelector(".points-value").innerText);
+        var cardsContainer = document.getElementById("cards-container");
+        if (cardsContainer) {
+            cardsContainer.addEventListener("change", function (event) {
+                var checkbox = event.target;
+                var card = checkbox.closest(".card");
+                var cardText = card.querySelector(".card-text").textContent;
+                var pointsValue = parseInt(card.querySelector(".points-value").innerText);
 
-        if (checkbox.checked) {
-            // Controlla se aggiungere questa persona alla squadra supera il limite massimo di 100 punti
-            var totalPoints = squadra.reduce((total, person) => total + person.points, 0) + pointsValue;
-            if (totalPoints <= 50 && squadra.length < 5) {
-                squadra.push({ name: cardText, points: pointsValue });
-            } else {
-                checkbox.checked = false; // Annulla la selezione se supera il limite di 100 punti o il massimo di 5 persone
-                var alertContainer = document.getElementById("alert-container-2");
-                alertContainer.innerHTML = '<div class="alert alert-danger" role="alert">La tua squadra ha già raggiunto il massimo punteggio consentito di 50 punti o il numero massimo di 5 persone!</div>';
-            }
-        } else {
-            // Rimuovi la persona dalla squadra
-            var index = squadra.findIndex(person => person.name === cardText);
-            if (index !== -1) {
-                squadra.splice(index, 1);
-            }
+                if (checkbox.checked) {
+                    // Controlla se aggiungere questa persona alla squadra supera il limite massimo di 100 punti
+                    var totalPoints = squadra.reduce((total, person) => total + person.points, 0) + pointsValue;
+                    if (totalPoints <= 50 && squadra.length < 5) {
+                        squadra.push({name: cardText, points: pointsValue});
+                    } else {
+                        checkbox.checked = false; // Annulla la selezione se supera il limite di 100 punti o il massimo di 5 persone
+                        var alertContainer = document.getElementById("alert-container-2");
+                        alertContainer.innerHTML = '<div class="alert alert-danger" role="alert">La tua squadra ha già raggiunto il massimo punteggio consentito di 50 punti o il numero massimo di 5 persone!</div>';
+                    }
+                } else {
+                    // Rimuovi la persona dalla squadra
+                    var index = squadra.findIndex(person => person.name === cardText);
+                    if (index !== -1) {
+                        squadra.splice(index, 1);
+                    }
+                }
+
+
+                updateSquadraGrid();
+            });
         }
 
 
 
-        updateSquadraGrid();
-    });
 
+        var salvaSquadraButton = document.getElementById("salva-squadra-button");
+        if (salvaSquadraButton) {
+            salvaSquadraButton.addEventListener("click", function() {
+                salvaSquadra();
+            });
+        }
 
-
-
-// Funzione per gestire l'evento di clic sul pulsante "Salva Squadra"
-document.getElementById("salva-squadra-button").addEventListener("click", function() {
-    salvaSquadra();
-});
-
-// Funzione per gestire l'evento di clic sul pulsante di ricerca
-document.getElementById("search-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    searchCards();
-});
+        var searchForm = document.getElementById("search-form");
+        if (searchForm) {
+            searchForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                searchCards();
+            });
+        }
 
 // Funzione per filtrare le card in base alla query di ricerca
 function searchCards() {
@@ -209,12 +253,12 @@ function searchCards() {
 
     // Get the button
 
-
+    let mybutton = document.getElementById("myBtn");
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
-        let mybutton = document.getElementById("myBtn");
+
       if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         mybutton.style.display = "block";
       } else {
@@ -227,6 +271,158 @@ function searchCards() {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     }
+
+
+    // register form
+function validateForm(inputField) {
+    var inputId = inputField.id;
+    var inputValue = inputField.value.trim();
+    var alertElementId = inputId + 'Alert';
+    var alertElement = document.getElementById(alertElementId);
+
+    // Nasconde l'alert relativo al campo in cui si sta inserendo l'input
+    alertElement.classList.add('d-none');
+
+    // Controlla la lunghezza della password solo se l'input è nel campo password
+    if (inputId === 'password' && inputValue.length < 5) {
+        alertElement.innerHTML = "La password deve essere lunga almeno 5 caratteri.";
+        alertElement.classList.remove('d-none');
+        return false;
+    }
+
+    // Controlla se la password contiene almeno un numero solo se l'input è nel campo password
+    if (inputId === 'password' && !/\d/.test(inputValue)) {
+        alertElement.innerHTML = "La password deve contenere almeno un numero.";
+        alertElement.classList.remove('d-none');
+        return false;
+    }
+
+    if (inputId === 'username' && inputValue.length < 3) {
+        alertElement.innerHTML = "L'username deve essere lungo almeno 3 caratteri.";
+        alertElement.classList.remove('d-none');
+        return false;
+    }
+
+    if (inputId === 'bio' && inputValue.length > 25) {
+        alertElement.innerHTML = "La bio non può essere più lunga di 25 caratteri.";
+        alertElement.classList.remove('d-none');
+        return false;
+    }
+
+    return true;
+}
+
+
+    var passwordInput = document.getElementById('password');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            validateForm(this);
+        });
+    }
+
+    var usernameInput = document.getElementById('username');
+    if (usernameInput) {
+        usernameInput.addEventListener('input', function() {
+            validateForm(this);
+        });
+    }
+
+    var bioInput = document.getElementById('bio');
+    if (bioInput) {
+        bioInput.addEventListener('input', function() {
+            validateForm(this);
+        });
+    }
+
+    // Login DOMpurify
+    var formLogin = document.getElementById('login-form');
+    if (formLogin) {
+        formLogin.addEventListener('DOMContentLoaded', function() {
+            formLogin.addEventListener('submit', function(event) {
+                // Evita il comportamento predefinito del modulo di login
+                event.preventDefault();
+
+                // Ottieni i valori dei campi del modulo di login
+                var username = document.getElementById('usernameLogin').value;
+                var password = document.getElementById('passwordLogin').value;
+
+                // Sanifica i valori utilizzando DOMPurify
+                var cleanUsername = DOMPurify.sanitize(username);
+                var cleanPassword = DOMPurify.sanitize(password);
+
+                // Crea un oggetto con i dati da inviare al server
+                var formData = new FormData();
+                formData.append('username', cleanUsername);
+                formData.append('password', cleanPassword);
+
+                // Invia i dati al server utilizzando Fetch
+                fetch('/auth/login', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Errore durante la richiesta:', response.statusText);
+                    }
+                    // Gestisci la risposta dal server
+                     window.location.href = '/home';
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+            });
+        });
+    }
+
+    // Register DOMpurify
+    var formRegister = document.getElementById('register-form');
+    if (formRegister) {
+        formRegister.addEventListener('DOMContentLoaded', function() {
+            formRegister.addEventListener('submit', function(event) {
+                // Evita il comportamento predefinito del modulo di login
+                event.preventDefault();
+
+                // Ottieni i valori dei campi del modulo di login
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var bio = document.getElementById('bio').value;
+
+
+                // Sanifica i valori utilizzando DOMPurify
+                var cleanUsername = DOMPurify.sanitize(username);
+                var cleanPassword = DOMPurify.sanitize(password);
+                var cleanBio = DOMPurify.sanitize(bio);
+
+                // Crea un oggetto con i dati da inviare al server
+                var formData = new FormData();
+                formData.append('username', cleanUsername);
+                formData.append('password', cleanPassword);
+                formData.append('bio', cleanBio);
+
+                // Invia i dati al server utilizzando Fetch
+                fetch('/auth/register', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Errore durante la richiesta:', response.statusText);
+                    }
+                    console.log(response);
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+            });
+        });
+    }
+
+
+
+
+
+
+
 
 
 
