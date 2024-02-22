@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="it" data-bs-theme="dark" class="text-white">
 <head>
-    <title>HomePage</title>
+    <title>FantaRinuncia</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
 
 </head>
 
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded fixed-top shadow-lg p-3 mb-5">
-    <div class="container px-3">
+<div class="container-fluid fixed">
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv alert alert-danger text-center w-100">
+        Fantarinuncia è in fase di sviluppo.
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5">
+    <div class="container px-3 text-white">
         <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,85 +51,64 @@
     </div>
 </nav>
 
-<div class="container-fluid bg-dark text-white">
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
-        <div class="row">
-            <div class="col-xs-12 col-md-6 p-3">
-                <h2 class="fw-bold">Benvenuto su</h2>
-                <div class="typewriter-text fw-bolder">Fantarinuncia.live</div>
+<div class="container-fluid text-white">
+    <div class="container my-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 my-5">
+                <h3 class="fw-bold">Benvenuto su</h3>
+                <h1 class="fw-bolder text-warning">Fantarinuncia</h1>
                 <p class="fst-italic fw-light">Indovina chi lascerà gli studi per primo con FantaRinuncia</p>
-                <hr class="my-4">
-                <p class="text-muted text-white">Segui da vicino le scelte audaci degli studenti e scommetti su chi lascerà gli studi per primo con FantaRinuncia. Metti alla prova la tua capacità di prevedere il futuro accademico e chi sarà il primo a fare la grande rinuncia agli studi.</p>
+                <hr class="my-5">
+                <p class="text-muted">Segui da vicino le scelte audaci degli studenti e scommetti su chi lascerà gli studi per primo con FantaRinuncia. Metti alla prova la tua capacità di prevedere il futuro accademico e chi sarà il primo a fare la grande rinuncia agli studi.</p>
                 <p class="lead my-5">
                     <a class="btn btn-warning btn-lg" href="/auth/login" role="button">Crea la tua squadra</a>
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6">
-                <svg fill="#000" width="650px" height="300px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-
+            <div class="col-xs-12 col-sm-12 col-md-6 my-5 d-none d-md-block">
+                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" width="550px" height="250px" fill="#ffc107" stroke="#ffc107">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-                <g id="SVGRepo_iconCarrier">
-
-                <path d="M12 14c1.381 0 2.631-.56 3.536-1.465.904-.904 1.464-2.154 1.464-3.535s-.56-2.631-1.464-3.535c-.905-.905-2.155-1.465-3.536-1.465s-2.631.56-3.536 1.465c-.904.904-1.464 2.154-1.464 3.535s.56 2.631 1.464 3.535c.905.905 2.155 1.465 3.536 1.465zM20 15c.69 0 1.315-.279 1.768-.731.453-.452.732-1.077.732-1.769 0-.69-.279-1.315-.732-1.768-.453-.453-1.078-.732-1.768-.732-.691 0-1.316.279-1.769.732-.452.453-.731 1.078-.731 1.768 0 .691.279 1.316.731 1.769s1.078.731 1.769.731zM20 15.59c-1.331 0-2.332.406-2.917.968-1.115-.917-2.878-1.558-5.083-1.558-2.266 0-3.995.648-5.092 1.564-.596-.565-1.608-.974-2.908-.974-2.188 0-3.5 1.09-3.5 2.182 0 .545 1.312 1.092 3.5 1.092.604 0 1.146-.051 1.623-.133l-.04.27c0 1 2.406 2 6.417 2 3.762 0 6.417-1 6.417-2l-.02-.255c.463.073.995.118 1.603.118 2.051 0 3.5-.547 3.5-1.092 0-1.092-1.373-2.182-3.5-2.182zM4 15c.69 0 1.315-.279 1.768-.732.453-.453.732-1.078.732-1.768 0-.689-.279-1.314-.732-1.768-.453-.452-1.078-.732-1.768-.732-.691 0-1.316.28-1.769.732-.452.454-.731 1.079-.731 1.768 0 .69.279 1.315.731 1.768.453.453 1.078.732 1.769.732z"/>
-
-                </g>
-
+                <g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} </style> <path d="M12.5,23h-1.3c0,0,0,0,0-0.1c-0.1-0.2-0.2-0.4-0.4-0.5c0,0-0.1-0.1-0.1-0.1c-0.3-0.4-0.6-0.7-1-1c0,0-0.1-0.1-0.1-0.1 c-0.2-0.1-0.3-0.2-0.5-0.3c0,0-0.1-0.1-0.1-0.1c-0.4-0.2-0.9-0.4-1.3-0.6c-0.1,0-0.1,0-0.2,0c-0.2,0-0.4-0.1-0.5-0.1 c-0.1,0-0.1,0-0.2,0c-0.2,0-0.5,0-0.7,0c-3.3,0-6,2.7-6,6s2.7,6,6,6c0.1,0,0.2,0,0.2,0c0.1,0,0.2,0,0.3,0h6c2.5,0,4.5-2,4.5-4.5 S15,23,12.5,23z"/> <path d="M27.9,4.8h-0.6c0,0,0,0,0,0c0,0,0-0.1-0.1-0.1c-0.1-0.2-0.2-0.3-0.4-0.5c0,0-0.1-0.1-0.1-0.1c-0.2-0.2-0.3-0.3-0.5-0.4 c0,0-0.1,0-0.1-0.1c-0.2-0.1-0.3-0.2-0.5-0.3c0,0-0.1,0-0.1-0.1c-0.2-0.1-0.4-0.2-0.6-0.2c-0.1,0-0.1,0-0.2,0C24.5,3,24.2,3,24,3 c-2.2,0-4,1.8-4,4s1.8,4,4,4c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.1,0h3.6c1.7,0,3.1-1.4,3.1-3.1C31,6.2,29.6,4.8,27.9,4.8z"/> <g> <polygon points="9,20.8 9,20.8 9,20.8 "/> <path d="M29.2,14.2c-0.4-0.1-0.9,0.1-1.1,0.5C26.7,17.3,24,19,21,19c-4.4,0-8-3.6-8-8c0-3,1.7-5.7,4.3-7.1c0.4-0.2,0.6-0.7,0.5-1.1 c-0.1-0.4-0.5-0.8-1-0.8c0,0,0,0,0,0C9.8,2.1,4,7.9,4,15c0,1.1,0.1,2.1,0.4,3.2C4.9,18.1,5.5,18,6,18c0.3,0,0.7,0,1,0.1l0.2,0 c0.3,0,0.5,0.1,0.8,0.2l0.2,0.1c0.6,0.2,1.2,0.4,1.8,0.7l0.2,0.1c0.2,0.1,0.5,0.3,0.7,0.4l0.2,0.1c0.5,0.4,0.9,0.8,1.3,1.3h0.3 c3.6,0,6.5,2.9,6.5,6.5c0,0.1,0,0.2,0,0.3c6.2-1,10.9-6.3,11-12.7C30,14.7,29.7,14.3,29.2,14.2z"/> </g> </g>
                 </svg>
             </div>
-
         </div>
     </div>
-
 </div>
 
-<div class="container my-5">
+
+<div class="container my-5 text-white">
     <div class="card-group">
         <div class="card border-0 my-4 mx-2 align-items-center text-center ">
            <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
             <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 6C14.3432 6 13 7.34315 13 9C13 10.6569 14.3432 12 16 12C17.6569 12 19 10.6569 19 9C19 7.34315 17.6569 6 16 6ZM11 9C11 6.23858 13.2386 4 16 4C18.7614 4 21 6.23858 21 9C21 10.3193 20.489 11.5193 19.6542 12.4128C21.4951 13.0124 22.9176 14.1993 23.8264 15.5329C24.1374 15.9893 24.0195 16.6114 23.5631 16.9224C23.1068 17.2334 22.4846 17.1155 22.1736 16.6591C21.1979 15.2273 19.4178 14 17 14C13.166 14 11 17.0742 11 19C11 19.5523 10.5523 20 10 20C9.44773 20 9.00001 19.5523 9.00001 19C9.00001 18.308 9.15848 17.57 9.46082 16.8425C9.38379 16.7931 9.3123 16.7323 9.24889 16.6602C8.42804 15.7262 7.15417 15 5.50001 15C3.84585 15 2.57199 15.7262 1.75114 16.6602C1.38655 17.075 0.754692 17.1157 0.339855 16.7511C-0.0749807 16.3865 -0.115709 15.7547 0.248886 15.3398C0.809035 14.7025 1.51784 14.1364 2.35725 13.7207C1.51989 12.9035 1.00001 11.7625 1.00001 10.5C1.00001 8.01472 3.01473 6 5.50001 6C7.98529 6 10 8.01472 10 10.5C10 11.7625 9.48013 12.9035 8.64278 13.7207C9.36518 14.0785 9.99085 14.5476 10.5083 15.0777C11.152 14.2659 11.9886 13.5382 12.9922 12.9945C11.7822 12.0819 11 10.6323 11 9ZM3.00001 10.5C3.00001 9.11929 4.1193 8 5.50001 8C6.88072 8 8.00001 9.11929 8.00001 10.5C8.00001 11.8807 6.88072 13 5.50001 13C4.1193 13 3.00001 11.8807 3.00001 10.5Z" fill="#ffffff"/> </g>
-
             </svg>
             <div class="card-body">
-                <h4 class="card-title">Crea la tua squadra</h4>
-                <p class="card-text">Forma la tua squadra e vinci con FantaRinuncia!</p>
+                <h4 class="card-title text-warning">Crea la tua squadra</h4>
+                <p class="card-text text-white">Forma la tua squadra e vinci con FantaRinuncia!</p>
             </div>
         </div>
         <div class="card border-0 my-4 mx-2 align-items-center text-center">
             <svg width="250px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
             <g id="SVGRepo_iconCarrier"> <path d="M15 21H9V12.6C9 12.2686 9.26863 12 9.6 12H14.4C14.7314 12 15 12.2686 15 12.6V21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M20.4 21H15V18.1C15 17.7686 15.2686 17.5 15.6 17.5H20.4C20.7314 17.5 21 17.7686 21 18.1V20.4C21 20.7314 20.7314 21 20.4 21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 21V16.1C9 15.7686 8.73137 15.5 8.4 15.5H3.6C3.26863 15.5 3 15.7686 3 16.1V20.4C3 20.7314 3.26863 21 3.6 21H9Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M10.8056 5.11325L11.7147 3.1856C11.8314 2.93813 12.1686 2.93813 12.2853 3.1856L13.1944 5.11325L15.2275 5.42427C15.4884 5.46418 15.5923 5.79977 15.4035 5.99229L13.9326 7.4917L14.2797 9.60999C14.3243 9.88202 14.0515 10.0895 13.8181 9.96099L12 8.96031L10.1819 9.96099C9.94851 10.0895 9.67568 9.88202 9.72026 9.60999L10.0674 7.4917L8.59651 5.99229C8.40766 5.79977 8.51163 5.46418 8.77248 5.42427L10.8056 5.11325Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-
             </svg>
             <div class="card-body">
-                <h4 class="card-title"> Scala le classifiche </h4>
-                <p class="card-text">Scali le classifiche con FantaRinuncia! Vinci "un coins" e raggiungi la vetta.</p>
+                <h4 class="card-title text-warning"> Scala le classifiche </h4>
+                <p class="card-text text-white">Scali le classifiche con FantaRinuncia! Vinci "un coins" e raggiungi la vetta.</p>
             </div>
         </div>
         <div class="card border-0 my-4 mx-2 align-items-center text-center">
             <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
             <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 2.34315 6.34315 1 8 1H15.9999C17.6568 1 19 2.34314 19 4H20C21.6569 4 23 5.34315 23 7V7.64593C23 8.87265 22.2531 9.97577 21.1142 10.4314L18.031 11.6646C17.5965 12.464 16.958 13.2715 16.0234 13.8946C15.211 14.4361 14.2124 14.8132 13 14.9467V17H15C16.6569 17 18 18.3431 18 20V21C18 22.1046 17.1046 23 16 23H8C6.89543 23 6 22.1046 6 21V20C6 18.3431 7.34315 17 9 17H11V14.9467C9.78757 14.8133 8.7889 14.4361 7.97651 13.8945C7.04188 13.2715 6.40335 12.464 5.9689 11.6646L2.88583 10.4314C1.74685 9.97577 1 8.87265 1 7.64593V7C1 5.34315 2.34315 4 4 4H5ZM5 6H4C3.44772 6 3 6.44772 3 7V7.64593C3 8.05484 3.24895 8.42255 3.62861 8.57441L5.11907 9.1706C5.05194 8.78628 5.00063 8.39214 5 8.00104L5 6ZM19 8V6H20C20.5523 6 21 6.44772 21 7V7.64593C21 8.05484 20.751 8.42255 20.3714 8.57441L18.8809 9.17062C18.9469 8.78361 19 8.39286 19 8ZM8 3C7.44772 3 7 3.44772 7 4V7.99707L7 7.99832C7 7.99996 7 8.00078 7 7.99832C7.00508 8.25761 7.03756 8.51764 7.08014 8.77311C7.16297 9.27012 7.32677 9.91751 7.6444 10.5528C7.96008 11.1842 8.4179 11.7851 9.08591 12.2305C9.74766 12.6716 10.6749 13 12 13C13.325 13 14.2522 12.6716 14.914 12.2304C15.582 11.7851 16.0398 11.1842 16.3555 10.5528C16.6732 9.9175 16.837 9.27011 16.9198 8.7731C16.9624 8.51735 16.993 8.25848 17 7.99909V4C17 3.44772 16.5522 3 15.9999 3H8ZM9 19C8.44772 19 8 19.4477 8 20V21H16V20C16 19.4477 15.5523 19 15 19H9Z" fill="#ffffff"/> </g>
-
             </svg>
             <div class="card-body">
-                <h4 class="card-title">Crea la tua lega</h4>
-                <p class="card-text">Crea la tua lega su FantaRinuncia! Sfida gli amici e vinci insieme</p>
+                <h4 class="card-title text-warning">Crea la tua lega</h4>
+                <p class="card-text text-white">Crea la tua lega su FantaRinuncia! Sfida gli amici e vinci insieme</p>
                 <p class="card-text"><small class="text-muted">work in progress</small></p>
             </div>
         </div>
@@ -141,16 +128,17 @@
                 </div>
                 {% for commit in commits %}
               <div class="col-md-4 text-center">
-                <h2 class="fw-bolder">{{commit.hexsha[:10]}}</h2>
-                <p class="fst-italic fw-light">{{commit.message}}</p>
-                <p><a class="btn btn-secondary" href="https://github.com/wassupiari/FantaRinuncia/commit/{{commit.hexsha}}" role="button">View details</a></p>
+                <h2 class="fw-bold text-success">{{commit.hexsha[:6]}}</h2>
+                   <br>
+                <p class="fst-italic fw-light text-white">{{commit.message}}</p>
+                <p class="justify-content-center my-4 sticky"><a class="btn btn-primary" href="https://github.com/wassupiari/FantaRinuncia/commit/{{commit.hexsha}}" role="button">View details</a></p>
               </div>
                 {% endfor %}
              </div>
     </div>
 
 
-    <footer class="container">
+    <footer class="container sticky-bottom">
         <hr>
           <p>© FantaRinuncia 2024</p>
     </footer>
@@ -158,9 +146,9 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='jquery/jquery-3.7.1.min.js')}}"></script>
 
 
 

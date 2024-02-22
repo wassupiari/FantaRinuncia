@@ -5,12 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
 </head>
 <body>
-    <div class="container mt-5">
+<div class="container-fluid fixed">
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv alert alert-danger text-center w-100">
+        Fantarinuncia è in fase di sviluppo.
+      </div>
+    </div>
+  </div>
+</div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5">
+        <div class="container px-3 text-white">
+            <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
+                    </li>
+
+                    <li class="nav-item rounded">
+                        <a class="nav-link" href="/"><i class="bi bi-telephone-fill me-2"></i>Home</a>
+                    </li>
+                    <li class="nav-item svg-item">
+                        <a class="" href="https://github.com/wassupiari">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 my-5">
                 <h2 class="mb-4">Login</h2>
                 <form method="post">
                     <div class="mb-3">
@@ -26,5 +66,14 @@
             </div>
         </div>
     </div>
+
+    <footer class="container fixed-bottom">
+        <hr>
+          <p>© FantaRinuncia 2024</p>
+    </footer>
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='jquery/jquery-3.7.1.min.js')}}"></script>
 </body>
 </html>
