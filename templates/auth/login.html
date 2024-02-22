@@ -20,25 +20,24 @@
 </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5">
         <div class="container px-3 text-white">
-            <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a href="#" class="navbar-brand">Fanta_Rinuncia</a>
+            <button aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarNav" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button" class="navbar-toggler">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div id="navbarNav" class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
+                        <a href="/regolamento" class="nav-link"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
                     </li>
 
                     <li class="nav-item rounded">
-                        <a class="nav-link" href="/"><i class="bi bi-telephone-fill me-2"></i>Home</a>
+                        <a href="/" class="nav-link"><i class="bi bi-telephone-fill me-2"></i>Home</a>
                     </li>
                     <li class="nav-item svg-item">
-                        <a class="" href="https://github.com/wassupiari">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                        <a href="https://github.com/wassupiari" class="">
+                            <svg stroke-linejoin="round" stroke-linecap="round" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" height="24" width="24" class="icon icon-tabler icon-tabler-brand-github" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
+                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
                             </svg>
                         </a>
                     </li>
@@ -54,14 +53,14 @@
                 <h2 class="mb-4">Login</h2>
                 <form method="post">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <label class="form-label" for="username">Username</label>
+                        <input name="username" id="username" class="form-control" type="text">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <label class="form-label" for="password">Password</label>
+                        <input name="password" id="password" class="form-control" type="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Accedi</button> <a class="btn btn-outline-primary" href="/auth/register">Registrati</a>
+                    <button class="btn btn-primary" type="submit">Accedi</button> <a href="/auth/register" class="btn btn-outline-primary">Registrati</a>
                 </form>
             </div>
         </div>
@@ -73,7 +72,8 @@
     </footer>
 
     <script src="{{url_for('static', filename='script.js')}}"></script>
-    <script src="{{url_for('static', filename='bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='jquery/jquery-3.7.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='DOMpurify/purify.min.js')}}"></script>
 </body>
 </html>
