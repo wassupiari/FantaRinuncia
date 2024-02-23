@@ -87,25 +87,25 @@
 
 
             <div class="col p-5 pb-3 h-100 m-auto">
-                <div class=" d-flex flex-column h-100 p-5 pb-3 text-white border rounded-5">
+                <div class="row d-flex flex-column h-100 p-5 pb-3 text-white border rounded-5">
                     <h2 class="display-6 lh-1 fw-bold text-center mb-3">Squadra</h2>
                     <div class="col text-center">
-                        <span class="badge bg-light text-dark mb-3">totale distasi spesi: {{total_points}}</span>
+                        <span class="d-inline-flex mt-2 px-2 py-1 fw-semibold text-light-emphasis bg-warning-subtle border border-warning-subtle rounded-2 mb-3">totale distasi spesi: {{total_points}}/50</span>
                     </div>
                     {% if username is not in squadre %}
                             <span class="fw-bold list-item mb-3 text-center">Non hai ancora una squadra</span>
                             <a class="btn btn-outline-primary" href="/home">Fallo adesso</a>
                             {% endif %}
                     {% for membro in squadre[username] %}
-                    <div class="list-group text-center mb-2">
-                        <div class="list-group-item  d-flex flex-column justify-content-center align-items-center border-0 pb-3">
-                            <span class="fw-bold list-item mb-3">{{ membro.name }}</span>
-                            <span class="badge bg-warning text-bold p-2">{{ membro.points }} distasi</span>
+                    <div class="col  mb-2">
+                        <div class="list-group d-flex flex-column justify-content-between align-items-center border-0 pb-3">
+                            <li class="fw-bold list-group-item d-flex justify-content-between align-items-center border-0">{{ membro.name }}</li>
+                            <span class="d-inline-flex mt-2 px-2 py-1 fw-semibold text-success-emphasis bg-success-subtle border border-success-subtle rounded-2">{{ membro.points }} distasi</span>
                         </div>
                     </div>
                     {% endfor %}
                     <div id="alert-del"></div>
-                    <button id="cancellaSquadra" class="btn btn-success" onclick="cancellaSquadra()">Cancella Squadra</button>
+                    <button id="cancellaSquadra" class="btn btn-outline-light" onclick="cancellaSquadra()">Cancella Squadra</button>
                 </div>
             </div>
 

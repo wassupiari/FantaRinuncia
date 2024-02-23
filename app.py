@@ -5,20 +5,27 @@ from logger import setup_logger
 import git
 import json
 from datetime import datetime
+from functools import wraps
 
 # logging system
 logger = setup_logger('app.log')
 
 app = Flask(__name__, static_url_path='/static',static_folder='static')
 
-app.secret_key = '8a6sd-a9s66d8as86d-9asd'
+app.secret_key = 'f8696db1c05e0ca25edc60029c0cdd99dc1b2b42f15aee2076e29fcf3fab36bf'
 
 
 squadra_json_file = 'private/squadra.json'
 utenti_json_file = 'private/utenti.json'
 db_json_file = 'private/people.json'
 
-
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico')
@@ -110,6 +117,7 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
@@ -126,11 +134,10 @@ def index():
     return render_template('index.html', commits=commits)
 
 @app.route('/home')
+@login_required
 def user():
-    if 'username' in session:
-        return render_template('src/main.html', data=people)
-    else:
-        return redirect(url_for('login'))
+    return render_template('src/main.html', data=people)
+
 @app.route('/crea-squadra', methods=['POST'])
 def crea_squadra():
     if 'username' in session:
@@ -196,35 +203,32 @@ def cancella_squadra():
 
 
 @app.route('/profile')
+@login_required
 def profile():
-    if 'username' in session:
-        # Verifica se il file utenti_json_file esiste
-        if os.path.exists(utenti_json_file):
-            with open(utenti_json_file, 'r') as file:
-                squadre = leggi_dati_da_file_json(squadra_json_file)
-                utenti = json.load(file)
-                username = session['username']
+    if os.path.exists(utenti_json_file):
+        with open(utenti_json_file, 'r') as file:
+            squadre = leggi_dati_da_file_json(squadra_json_file)
+            utenti = json.load(file)
+            username = session['username']
 
-                # Verifica se l'utente ha una squadra
-                if username in squadre:
-                    total_points = sum(membro['points'] for membro in squadre[username])
-                else:
-                    total_points = 0
-                    squadre = {}
+            # Verifica se l'utente ha una squadra
+            if username in squadre:
+                total_points = sum(membro['points'] for membro in squadre[username])
+            else:
+                total_points = 0
+                squadre = {}
 
-                if username in utenti:
-                    bio = utenti[username]['bio']
-                    badges = utenti[username]['badges']
-                    data_creazione = utenti[username]['creation_date']
-                    data_creazione = datetime.strptime(data_creazione, '%Y-%m-%d')
-                    data_corrente = datetime.now()
-                    differenza = data_corrente - data_creazione
-                    return render_template('/src/profile.html', username=username, bio=bio, badges=badges,
-                                           squadre=squadre, total_points=total_points,differenza=differenza.days)
-                else:
-                    return 'Questo utente non esiste'
-        else:
-            return 'Il file utenti.json non esiste'
+            if username in utenti:
+                bio = utenti[username]['bio']
+                badges = utenti[username]['badges']
+                data_creazione = utenti[username]['creation_date']
+                data_creazione = datetime.strptime(data_creazione, '%Y-%m-%d')
+                data_corrente = datetime.now()
+                differenza = data_corrente - data_creazione
+                return render_template('/src/profile.html', username=username, bio=bio, badges=badges,
+                                       squadre=squadre, total_points=total_points,differenza=differenza.days)
+            else:
+                return 'Questo utente non esiste'
     else:
         return redirect(url_for('login'))
 
