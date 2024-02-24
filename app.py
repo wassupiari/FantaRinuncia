@@ -7,6 +7,8 @@ import json
 from datetime import datetime
 from functools import wraps
 
+version = '0.0.109'
+
 # logging system
 logger = setup_logger('app.log')
 
@@ -126,12 +128,15 @@ def logout():
 def index():
     repo = git.Repo('/home/jarvis/FantaRinuncia/')
     commits = list(repo.iter_commits('main'))[:3]
+    numero_squadre = conta_squadre(squadra_json_file)
+    numero_utenti = conta_utenti(utenti_json_file)
+    numero_persone = conta_persone(db_json_file)
     if 'username' in session:
         logout()
     else:
-        return render_template('index.html', commits=commits)
+        return render_template('index.html', commits=commits,version=version,numero_squadre=numero_squadre,numero_utenti=numero_utenti,numero_persone=numero_persone)
 
-    return render_template('index.html', commits=commits)
+    return render_template('index.html', commits=commits,version=version,numero_squadre=numero_squadre, numero_utenti=numero_utenti,numero_persone=numero_persone)
 
 @app.route('/home')
 @login_required
@@ -282,9 +287,44 @@ def registrazione():
 
     return render_template('auth/register.html')
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
+
+
+def conta_squadre(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_squadre = len(data)
+            return numero_squadre
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+def conta_utenti(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_utenti = len(data)
+            return numero_utenti
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+def conta_persone(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_persone = len(data)
+            return numero_persone
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

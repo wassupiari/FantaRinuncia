@@ -5,59 +5,7 @@ html,body {
 
 }
 
-/*
-NAVBAR
-*/
 
-
-
-/*
-SEARCH BAR
-*/
-
-
-.search-container{
-  margin-top: 20px;
-  width: 300px;
-  display: block;
-  margin: 0 auto;
-}
-
-input#search-bar{
-  margin: 0 auto;
-  width: 100%;
-  height: 45px;
-  padding: 0 20px;
-  font-size: 1rem;
-  border: 1px solid #D0CFCE;
-  outline: none;
-  &:focus{
-    border: 1px solid #008ABF;
-    transition: 0.35s ease;
-    color: #008ABF;
-    &::-webkit-input-placeholder{
-      transition: opacity 0.45s ease;
-  	  opacity: 0;
-     }
-    &::-moz-placeholder {
-      transition: opacity 0.45s ease;
-  	  opacity: 0;
-     }
-    &:-ms-placeholder {
-     transition: opacity 0.45s ease;
-  	 opacity: 0;
-     }
-   }
- }
-
-.search-icon{
-  position: relative;
-  float: right;
-  width: 75px;
-  height: 75px;
-  top: -62px;
-  right: -45px;
-}
 
 /*
 SQUAD BUILDER
@@ -73,8 +21,6 @@ SQUAD BUILDER
   margin-top: 75px;
 }
 
-
-
 /* Stile per il contenitore degli avvisi */
 #alert-container {
   margin-bottom: 10px;
@@ -82,7 +28,7 @@ SQUAD BUILDER
 
 /* Stile per il pulsante "Salva Squadra" */
 #salva-squadra-button {
-  background-color: #2D3250;
+  background-color: #ffc107;
   position: relative;
   color: #fff;
   border: none;
@@ -94,7 +40,7 @@ SQUAD BUILDER
 
 /* Stile per il pulsante "Salva Squadra" al passaggio del mouse */
 #salva-squadra-button:hover {
-  background-color: #7077A1;
+  background-color: #e7a305;
 }
 
 /*
@@ -135,7 +81,7 @@ CARDS
 
 /* Stile per il valore dei punti */
 .points-value {
-  color: #B80000;
+  color: #ffc107;
   font-weight: bold;
   font-family: 'Arial', sans-serif; /* Cambia il font */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Aggiunge un effetto ombra */
@@ -145,31 +91,6 @@ CARDS
 .points-value:hover {
   transform: scale(1.1); /* Effetto di ingrandimento al passaggio del mouse */
 }
-
-
-/*
-FOOTER
-*/
-
-.footer-heart{text-align:center;
-  font-family: open sans, sans-serif;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  position: sticky;
-}
-
-.footer-heart a{border-bottom: 1px solid #453886;color: #453886;padding-bottom: .25em; text-decoration: none;}
-
-.footer-heart a:hover{color:#2196f3; background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
-  background-position: bottom;
-  background-repeat: repeat-x;
-  background-size: 20%;
-  border-bottom: 0;
-  padding-bottom: .3em;
-  text-decoration: none;}
-
-.emoji{vertical-align: middle;}
 
 
 /*
@@ -208,7 +129,7 @@ SCROLLBAR
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: #2D3250;
+  background-color: #ffc107;
   color: white;
   cursor: pointer;
   padding: 15px;
@@ -216,7 +137,7 @@ SCROLLBAR
 }
 
 #myBtn:hover {
-  background-color: #7077A1;
+  background-color: #e7a305;
 }
 
 
@@ -230,110 +151,6 @@ PROFILE
         background: linear-gradient(200deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* Applica uno sfondo con un gradiente che sfuma da trasparente a nero */
     }
 
-/* FAQ page */
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* Stile generale della sezione FAQ */
-.section-faq {
-  padding-top: 24px;
-  padding-bottom: 32px;
-  background-color: #FFFFFF;
-  overflow: hidden;
-}
-
-/* Stile del titolo */
-.section-faq h2 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Stile dei paragrafi */
-.section-faq p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #666666;
-}
-
-/* Stile dei collegamenti */
-.section-faq a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.section-faq a:hover {
-  text-decoration: underline;
-}
-
-/* Stile delle domande */
-.section-faq .faq-question {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-/* Stile delle risposte */
-.section-faq .faq-answer {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-
-
-
-
-
-.section-faq .contact-link p {
-  margin-bottom: 5px;
-}
-
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-
-.text-center {
-  text-align: center;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -10px;
-  margin-right: -10px;
-}
-
-
-.col-12 {
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-
-.col-md-6 {
-  flex: 0 0 50%;
-  max-width: 50%;
-}
-
-/* Stile dei margini inferiori per le colonne */
-.mb-10 {
-  margin-bottom: 10px;
-}
-
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.mb-24 {
-  margin-bottom: 24px;
-}
 
 
 /* Stile per il index */

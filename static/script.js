@@ -247,6 +247,31 @@ function searchCards() {
     }
 }
 
+    // dark mode toggle
+
+    var html = document.querySelectorAll('html')[0];
+    var themeToggle = document.querySelectorAll('*[data-bs-toggle-theme]')[0];
+    var darkModeIcon = document.getElementById('darkModeIcon');
+    var lightModeIcon = document.getElementById('lightModeIcon');
+
+    html.setAttribute('data-bs-theme', 'dark');
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        if (html.getAttribute('data-bs-theme') === 'dark') {
+          html.setAttribute('data-bs-theme', 'light');
+          darkModeIcon.classList.add('d-none');
+          lightModeIcon.classList.remove('d-none');
+        } else {
+          html.setAttribute('data-bs-theme', 'dark');
+          lightModeIcon.classList.add('d-none');
+          darkModeIcon.classList.remove('d-none');
+        }
+      });
+    }
+
 });
 
 
@@ -416,6 +441,8 @@ function validateForm(inputField) {
             });
         });
     }
+
+
 
 
 
