@@ -163,7 +163,7 @@ def crea_squadra():
         # Verifica se l'utente ha già una squadra e restituisci un messaggio di errore se è così
         if username in squadre:
             squadraEsinente_message = 'Hai già una squadra. Se vuoi cancellarla, vai alla pagina del tuo profilo.'
-            return squadraEsinente_message , False
+            return squadraEsinente_message
 
         # Aggiungi la nuova squadra per l'utente
         squadre[username] = selected_names
@@ -173,7 +173,7 @@ def crea_squadra():
             json.dump(squadre, file)
 
         success_message = 'Squadra creata con successo!'
-        return success_message , True
+        return success_message
     return redirect(url_for('login'))
 
 @app.route('/cancella-squadra', methods=['POST'])
