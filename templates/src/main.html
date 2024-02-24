@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4 shadow-lg p-3 mb-5">
     <div class="container px-3">
-        <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
+        <a class="navbar-brand" href="#">fantarinuncia.live</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,8 +38,7 @@
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                     </ul>
                 </li>
-            </ul>
-            <form role="search" method="get" id="search-form" action="/" class="d-flex ms-auto justify-content-center">
+                            <form role="search" method="get" id="search-form" action="/" class="d-flex ms-auto justify-content-center">
                     <div class="input-group">
                         <input type="text" value="" name="s" id="search-input" placeholder="Cerca in base al nome.." class="form-control"  aria-label="Cerca">
                         <span class="input-group-text" id="basic-addon2">
@@ -48,18 +47,21 @@
                             </svg>
                         </span>
                     </div>
-                </form>
+            </form>
+            </ul>
+
         </div>
     </div>
 </nav>
+<div id="toastContainer" aria-live="polite" aria-atomic="true" style="position: fixed; top: 0; right: 1;  z-index: 1050; width: 300px;margin: 20px; "></div>
+<div id="alertSquadFull" aria-live="polite" aria-atomic="true" style="position: fixed; top: 0; right: 1;  z-index: 1050;width: 300px; margin: 20px;"></div>
 
-
-<div class="container d-flex px-3">
-    <div class="row px-3">
-      <div class="col-xs-12 col-sm-12 col-md-6 my-5">
+<div class="container py-5">
+    <div class="row px-2">
+      <div class="col-xs-12 col-sm-12 col-md-12 ">
         <div class="container" id="cards-container">
             {% for person in data %}
-                <div class="col-md-5 card-item">
+                <div class="col-md-4 card-item">
                     <div class="card h-100">
                         <div class="card-body">
                             <p class="card-text">{{ person.firstname }} {{ person.lastname }} </p>
@@ -73,37 +75,61 @@
             <div id="search-message" style="display: none;">Nessuna persona trovata con questo nome</div>
         </div>
       </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 my-5" id="squad-maker">
-                  <figure>
-                  <blockquote class="blockquote">
-                    <h2>La tua squadra</h2>
-                  </blockquote>
-                  <figcaption class="blockquote-footer">
-                  <cite title="Source Title">  Fai la scelta giusta </cite>
-                  </figcaption>
-                </figure>
-                <div id="squadra-container" class="card-body border-0">
-                    <!-- Qui verranno aggiunti dinamicamente gli elementi della squadra -->
-                </div>
-                <div id="alert-container"></div>
-                <div id="alert-container-2"></div>
-                <div id="team-points" class="mb-2"></div>
-                <button id="salva-squadra-button" class="btn btn-success invisible" onclick="salvaSquadra()">Salva Squadra</button>
-                <button onclick="topFunction()" id="myBtn" title="Go to top">
-                    <i class="fa-solid fa-arrow-up"></i>
-                </button>
-        </div>
     </div>
+</div>
+
+<div id="fab" class="fabCollapse animate zoomIn">
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0/5<span class="visually-hidden">persone</span>
+  </span>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 48c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16H384zM96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM240 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H208zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z"/></svg>
+  <div class="fabContent" id="fabContent">
+    <div class="card bg-white">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <!--- >  NOMI CHE VENGONO GENERATI<--->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center mt-3">
+                <button id="saveSquadBtn" class="btn btn-success invisible" onclick="salvaSquadra()">Salva Squadra</button>
+    </div>
+    <p id="team-points" class="mb-2 text-dark"></p>
 </div>
 
 
 
-    <footer class="container sticky-bottom">
-        <hr>
-        <p class="footer-heart">
-      Made with <g-emoji class="g-emoji" alias="heart" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png">
-    <img class="emoji" alt="heart" height="15" width="15" src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"></g-emoji> by <a class="text-white" href="https://github.com/wassupiari">me</a>
-    </p>
+
+
+<footer class="sticky-bottom">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="lc-block text-center mb-3 mb-md-0">
+                    <a class="navbar-brand" href="#">
+                        <img class="img-fluid me-1" src="static/favicon.ico" alt="my brand" width="38px" height="38px">
+                    </a>
+
+                    <span editable="inline" class="text-muted">© 2022 Fantarinuncia.live</span>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4 justify-content-end d-flex gap-3">
+                <div class="lc-block">
+
+                    <a href="https://github.com/wassupiari">
+                        <svg width="2em" height="2em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <title>github</title>
+                          <rect width="24" height="24" fill="none"/>
+                          <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"/>
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
     </footer>
 
 
