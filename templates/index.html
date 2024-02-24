@@ -7,21 +7,13 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </head>
 
 
 
 <body>
-<div class="container-fluid fixed">
-  <div class="row justify-content-center mt-3">
-    <div class="col-md-6">
-      <div class="d-block px-3 py-2 text-center text-bold text-white old-bv alert alert-danger text-center w-100">
-        Fantarinuncia è in fase di sviluppo.
-      </div>
-    </div>
-  </div>
-</div>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded sticky-top shadow-lg p-3 mb-5">
     <div class="container px-3 text-white">
         <a class="navbar-brand" href="#">Fanta_Rinuncia</a>
@@ -34,91 +26,221 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/regolamento"><i class="bi bi-people-fill me-2"></i>Regolamento</a>
                 </li>
-
                 <li class="nav-item rounded">
                     <a class="nav-link" href="/auth/login"><i class="bi bi-telephone-fill me-2"></i>Login</a>
                 </li>
-                <li class="nav-item svg-item">
-                    <a class="" href="https://github.com/wassupiari">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                        </svg>
-                    </a>
+                <li class="nav-item rounded svg-item">
+                  <a class="nav-link" href="#" tabindex="-1" data-bs-toggle-theme="true" aria-disabled="true">
+                    <span class="material-symbols-outlined d-none" id="lightModeIcon">light_mode</span>
+                    <span class="material-symbols-outlined" id="darkModeIcon">dark_mode</span>
+                  </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid text-white">
-    <div class="container my-5">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 my-5">
-                <h3 class="fw-bold">Benvenuto su</h3>
-                <h1 class="fw-bolder text-warning">Fantarinuncia</h1>
-                <p class="fst-italic fw-light">Indovina chi lascerà gli studi per primo con FantaRinuncia</p>
-                <hr class="my-5">
-                <p class="text-muted">Segui da vicino le scelte audaci degli studenti e scommetti su chi lascerà gli studi per primo con FantaRinuncia. Metti alla prova la tua capacità di prevedere il futuro accademico e chi sarà il primo a fare la grande rinuncia agli studi.</p>
-                <p class="lead my-5">
-                    <a class="btn btn-warning btn-lg" href="/auth/login" role="button">Crea la tua squadra</a>
-                </p>
+
+    <div class="container text-center py-4 mt-5">
+        <div class="lc-block card border-0 text-center rounded p-4 p-lg-6">
+            <div class="row card-body mb-3 mb-lg-4">
+                <div class="col-xl-11 col-xxl-10 mx-auto">
+                    <div class="lc-block mb-5">
+                        <p class="text-uppercase" editable="inline">Pronto ad indovinare chi lascerà gli studi per primo?</p>
+                        <h3 editable="inline" class="fw-bold display-2">Crea anche tu la tua <span class="text-warning">squadra</span> </h3>
+                    </div>
+
+                    <div class="lc-block mb-4">
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+
+                            <div class="d-inline-flex gap-1 lc-block">
+
+                                    <svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                                    <g id="SVGRepo_iconCarrier"> <path opacity="0.1" d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" fill="#ffc107"/> <path d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 12L10.8189 13.8189V13.8189C10.9189 13.9189 11.0811 13.9189 11.1811 13.8189V13.8189L15 10" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+
+                                    </svg>
+                                    <p editable="inline" class="lead my-auto">Spargi la voce.</p>
+
+                            </div>
+                            <div class="d-inline-flex gap-1 lc-block">
+
+                                    <svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                                    <g id="SVGRepo_iconCarrier"> <path opacity="0.1" d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" fill="#ffc107"/> <path d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 12L10.8189 13.8189V13.8189C10.9189 13.9189 11.0811 13.9189 11.1811 13.8189V13.8189L15 10" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+
+                                    </svg>
+                                    <p editable="inline" class="lead my-auto">Divertimento assicurato.</p>
+
+                            </div>
+                            <div class="d-inline-flex gap-1 lc-block">
+
+                                    <svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                                    <g id="SVGRepo_iconCarrier"> <path opacity="0.1" d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" fill="#ffc107"/> <path d="M13.8179 4.54512L13.6275 4.27845C12.8298 3.16176 11.1702 3.16176 10.3725 4.27845L10.1821 4.54512C9.76092 5.13471 9.05384 5.45043 8.33373 5.37041L7.48471 5.27608C6.21088 5.13454 5.13454 6.21088 5.27608 7.48471L5.37041 8.33373C5.45043 9.05384 5.13471 9.76092 4.54512 10.1821L4.27845 10.3725C3.16176 11.1702 3.16176 12.8298 4.27845 13.6275L4.54512 13.8179C5.13471 14.2391 5.45043 14.9462 5.37041 15.6663L5.27608 16.5153C5.13454 17.7891 6.21088 18.8655 7.48471 18.7239L8.33373 18.6296C9.05384 18.5496 9.76092 18.8653 10.1821 19.4549L10.3725 19.7215C11.1702 20.8382 12.8298 20.8382 13.6275 19.7215L13.8179 19.4549C14.2391 18.8653 14.9462 18.5496 15.6663 18.6296L16.5153 18.7239C17.7891 18.8655 18.8655 17.7891 18.7239 16.5153L18.6296 15.6663C18.5496 14.9462 18.8653 14.2391 19.4549 13.8179L19.7215 13.6275C20.8382 12.8298 20.8382 11.1702 19.7215 10.3725L19.4549 10.1821C18.8653 9.76092 18.5496 9.05384 18.6296 8.33373L18.7239 7.48471C18.8655 6.21088 17.7891 5.13454 16.5153 5.27608L15.6663 5.37041C14.9462 5.45043 14.2391 5.13471 13.8179 4.54512Z" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 12L10.8189 13.8189V13.8189C10.9189 13.9189 11.0811 13.9189 11.1811 13.8189V13.8189L15 10" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+
+                                    </svg>
+                                    <p editable="inline" class="lead my-auto">Ci pensiamo noi ad aiutarti.</p>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 my-5 d-none d-md-block">
-                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" width="550px" height="250px" fill="#ffc107" stroke="#ffc107">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                <g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} </style> <path d="M12.5,23h-1.3c0,0,0,0,0-0.1c-0.1-0.2-0.2-0.4-0.4-0.5c0,0-0.1-0.1-0.1-0.1c-0.3-0.4-0.6-0.7-1-1c0,0-0.1-0.1-0.1-0.1 c-0.2-0.1-0.3-0.2-0.5-0.3c0,0-0.1-0.1-0.1-0.1c-0.4-0.2-0.9-0.4-1.3-0.6c-0.1,0-0.1,0-0.2,0c-0.2,0-0.4-0.1-0.5-0.1 c-0.1,0-0.1,0-0.2,0c-0.2,0-0.5,0-0.7,0c-3.3,0-6,2.7-6,6s2.7,6,6,6c0.1,0,0.2,0,0.2,0c0.1,0,0.2,0,0.3,0h6c2.5,0,4.5-2,4.5-4.5 S15,23,12.5,23z"/> <path d="M27.9,4.8h-0.6c0,0,0,0,0,0c0,0,0-0.1-0.1-0.1c-0.1-0.2-0.2-0.3-0.4-0.5c0,0-0.1-0.1-0.1-0.1c-0.2-0.2-0.3-0.3-0.5-0.4 c0,0-0.1,0-0.1-0.1c-0.2-0.1-0.3-0.2-0.5-0.3c0,0-0.1,0-0.1-0.1c-0.2-0.1-0.4-0.2-0.6-0.2c-0.1,0-0.1,0-0.2,0C24.5,3,24.2,3,24,3 c-2.2,0-4,1.8-4,4s1.8,4,4,4c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.1,0h3.6c1.7,0,3.1-1.4,3.1-3.1C31,6.2,29.6,4.8,27.9,4.8z"/> <g> <polygon points="9,20.8 9,20.8 9,20.8 "/> <path d="M29.2,14.2c-0.4-0.1-0.9,0.1-1.1,0.5C26.7,17.3,24,19,21,19c-4.4,0-8-3.6-8-8c0-3,1.7-5.7,4.3-7.1c0.4-0.2,0.6-0.7,0.5-1.1 c-0.1-0.4-0.5-0.8-1-0.8c0,0,0,0,0,0C9.8,2.1,4,7.9,4,15c0,1.1,0.1,2.1,0.4,3.2C4.9,18.1,5.5,18,6,18c0.3,0,0.7,0,1,0.1l0.2,0 c0.3,0,0.5,0.1,0.8,0.2l0.2,0.1c0.6,0.2,1.2,0.4,1.8,0.7l0.2,0.1c0.2,0.1,0.5,0.3,0.7,0.4l0.2,0.1c0.5,0.4,0.9,0.8,1.3,1.3h0.3 c3.6,0,6.5,2.9,6.5,6.5c0,0.1,0,0.2,0,0.3c6.2-1,10.9-6.3,11-12.7C30,14.7,29.7,14.3,29.2,14.2z"/> </g> </g>
-                </svg>
+            <div class="lc-block"><a class="btn  btn-lg btn-light fw-bold" href="/auth/login" role="button">Fallo adesso</a></div>
+        </div>
+    </div>
+
+
+
+
+<script defer="" src="https://unpkg.com/vanilla-counter" onload="initializeCounterRANDOMID()"></script>
+    <script>
+        function initializeCounterRANDOMID(){
+
+        	const options = {};
+
+        	const observer = new IntersectionObserver(function
+        	(entries, observer){
+        	    entries.forEach(entry => {
+        	        console.log(entry);
+        	         VanillaCounter();
+        	    });
+        	}, options);
+
+        	observer.observe(document.querySelector('.counter-RANDOMID'));
+
+        }
+    </script>
+
+
+    <div class="container py-7 my-5">
+        <div class="row rounded  text-center py-4 g-4 counter-RANDOMID">
+            <div class="col-6 col-lg-3"><span class="fw-bold display-5 mb-5" data-vanilla-counter="" data-start-at="0" data-end-at="{{numero_utenti}}" data-time="1000" data-delay="60" data-format="{}"> </span>
+                <p class="lead" editable="inline"><span><b>Utenti</b></span> registrati</p>
+            </div>
+            <div class="col-6 col-lg-3"> <span class="fw-bold display-5 mb-5" data-vanilla-counter="" data-start-at="0" data-end-at="{{numero_squadre}}" data-time="1000" data-delay="60" data-format="{}"> </span>
+                <p class="lead" editable="inline"><b>Squadre</b> create</p>
+            </div>
+            <div class="col-6 col-lg-3"> <span class="fw-bold display-5 mb-5" data-vanilla-counter="" data-start-at="0" data-end-at="1" data-time="1000" data-delay="60" data-format="{}"> </span>
+                <p class="lead" editable="inline"><b>Leghe</b> create</p>
+            </div>
+            <div class="col-6 col-lg-3"> <span class="fw-bold display-5 mb-5" data-vanilla-counter="" data-start-at="500" data-end-at="{{numero_persone}}" data-time="1000" data-delay="0" data-format="{}"> </span>
+                <p class="lead" editable="inline"><b>Persone</b> attive da reclutare</p>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="container py-4 py-md-6 my-5">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="lc-block text-center mb-4">
+                    <div editable="rich">
+                        <h2 class="display-2 fw-bolder">Features&nbsp;</h2>
+                    </div>
+                </div>
+                <div class="lc-block text-center">
+                    <div editable="rich">
+                        <p class="lead"> <br>Tu crea la tua squadra e noi ci pensiamo al resto.&nbsp; </p>
+                    </div>
+                </div>
+                <!-- /lc-block -->
+            </div>
+            <!-- /col -->
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-xl-7 mb-4">
+                <div class="lc-block text-center ">
+                    <div class="lc-block rounded-circle d-flex justify-content-center align-items-center mx-auto mb-4 bg-light bg-light" style="width:72px;
+height:72px;
+ ">
+                        <svg fill="#000000" width="3em" height="3em" viewBox="0 0 24 24" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.381 0 2.631-.56 3.536-1.465.904-.904 1.464-2.154 1.464-3.535s-.56-2.631-1.464-3.535c-.905-.905-2.155-1.465-3.536-1.465s-2.631.56-3.536 1.465c-.904.904-1.464 2.154-1.464 3.535s.56 2.631 1.464 3.535c.905.905 2.155 1.465 3.536 1.465zM20 15c.69 0 1.315-.279 1.768-.731.453-.452.732-1.077.732-1.769 0-.69-.279-1.315-.732-1.768-.453-.453-1.078-.732-1.768-.732-.691 0-1.316.279-1.769.732-.452.453-.731 1.078-.731 1.768 0 .691.279 1.316.731 1.769s1.078.731 1.769.731zM20 15.59c-1.331 0-2.332.406-2.917.968-1.115-.917-2.878-1.558-5.083-1.558-2.266 0-3.995.648-5.092 1.564-.596-.565-1.608-.974-2.908-.974-2.188 0-3.5 1.09-3.5 2.182 0 .545 1.312 1.092 3.5 1.092.604 0 1.146-.051 1.623-.133l-.04.27c0 1 2.406 2 6.417 2 3.762 0 6.417-1 6.417-2l-.02-.255c.463.073.995.118 1.603.118 2.051 0 3.5-.547 3.5-1.092 0-1.092-1.373-2.182-3.5-2.182zM4 15c.69 0 1.315-.279 1.768-.732.453-.453.732-1.078.732-1.768 0-.689-.279-1.314-.732-1.768-.453-.452-1.078-.732-1.768-.732-.691 0-1.316.28-1.769.732-.452.454-.731 1.079-.731 1.768 0 .69.279 1.315.731 1.768.453.453 1.078.732 1.769.732z"/></svg>
+                    </div>
+                    <div class="lc-block">
+                        <div editable="rich">
+                            <h5 class="">Forma la tua squadra</h5>
+                            <p class="text-muted">Crea la tua squadra e vinci con FantaRinuncia!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+                <div class="lc-block text-center ">
+                    <div class="lc-block rounded-circle d-flex justify-content-center align-items-center mx-auto mb-4 bg-light" style="width:72px;
+height:72px;
+">
+                        <svg width="4em" height="4em" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve">
+	<path fill="#000000" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 58.5833,20.5833L 58.5833,30.0833L 55.4167,26.9167L 41.6074,39.9229L 34.3926,32.2315L 30.573,44.1959L 27.1778,40.7775L 19,49.0833L 19,25.3333L 45.9167,25.3333L 45.9167,30.0833L 52.25,23.75L 49.0833,20.5833L 58.5833,20.5833 Z M 17.4167,55.4167L 27.1778,45.0505L 31.4218,49.3234L 35.2414,37.3591L 41.6074,44.1959L 49.0833,36.4167L 49.0833,55.4167L 17.4167,55.4167 Z "/>
+</svg>
+                    </div>
+                    <div class="lc-block">
+                        <div editable="rich">
+                            <h5 class="">Scala la classifica generale</h5>
+                            <p class="text-muted">Scala le classifiche con FantaRinuncia! Vinci coins e raggiungi la vetta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-12 mb-4">
+                <div class="lc-block text-center ">
+                    <div class="lc-block rounded-circle d-flex justify-content-center align-items-center mx-auto mb-4 bg-light" style="width:72px;
+height:72px;
+">
+                        <svg fill="#000000" width="3em" height="3em" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	                    viewBox="0 0 512.001 512.001" xml:space="preserve">
+                        <g>
+                            <g>
+                                <g>
+                                    <path d="M277.047,254.804h0.256c5.891,0,10.667-4.778,10.667-10.667c0-5.892-4.777-10.667-10.667-10.667h-0.256
+                                        c-5.891,0-10.667,4.776-10.667,10.667C266.379,250.027,271.155,254.804,277.047,254.804z"/>
+                                    <path d="M373.334,148.131H313.53l-4.792-37.732l32.999-35.934c2.617-2.852,3.486-6.899,2.268-10.571
+                                        c-1.218-3.675-4.331-6.4-8.134-7.124l-46.599-8.857l-23.98-42.491C263.399,2.071,259.848,0,256,0c-0.021,0-0.042,0-0.063,0
+                                        c-3.871,0.022-7.426,2.142-9.288,5.534l-22.821,41.584l-47.82,9.675c-3.794,0.769-6.874,3.532-8.05,7.222
+                                        c-1.173,3.688-0.258,7.723,2.394,10.543l32.494,34.553l-4.488,39.021h-59.692c-5.892,0-10.667,4.776-10.667,10.667v42.67
+                                        c0,5.89,4.776,10.667,10.667,10.667h12.29l39.13,235.859h-14.085c-5.892,0-10.667,4.776-10.667,10.667v42.67
+                                        c0,5.89,4.776,10.667,10.667,10.667h159.998c5.892,0,10.667-4.778,10.667-10.667v-42.67c0-5.892-4.776-10.667-10.667-10.667
+                                        h-14.084l39.129-235.859h12.29c5.891,0,10.667-4.778,10.667-10.667V158.8C384.002,152.907,379.225,148.131,373.334,148.131z
+                                         M199.025,73.903l33.888-6.857c3.078-0.623,5.725-2.571,7.236-5.323L256.131,32.6l16.995,30.111
+                                        c1.543,2.735,4.213,4.65,7.298,5.238l32.635,6.203l-23.385,25.466c-2.124,2.313-3.121,5.445-2.726,8.56l4.186,32.955
+                                        l-31.448-14.37c-1.408-0.644-2.921-0.964-4.433-0.964c-1.554,0-3.108,0.339-4.549,1.017l-30.048,14.163l3.95-34.348
+                                        c0.359-3.121-0.675-6.24-2.826-8.528L199.025,73.903z M325.332,469.33v21.335H186.669V469.33h16.001h106.661H325.332z
+                                         M307.367,405.332h-34.206c-5.893,0-10.667,4.776-10.667,10.667c0,5.89,4.776,10.667,10.667,10.667h30.667l-3.537,21.328h-88.575
+                                        L179.664,254.8h66.741c5.891,0,10.667-4.778,10.667-10.667c0-5.893-4.777-10.667-10.667-10.667h-70.28l-3.538-21.328h166.834
+                                        L307.367,405.332z M352.002,190.801h-192h-10.667v-21.335h213.332v21.335H352.002z"/>
+                                    <path d="M242.516,405.336h-0.254c-5.892,0-10.667,4.776-10.667,10.667c0,5.89,4.776,10.667,10.667,10.667h0.254
+                                        c5.892,0,10.667-4.778,10.667-10.667C253.184,410.111,248.408,405.336,242.516,405.336z"/>
+                                </g>
+                            </g>
+                        </g>
+                        </svg>
 
-<div class="container my-5 text-white">
-    <div class="card-group">
-        <div class="card border-0 my-4 mx-2 align-items-center text-center ">
-           <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-            <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 6C14.3432 6 13 7.34315 13 9C13 10.6569 14.3432 12 16 12C17.6569 12 19 10.6569 19 9C19 7.34315 17.6569 6 16 6ZM11 9C11 6.23858 13.2386 4 16 4C18.7614 4 21 6.23858 21 9C21 10.3193 20.489 11.5193 19.6542 12.4128C21.4951 13.0124 22.9176 14.1993 23.8264 15.5329C24.1374 15.9893 24.0195 16.6114 23.5631 16.9224C23.1068 17.2334 22.4846 17.1155 22.1736 16.6591C21.1979 15.2273 19.4178 14 17 14C13.166 14 11 17.0742 11 19C11 19.5523 10.5523 20 10 20C9.44773 20 9.00001 19.5523 9.00001 19C9.00001 18.308 9.15848 17.57 9.46082 16.8425C9.38379 16.7931 9.3123 16.7323 9.24889 16.6602C8.42804 15.7262 7.15417 15 5.50001 15C3.84585 15 2.57199 15.7262 1.75114 16.6602C1.38655 17.075 0.754692 17.1157 0.339855 16.7511C-0.0749807 16.3865 -0.115709 15.7547 0.248886 15.3398C0.809035 14.7025 1.51784 14.1364 2.35725 13.7207C1.51989 12.9035 1.00001 11.7625 1.00001 10.5C1.00001 8.01472 3.01473 6 5.50001 6C7.98529 6 10 8.01472 10 10.5C10 11.7625 9.48013 12.9035 8.64278 13.7207C9.36518 14.0785 9.99085 14.5476 10.5083 15.0777C11.152 14.2659 11.9886 13.5382 12.9922 12.9945C11.7822 12.0819 11 10.6323 11 9ZM3.00001 10.5C3.00001 9.11929 4.1193 8 5.50001 8C6.88072 8 8.00001 9.11929 8.00001 10.5C8.00001 11.8807 6.88072 13 5.50001 13C4.1193 13 3.00001 11.8807 3.00001 10.5Z" fill="#ffffff"/> </g>
-            </svg>
-            <div class="card-body">
-                <h4 class="card-title text-warning">Crea la tua squadra</h4>
-                <p class="card-text text-white">Forma la tua squadra e vinci con FantaRinuncia!</p>
-            </div>
-        </div>
-        <div class="card border-0 my-4 mx-2 align-items-center text-center">
-            <svg width="250px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-            <g id="SVGRepo_iconCarrier"> <path d="M15 21H9V12.6C9 12.2686 9.26863 12 9.6 12H14.4C14.7314 12 15 12.2686 15 12.6V21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M20.4 21H15V18.1C15 17.7686 15.2686 17.5 15.6 17.5H20.4C20.7314 17.5 21 17.7686 21 18.1V20.4C21 20.7314 20.7314 21 20.4 21Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 21V16.1C9 15.7686 8.73137 15.5 8.4 15.5H3.6C3.26863 15.5 3 15.7686 3 16.1V20.4C3 20.7314 3.26863 21 3.6 21H9Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M10.8056 5.11325L11.7147 3.1856C11.8314 2.93813 12.1686 2.93813 12.2853 3.1856L13.1944 5.11325L15.2275 5.42427C15.4884 5.46418 15.5923 5.79977 15.4035 5.99229L13.9326 7.4917L14.2797 9.60999C14.3243 9.88202 14.0515 10.0895 13.8181 9.96099L12 8.96031L10.1819 9.96099C9.94851 10.0895 9.67568 9.88202 9.72026 9.60999L10.0674 7.4917L8.59651 5.99229C8.40766 5.79977 8.51163 5.46418 8.77248 5.42427L10.8056 5.11325Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
-            </svg>
-            <div class="card-body">
-                <h4 class="card-title text-warning"> Scala le classifiche </h4>
-                <p class="card-text text-white">Scali le classifiche con FantaRinuncia! Vinci "un coins" e raggiungi la vetta.</p>
-            </div>
-        </div>
-        <div class="card border-0 my-4 mx-2 align-items-center text-center">
-            <svg width="100px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-            <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 2.34315 6.34315 1 8 1H15.9999C17.6568 1 19 2.34314 19 4H20C21.6569 4 23 5.34315 23 7V7.64593C23 8.87265 22.2531 9.97577 21.1142 10.4314L18.031 11.6646C17.5965 12.464 16.958 13.2715 16.0234 13.8946C15.211 14.4361 14.2124 14.8132 13 14.9467V17H15C16.6569 17 18 18.3431 18 20V21C18 22.1046 17.1046 23 16 23H8C6.89543 23 6 22.1046 6 21V20C6 18.3431 7.34315 17 9 17H11V14.9467C9.78757 14.8133 8.7889 14.4361 7.97651 13.8945C7.04188 13.2715 6.40335 12.464 5.9689 11.6646L2.88583 10.4314C1.74685 9.97577 1 8.87265 1 7.64593V7C1 5.34315 2.34315 4 4 4H5ZM5 6H4C3.44772 6 3 6.44772 3 7V7.64593C3 8.05484 3.24895 8.42255 3.62861 8.57441L5.11907 9.1706C5.05194 8.78628 5.00063 8.39214 5 8.00104L5 6ZM19 8V6H20C20.5523 6 21 6.44772 21 7V7.64593C21 8.05484 20.751 8.42255 20.3714 8.57441L18.8809 9.17062C18.9469 8.78361 19 8.39286 19 8ZM8 3C7.44772 3 7 3.44772 7 4V7.99707L7 7.99832C7 7.99996 7 8.00078 7 7.99832C7.00508 8.25761 7.03756 8.51764 7.08014 8.77311C7.16297 9.27012 7.32677 9.91751 7.6444 10.5528C7.96008 11.1842 8.4179 11.7851 9.08591 12.2305C9.74766 12.6716 10.6749 13 12 13C13.325 13 14.2522 12.6716 14.914 12.2304C15.582 11.7851 16.0398 11.1842 16.3555 10.5528C16.6732 9.9175 16.837 9.27011 16.9198 8.7731C16.9624 8.51735 16.993 8.25848 17 7.99909V4C17 3.44772 16.5522 3 15.9999 3H8ZM9 19C8.44772 19 8 19.4477 8 20V21H16V20C16 19.4477 15.5523 19 15 19H9Z" fill="#ffffff"/> </g>
-            </svg>
-            <div class="card-body">
-                <h4 class="card-title text-warning">Crea la tua lega</h4>
-                <p class="card-text text-white">Crea la tua lega su FantaRinuncia! Sfida gli amici e vinci insieme</p>
-                <p class="card-text"><small class="text-muted">work in progress</small></p>
+                    </div>
+                    <div class="lc-block">
+                        <div editable="rich">
+                            <h5 class="">Crea la tua lega</h5>
+                            <p class="text-muted">Crea la lega del tuo resto! Sfida gli amici e vinci insieme</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
-</div>
 
-
-
-
+<br>
 
     <div class="container my-5 align-items-center">
             <div class="row">
@@ -130,7 +252,7 @@
               <div class="col-md-4 text-center">
                 <h2 class="fw-bold text-success">{{commit.hexsha[:6]}}</h2>
                    <br>
-                <p class="fst-italic fw-light text-white">{{commit.message}}</p>
+                <p class="fst-italic fw-light">{{commit.message}}</p>
                 <p class="justify-content-center my-4 sticky"><a class="btn btn-primary" href="https://github.com/wassupiari/FantaRinuncia/commit/{{commit.hexsha}}" role="button">View details</a></p>
               </div>
                 {% endfor %}
@@ -138,9 +260,33 @@
     </div>
 
 
-    <footer class="container sticky-bottom">
-        <hr>
-          <p>© FantaRinuncia 2024</p>
+    <footer class="sticky-bottom">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="lc-block text-center mb-3 mb-md-0">
+                    <a class="navbar-brand" href="#">
+                        <img class="img-fluid me-1" src="static/favicon.ico" alt="my brand" width="38px" height="38px">
+                    </a>
+
+                    <span editable="inline" class="text-muted">© 2022 Fantarinuncia.live</span>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4 justify-content-end d-flex gap-3">
+                <div class="lc-block">
+
+                    <a href="https://github.com/wassupiari">
+                        <svg width="2em" height="2em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <title>github</title>
+                          <rect width="24" height="24" fill="none"/>
+                          <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"/>
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
     </footer>
 
 
