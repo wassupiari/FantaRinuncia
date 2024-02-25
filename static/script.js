@@ -137,8 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Mostra il punteggio totale della squadra
-    let pointsContainer = document.createElement("p");
+    let pointsContainer = document.createElement("span");
     pointsContainer.id = "team-points";
+    pointsContainer.classList.add("fw-bold", "text-dark");
     pointsContainer.innerText = "Punteggio totale squadra: " + totalPoints;
     squadraContainer.appendChild(pointsContainer);
 
