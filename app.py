@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory, send_file
 import os
 import bcrypt
 from logger import setup_logger
@@ -325,6 +325,12 @@ def conta_persone(file_json):
         return None
     except json.JSONDecodeError:
         return None
+
+
+@app.route('/sitemap.xml')
+def render_xml():
+    xml_file_path = 'templates/sitemap.xml'
+    return send_file(xml_file_path, mimetype='text/xml')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
