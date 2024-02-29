@@ -66,6 +66,7 @@
                 alt=""
                 style="width: 45px; height: 45px"
                 class="rounded-circle"
+                id="user-image"
                 />
             <div class="ms-3">
               <p class="fw-bold mb-1">{{team}}</p>
@@ -111,6 +112,22 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        fetch('/api/get_user_image')
+            .then(response => response.json()) // Analizza la risposta come JSON
+            .then(data => {
+                const imageLink = data.image_link;
+                if (imageLink) {
+                    // Se viene restituito un URL valido, imposta l'URL dell'immagine come attributo src dell'elemento img
+                    document.getElementById('user-image').src = imageLink;
+                } else {
+                    // Se non viene restituito alcun URL immagine, stampa un messaggio di errore nella console
+                    console.error('Nessun URL immagine disponibile.');
+                }
+            })
+            .catch(error => console.error('Errore durante il recupero dell\'immagine:', error));
+    </script>
     <script src="{{url_for('static', filename='script.js')}}"></script>
     <script src="{{url_for('static', filename='bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='jquery/jquery-3.7.1.min.js')}}"></script>
