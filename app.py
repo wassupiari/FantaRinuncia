@@ -1,20 +1,20 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory, send_file
-import os
-import bcrypt
 from logger import setup_logger
-import git
-import json
 from datetime import datetime
 from functools import wraps
+from dotenv import load_dotenv
+import git
+import json
+import os
+import bcrypt
 
-version = '0.0.109'
 
 # logging system
 logger = setup_logger('app.log')
 
 app = Flask(__name__, static_url_path='/static',static_folder='static')
-
-app.secret_key = 'f8696db1c05e0ca25edc60029c0cdd99dc1b2b42f15aee2076e29fcf3fab36bf'
+load_dotenv()
+app.secret_key = os.getenv('SECRET_KEY')
 
 
 squadra_json_file = 'private/squadra.json'
@@ -28,24 +28,70 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico')
 
-# Funzione per leggere i dati dal file JSON
+
+def conta_squadre(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_squadre = len(data)
+            return numero_squadre
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+def conta_utenti(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_utenti = len(data)
+            return numero_utenti
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+def conta_persone(file_json):
+    try:
+        with open(file_json, 'r') as file:
+            data = json.load(file)
+            numero_persone = len(data)
+            return numero_persone
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+
 def leggi_dati_da_file_json(nome_file):
     with open(nome_file, 'r') as file:
         dati = json.load(file)
     return dati
 
-# Middleware per nascondere la richiesta GET /people
+def carica_utenti():
+    if os.path.exists(utenti_json_file):
+        with open(utenti_json_file, 'r') as file:
+            return json.load(file)
+    else:
+        return 'il file utenti.json non esiste'
+
+with open(db_json_file, 'r') as file:
+    people = json.load(file)
+
+
+def salva_utenti(utenti):
+    with open(utenti_json_file, 'w') as file:
+        json.dump(utenti, file)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path,'static'),'favicon.ico')
 @app.before_request
 def nascondi_get_people():
     if request.path == '/people' and 'username' not in session:
         return "Accesso non consentito", 403
 
-
-# Nuova route per ottenere l'URL dell'immagine dell'utente
 @app.route('/api/get_user_image')
 def get_user_image():
     utenti = carica_utenti()
@@ -54,13 +100,10 @@ def get_user_image():
         image_link = utenti[username].get('image_data', {}).get('image_link', '')
         return jsonify({'image_link': image_link})
     else:
-        return jsonify({'image_link': ''})  # Restituisci un URL vuoto se l'utente non ha un'immagine
-
-
+        return jsonify({'image_link': ''})
 
 @app.route('/api/people', methods=['GET'])
 def get_people():
-    # Assicurati che l'utente sia autenticato per accedere all'API
     if 'username' in session:
 
         utenti = leggi_dati_da_file_json(utenti_json_file)
@@ -74,24 +117,6 @@ def get_people():
         return "Accesso non consentito: badge utente non autorizzato", 403
     else:
         return "Accesso non consentito: utente non autenticato", 401
-
-
-
-def carica_utenti():
-    if os.path.exists(utenti_json_file):
-        with open(utenti_json_file, 'r') as file:
-            return json.load(file)
-    else:
-        return 'il file utenti.json non esiste'
-
-# Carica dati delle persone
-with open(db_json_file, 'r') as file:
-    people = json.load(file)
-
-
-def salva_utenti(utenti):
-    with open(utenti_json_file, 'w') as file:
-        json.dump(utenti, file)
 
 
 @app.route('/auth/login', methods=['GET', 'POST'])
@@ -134,14 +159,22 @@ def index():
     if 'username' in session:
         logout()
     else:
-        return render_template('index.html', commits=commits,version=version,numero_squadre=numero_squadre,numero_utenti=numero_utenti,numero_persone=numero_persone)
+        return render_template('index.html', commits=commits,numero_squadre=numero_squadre,numero_utenti=numero_utenti,numero_persone=numero_persone)
 
-    return render_template('index.html', commits=commits,version=version,numero_squadre=numero_squadre, numero_utenti=numero_utenti,numero_persone=numero_persone)
+    return render_template('index.html', commits=commits,numero_squadre=numero_squadre, numero_utenti=numero_utenti,numero_persone=numero_persone)
 
 @app.route('/home')
 @login_required
 def user():
-    return render_template('src/main.html', data=people)
+    username = session.get('username')
+    if username:
+        squadre = leggi_dati_da_file_json(squadra_json_file)
+        if username in squadre:
+            return redirect(url_for('profile'))
+        else:
+            return render_template('src/main.html', data=people)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/crea-squadra', methods=['POST'])
 def crea_squadra():
@@ -254,11 +287,9 @@ def registrazione():
         bio = request.form['bio']
         image_link = request.form['image_link']
 
-        # Carica gli utenti esistenti
         utenti = carica_utenti()
 
-        # Controlla se l'username è già presente
-
+        # Verifica se l'utente esiste già ################################################
 
         # Cripta la password prima di salvarla
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -293,44 +324,35 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 
-def conta_squadre(file_json):
-    try:
-        with open(file_json, 'r') as file:
-            data = json.load(file)
-            numero_squadre = len(data)
-            return numero_squadre
-    except FileNotFoundError:
-        return None
-    except json.JSONDecodeError:
-        return None
-
-def conta_utenti(file_json):
-    try:
-        with open(file_json, 'r') as file:
-            data = json.load(file)
-            numero_utenti = len(data)
-            return numero_utenti
-    except FileNotFoundError:
-        return None
-    except json.JSONDecodeError:
-        return None
-
-def conta_persone(file_json):
-    try:
-        with open(file_json, 'r') as file:
-            data = json.load(file)
-            numero_persone = len(data)
-            return numero_persone
-    except FileNotFoundError:
-        return None
-    except json.JSONDecodeError:
-        return None
-
-
 @app.route('/sitemap.xml')
 def render_xml():
     xml_file_path = 'templates/sitemap.xml'
     return send_file(xml_file_path, mimetype='text/xml')
+
+@login_required
+@app.route('/leaderboard')
+def leaderboard():
+    if os.path.exists(utenti_json_file):
+        with open(utenti_json_file, 'r') as file:
+            utenti = json.load(file)
+            squadre = leggi_dati_da_file_json(squadra_json_file)
+            id = 0
+            if len(squadre) > 0:
+                squadre_punteggi = {}
+                for username, membri in squadre.items():
+                    num_giocatori = len(membri)
+                    squadre_punteggi[username] = {
+                        'points': sum(membro['points'] for membro in membri),
+                        'num_players': num_giocatori
+                    }
+                squadre_punteggi = dict(sorted(squadre_punteggi.items(), key=lambda item: item[1]['points'], reverse=True))
+                return render_template('leaderboard.html', squadre_punteggi=squadre_punteggi, utenti=utenti,id=id)
+            else:
+                return 'Nessuna squadra presente'
+    else:
+        return redirect(url_for('login'))
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

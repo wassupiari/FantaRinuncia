@@ -78,10 +78,9 @@ fabric.properties
 
 # parser json file
 json_parser.py
-
-# folder of json db
 app.log
 private/*.json
+.env
 
 
 # End of https://www.gitignore.io/api/intellij
@@ -240,4 +239,4 @@ dmypy.json
 cython_debug/
 
 
->>>>>>> 2e27e4e5cefa32a03c283a28d54f7d11523ba048
+

@@ -1,8 +1,10 @@
-html,body {
-  font-family: Montserrat, sans-serif;
-    max-width: 100%;
-  overflow-x: hidden;
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap');
 
+html,body {
+  font-family: "Roboto Slab", serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-bottom: 60px;
 }
 
 
@@ -125,12 +127,16 @@ SCROLLBAR
 /*
 PROFILE
 */
+.rounded-circle {
+    border-radius: 10%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center center;
+}
 
 
 
-    #content-wrapper {
-        background: linear-gradient(200deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* Applica uno sfondo con un gradiente che sfuma da trasparente a nero */
-    }
 
 
 
@@ -243,5 +249,14 @@ PROFILE
   }
 }
 
+
+footer {
+
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
 
 
