@@ -141,10 +141,74 @@ const HomePage = () => {
                 </div>
             </div>
 
+            <div
+                className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:grid-cols-1 ">
+                <div className="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
+                    <h2 className="text-3xl lg:text-4xl text-gray-800 font-bold dark:text-gray-200">
+                        Spargi la voce!
+                    </h2>
+                    <p className="mt-3 text-gray-800 dark:text-gray-200">
+                        Non fare come marco, partecipa anche tu.
+                    </p>
+                </div>
+                <div className="chat chat-start">
+                    <div className="chat-image avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS chat bubble component"
+                                 src="https://i.pinimg.com/564x/85/df/7e/85df7e6b5a7ba293a0eba6d0efb7dea7.jpg"/>
+                        </div>
+                    </div>
+                    <div className="chat-header">
+                        founder
+                        <time className="text-xs opacity-50"> 12:45</time>
+                    </div>
+                    <div className="chat-bubble">Ti ho messo nella mia squadra del fantarinuncia 👋</div>
+                    <div className="chat-footer opacity-50">
+                        consegnato
+                    </div>
+                </div>
+                <div className="chat chat-end">
+                    <div className="chat-image avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS chat bubble component"
+                                 src="https://i.pinimg.com/564x/6f/30/99/6f3099398d7c955b95864e8efb0ae84a.jpg"/>
+                        </div>
+                    </div>
+                    <div className="chat-header">
+                        non-marco
+                        <time className="text-xs opacity-50"> 12:46</time>
+                    </div>
+                    <div className="chat-bubble">Ti odio! 😤</div>
+                    <div className="chat-footer opacity-50">
+                        visto alle 12:46
+                    </div>
+                </div>
+                <div className="chat chat-start">
+                    <div className="chat-image avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS chat bubble component"
+                                 src="https://i.pinimg.com/564x/85/df/7e/85df7e6b5a7ba293a0eba6d0efb7dea7.jpg"/>
+                        </div>
+                    </div>
+                    <div className="chat-header">
+                        founder
+                        <time className="text-xs opacity-50"> 12:50</time>
+                    </div>
+                    <div className="chat-bubble">Dai non piangere, dovresti vedere gli altri 😂</div>
+                    <div className="chat-footer opacity-50">
+                        non letto
+                    </div>
+                </div>
+            </div>
+
             <div className="bg-white py-24 sm:py-32 ">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
-                        Made with this technologies:</h2>
+                    <div className="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
+
+                        <h2 className="mt-3 text-gray-800 dark:text-gray-200">
+                            Creato con queste cose, non so cosa siano.
+                        </h2>
+                    </div>
                     <div
                         className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:grid-cols-4 ">
                         <div className="relative">
@@ -155,7 +219,7 @@ const HomePage = () => {
                         <div className="relative">
                             <img
                                 className="col-span-1 max-h-12 w-full object-contain lg:col-span-1 transition-transform transform hover:scale-110 drop-shadow-xl"
-                                src="https://skillicons.dev/icons?i=flask" alt="Transistor"/>
+                                src="https://skillicons.dev/icons?i=expressjs" alt="Transistor"/>
                         </div>
                         <div className="relative">
                             <img

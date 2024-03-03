@@ -18,9 +18,10 @@ const LoginPage = () => {
                 username,
                 password,
             });
-            // Se il login ha successo, gestisci la risposta dal backend come necessario
-            console.log(response.data);
-            // Esegui il reindirizzamento o mostra un messaggio di successo all'utente
+            if (response.status === 200) {
+
+                window.location.href = response.data.redirectUrl;
+            }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 setErrorMessage(error.response.data.message);

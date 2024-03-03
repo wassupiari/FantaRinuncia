@@ -45,7 +45,7 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Credenziali non valide' });
         }
 
-        res.redirect(301, `/dashboard/${username}`)
+        res.status(200).json({ redirectUrl: `/dashboard/${username}` });
 
     } catch (error) {
         console.error('Errore durante il login:', error);
@@ -53,7 +53,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/dashboard' ,(req, res) =>{
+app.get('/dashboard/:username' ,(req, res) =>{
     res.sendFile(path.join(__dirname, "pages", "DashboardPage.jsx"));
 })
 
