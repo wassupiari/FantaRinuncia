@@ -1,11 +1,11 @@
-import NavbarSimple from "../components/navbar.jsx";
-import Footer from "../components/footer.jsx";
+import NavbarSimple from "../../widgets/layout/navbar.jsx";
+import Footer from "../../widgets/layout/footer.jsx";
 import React, { useState } from 'react';
 import axios from "axios";
 import {Typography} from "@material-tailwind/react";
 
 
-const LoginPage = () => {
+export function SignIn() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -146,4 +146,4 @@ const LoginPage = () => {
     );
 }
 
-export default LoginPage
+export default SignIn

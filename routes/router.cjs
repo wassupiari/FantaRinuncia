@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/dashboard/:username' ,(req, res) =>{
-    res.sendFile(path.join(__dirname, "pages", "DashboardPage.jsx"));
+    res.sendFile(path.join(__dirname, "pages", "dashboard.jsx"));
 })
 
 

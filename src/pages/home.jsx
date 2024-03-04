@@ -1,12 +1,11 @@
 import React from 'react'
-import NavbarSimple from "../components/navbar.jsx"
-import Footer from "../components/footer.jsx"
+import {NavbarSimple, Footer} from "@/widgets/layout/index.js";
 import {version} from "../../package.json"
 import '../index.css'
 
 
 
-const HomePage = () => {
+export function Home() {
 
     return (
 
@@ -243,4 +242,4 @@ const HomePage = () => {
         ;
 };
 
-export default HomePage;
+export default Home;

@@ -1,20 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from './pages/HomePage';
-import LoginPage from "./pages/LoginPage.jsx";
-import RegisterPage from "./pages/RegisterPage.jsx";
-import Dashboard from "./pages/DashboardPage.jsx";
+import {  Routes, Route ,Navigate} from "react-router-dom";
+
+import { Dashboard, Auth } from "@/layouts";
+import {Home} from '@/pages'
 
 
 const App = () => {
     return (
-        <BrowserRouter>
+
             <Routes>
-                <Route path="/" element={<HomePage />}/>
-                <Route element={<LoginPage/>} path="/auth/login"/>
-                <Route element={<RegisterPage/>} path="/auth/register"/>
-                <Route element={<Dashboard/>} path="/dashboard/:username"/>
+                <Route path="/home" element={<Home />} />
+                <Route path="/auth/*" element={<Auth />} />
+                <Route path="/dashboard/*" element={<Dashboard />} />
+                <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
-        </BrowserRouter>
+
     );
 };
 

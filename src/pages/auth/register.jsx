@@ -1,11 +1,11 @@
-import NavbarSimple from "../components/navbar.jsx";
-import Footer from "../components/footer.jsx";
+import {NavbarSimple,Footer}from "@/widgets/layout/index.js";
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import {Typography} from "@material-tailwind/react";
 
 
-const RegisterPage = () => {
+export function SignUp (){
     const [nome, setFirstName] = useState('');
     const [cognome, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -193,4 +193,4 @@ const RegisterPage = () => {
     );
 }
 
-export default RegisterPage
+export default SignUp
