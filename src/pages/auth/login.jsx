@@ -5,24 +5,27 @@ import axios from "axios";
 import {Typography} from "@material-tailwind/react";
 
 
+
 export function SignIn() {
+
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleSubmit = async (e) => {
 
 
-
-    const loginUser = async (username, password) => {
         try {
-            // Effettua una richiesta POST al backend per il login
-            const response = await axios.post('http://localhost:4000/login', {
+            const response = await axios.post('http://localhost:4000/auth/login', {
                 username,
                 password,
             });
-            if (response.status === 200) {
 
-                window.location.href = response.data.redirectUrl;
+            if (response.status === 200) {
+                setIsLoggedIn(true);
+                setErrorMessage('');
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
@@ -32,6 +35,10 @@ export function SignIn() {
             }
         }
     };
+
+    if (isLoggedIn) {
+        return <p>Login effettuato con successo!</p>;
+    }
 
     return (
         <>
@@ -125,7 +132,7 @@ export function SignIn() {
                             <p className="text-sm text-gray-500">
                                 No account?
                                 <a href="/auth/register"
-                                              className="flex items-end hover:text-blue-500 transition-colors">
+                                              className="flex items-end hover:text-blue-500 transition-colors"  >
                                 Registrati
                             </a>
                             </p>
@@ -134,7 +141,7 @@ export function SignIn() {
 
                     <button
                         className="align-middle select-none font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-indigo-900 text-white shadow-md shadow-indigo-900/10 hover:shadow-lg hover:shadow-indigo-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none flex items-center gap-3"
-                        type="submit" onClick={() => loginUser(username, password)}>
+                        type="submit" onClick={() => handleSubmit(username, password)}>
                         Sign in
                     </button>
                     {errorMessage && <p>{errorMessage}</p>}

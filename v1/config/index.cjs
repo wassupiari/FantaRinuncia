@@ -1,0 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
+const { PORT, SECRET_ACCESS_TOKEN, POSTGRES_URL,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD } = process.env;
+
+module.exports = { PORT, SECRET_ACCESS_TOKEN ,POSTGRES_URL,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD};

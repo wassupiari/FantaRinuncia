@@ -15,7 +15,7 @@ export function SignUp (){
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/register', {
+            const response = await axios.post('http://localhost:4000/auth/register', {
                 nome,
                 cognome,
                 username,

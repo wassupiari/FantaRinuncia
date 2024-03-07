@@ -1,11 +1,13 @@
 const express = require('express')
 const bcrypt = require("bcrypt");
-const {pool} = require("../src/service/pool.cjs");
-const path = require("path");
+const pool = require("../config/db.cjs")
+const SECRET_ACCESS_TOKEN = require("../config/index.cjs")
+const jwt = require('jsonwebtoken');
+
 const router = express.Router()
 
 const saltRounds = 10;
-router.post('/register', async (req, res) => {
+router.post('auth/register', async (req, res) => {
     const { username, password, nome, cognome } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -17,7 +19,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('auth/login', async (req, res) => {
     const { username, password } = req.body;
     try {
 
@@ -29,17 +31,29 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Credenziali non valide' });
         }
 
-        res.status(200).json({ redirectUrl: `/dashboard/${username}` });
+
+        const token = jwt.sign({ userId: hashedPassword.id }, SECRET_ACCESS_TOKEN);
+
+        res.cookie('token', token, { httpOnly: true });
+
+        res.status(200).json({ message: 'Login successful' });
 
     } catch (error) {
-        console.error('Errore durante il login:', error);
-        return res.status(500).json({ message: 'Errore durante il login' });
+        console.error('Error during login:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
-router.get('/dashboard/:username' ,(req, res) =>{
-    res.sendFile(path.join(__dirname, "pages", "dashboard.jsx"));
-})
+router.post('logout', (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logout successful' });
+});
+
+
+
+
+
+
 
 
 
