@@ -1,25 +1,20 @@
+drop schema if exists fantarinuncia cascade;
 CREATE SCHEMA fantarinuncia;
-DO $$
-    BEGIN
-        IF EXISTS (
-            SELECT 1
-            FROM information_schema.schemata
-            WHERE schema_name = 'fantarinuncia'
-        ) THEN
-            EXECUTE 'DROP SCHEMA fantarinuncia CASCADE';
-        END IF;
-    END $$;
+
+
+
 
 SET schema 'fantarinuncia';
 
 
-create table Utente(
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(20) UNIQUE NOT NULL,
-    password VARCHAR(12) NOT NULL,
-    nome VARCHAR(20) NOT NULL,
-    cognome VARCHAR(30) NOT NULL,
-    data_registrazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE utente (
+                        id serial PRIMARY KEY,
+                        username varchar(20) NOT NULL UNIQUE,
+                        password varchar(60) NOT NULL,
+                        nome varchar(20) NOT NULL,
+                        cognome varchar(30) NOT NULL,
+                        data_registrazione timestamp DEFAULT CURRENT_TIMESTAMP,
+                        immagine_profilo bytea DEFAULT NULL
 );
 
 create table lega(

@@ -6,10 +6,15 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {useAuth} from "@/controller/AuthContex.jsx";
 
 function NavList() {
+    const { user, logout } = useAuth();
+
     return (
         <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+            {user ? (
+                <>
             <Typography
                 as="li"
                 variant="small"
@@ -30,6 +35,31 @@ function NavList() {
                     Sign in
                 </a>
             </Typography>
+                </>
+            ) : (
+                <>
+                    <Typography
+                        as="li"
+                    variant="small"
+                    color="blue-gray"
+                    className="p-1 font-medium"
+                    >
+                    <a href="/regolamento" className="flex items-center hover:text-blue-500 transition-colors">
+                    Regolamento
+                    </a>
+                </Typography>
+                    <Typography
+                        as="li"
+                        variant="small"
+                        color="blue-gray"
+                        className="p-1 font-medium"
+                    >
+                        <button onClick={logout} className="flex items-center hover:text-blue-500 transition-colors">
+                            Logout
+                        </button>
+                    </Typography>
+                </>
+            )}
         </ul>
     );
 }

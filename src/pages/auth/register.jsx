@@ -1,11 +1,14 @@
 import {NavbarSimple,Footer}from "@/widgets/layout/index.js";
-
-import React, { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import { AuthContext } from '@/controller/AuthContex.jsx';
+import React, {useContext, useState} from 'react';
 import axios from 'axios';
 import {Typography} from "@material-tailwind/react";
 
 
 export function SignUp (){
+    const { register } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [nome, setFirstName] = useState('');
     const [cognome, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -14,22 +17,17 @@ export function SignUp (){
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setErrorMessage('');
         try {
-            const response = await axios.post('http://localhost:4000/auth/register', {
-                nome,
-                cognome,
-                username,
-                password,
-            });
-            console.log(response.data); // Gestisci la risposta dal backend come necessario
-            // Esegui il reindirizzamento o mostra un messaggio di successo all'utente
-        } catch (error) {
-            // Controlla se la risposta contiene un messaggio di errore personalizzato dal server
-            if (error.response && error.response.data && error.response.data.message) {
-                setErrorMessage(error.response.data.message);
+            await register({ username, password,nome,cognome });
+            navigate('/login');
+        } catch (err) {
+            if (err.response && err.response.status === 401) {
+                setErrorMessage('Errore durante la registrazione. Riprova.');
             } else {
-                setErrorMessage('Errore durante la registrazione');
+                setErrorMessage('Riprova più tardi.');
             }
+            console.log(err);
         }
     };
 

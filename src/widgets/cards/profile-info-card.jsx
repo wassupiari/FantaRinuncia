@@ -12,10 +12,10 @@ export function ProfileInfoCard({ title, description, details, action }) {
             <CardHeader
                 color="transparent"
                 shadow={false}
-                floated={false}
+                floated={true}
                 className="mx-0 mt-0 mb-4 flex items-center justify-between gap-4"
             >
-                <Typography variant="h6" color="blue-gray">
+                <Typography variant="h6" className="text-black">
                     {title}
                 </Typography>
                 {action}
@@ -24,13 +24,13 @@ export function ProfileInfoCard({ title, description, details, action }) {
                 {description && (
                     <Typography
                         variant="small"
-                        className="font-normal text-blue-gray-500"
+                        className="font-normal text-black"
                     >
                         {description}
                     </Typography>
                 )}
                 {description && details ? (
-                    <hr className="my-8 border-blue-gray-50" />
+                    <hr className="my-8  text-gray-700" />
                 ) : null}
                 {details && (
                     <ul className="flex flex-col gap-4 p-0">
@@ -38,15 +38,15 @@ export function ProfileInfoCard({ title, description, details, action }) {
                             <li key={key} className="flex items-center gap-4">
                                 <Typography
                                     variant="small"
-                                    color="blue-gray"
-                                    className="font-semibold capitalize"
+
+                                    className="font-semibold capitalize text-gray-700"
                                 >
                                     {el}:
                                 </Typography>
                                 {typeof details[el] === "string" ? (
                                     <Typography
                                         variant="small"
-                                        className="font-normal text-blue-gray-500"
+                                        className="font-normal text-black"
                                     >
                                         {details[el]}
                                     </Typography>

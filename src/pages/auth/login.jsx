@@ -1,44 +1,35 @@
 import NavbarSimple from "../../widgets/layout/navbar.jsx";
 import Footer from "../../widgets/layout/footer.jsx";
-import React, { useState } from 'react';
-import axios from "axios";
+import React, {useContext } from 'react'
 import {Typography} from "@material-tailwind/react";
-
-
+import { useNavigate  } from 'react-router-dom';
+import { AuthContext } from '@/controller/AuthContex.jsx';
 
 export function SignIn() {
-
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [username, setUsername] = React.useState('')
+    const [password, setPassword] =React.useState('')
+    const [errors, setErrors] = React.useState('')
 
     const handleSubmit = async (e) => {
-
+        e.preventDefault();
+        setErrors('');
 
         try {
-            const response = await axios.post('http://localhost:4000/auth/login', {
-                username,
-                password,
-            });
-
-            if (response.status === 200) {
-                setIsLoggedIn(true);
-                setErrorMessage('');
-            }
-        } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
-                setErrorMessage(error.response.data.message);
+            await login({ username, password });
+            navigate('/profile');
+        } catch (err) {
+            if (err.response && err.response.status === 401) {
+                setErrors('Invalid credentials');
             } else {
-                setErrorMessage('Errore durante il login');
+                setErrors('Please try again.');
             }
+            console.log(err);
         }
     };
 
-    if (isLoggedIn) {
-        return <p>Login effettuato con successo!</p>;
-    }
+
 
     return (
         <>
@@ -131,7 +122,7 @@ export function SignIn() {
                         >
                             <p className="text-sm text-gray-500">
                                 No account?
-                                <a href="/auth/register"
+                                <a href="/register"
                                               className="flex items-end hover:text-blue-500 transition-colors"  >
                                 Registrati
                             </a>
@@ -141,10 +132,10 @@ export function SignIn() {
 
                     <button
                         className="align-middle select-none font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-indigo-900 text-white shadow-md shadow-indigo-900/10 hover:shadow-lg hover:shadow-indigo-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none flex items-center gap-3"
-                        type="submit" onClick={() => handleSubmit(username, password)}>
+                        type="submit" onClick={e=> handleSubmit(e)}>
                         Sign in
                     </button>
-                    {errorMessage && <p>{errorMessage}</p>}
+                    {errors && <p>{errors}</p>}
                 </div>
             </form>
         </div>
