@@ -1,20 +1,15 @@
-import React from 'react';
-import {
-    Navbar,
-    Collapse,
-    Typography,
-    IconButton,
-} from "@material-tailwind/react";
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Navbar, Collapse, Typography, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import {useAuth} from "@/controller/AuthContex.jsx";
+import { useAuth } from "@/controller/AuthContex.jsx";
+import  Search  from "@/widgets/layout/search.jsx";
 
 function NavList() {
     const { user, logout } = useAuth();
 
     return (
         <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-            {user ? (
-                <>
             <Typography
                 as="li"
                 variant="small"
@@ -25,58 +20,36 @@ function NavList() {
                     Regolamento
                 </a>
             </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-medium"
-            >
-                <a href="/auth/login" className="flex items-center hover:text-blue-500 transition-colors">
-                    Sign in
-                </a>
-            </Typography>
-                </>
-            ) : (
-                <>
-                    <Typography
-                        as="li"
+            {user ? (
+                <Typography
+                    as="li"
                     variant="small"
                     color="blue-gray"
                     className="p-1 font-medium"
-                    >
-                    <a href="/regolamento" className="flex items-center hover:text-blue-500 transition-colors">
-                    Regolamento
+                >
+                    <button onClick={logout} className="flex items-center hover:text-blue-500 transition-colors">
+                        Logout
+                    </button>
+                </Typography>
+            ) : (
+                <Typography
+                    as="li"
+                    variant="small"
+                    color="blue-gray"
+                    className="p-1 font-medium"
+                >
+                    <a href="/login" className="flex items-center hover:text-blue-500 transition-colors">
+                        Sign in
                     </a>
                 </Typography>
-                    <Typography
-                        as="li"
-                        variant="small"
-                        color="blue-gray"
-                        className="p-1 font-medium"
-                    >
-                        <button onClick={logout} className="flex items-center hover:text-blue-500 transition-colors">
-                            Logout
-                        </button>
-                    </Typography>
-                </>
             )}
         </ul>
     );
 }
 
 export function NavbarSimple() {
-    const [openNav, setOpenNav] = React.useState(false);
-
-    const handleWindowResize = () =>
-        window.innerWidth >= 960 && setOpenNav(false);
-
-    React.useEffect(() => {
-        window.addEventListener("resize", handleWindowResize);
-
-        return () => {
-            window.removeEventListener("resize", handleWindowResize);
-        };
-    }, []);
+    const [openNav, setOpenNav] = useState(false);
+    const { user } = useAuth();
 
     return (
         <Navbar className="mx-auto max-w-screen px-6 py-3">
@@ -111,5 +84,6 @@ export function NavbarSimple() {
         </Navbar>
     );
 }
+
 
 export default NavbarSimple;

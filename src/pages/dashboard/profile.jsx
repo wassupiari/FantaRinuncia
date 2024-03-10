@@ -123,7 +123,7 @@ export function Profile() {
                     </div>
                     <div className="grid-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
                         <ProfileInfoCard
-                            title="Profile Information"
+                            title="Informazioni su di te!"
                             description={
                                 isEditing ? (
                                     <textarea
@@ -132,7 +132,7 @@ export function Profile() {
                                         onChange={(e) => setEditedUserData({ ...editedUserData, bio: e.target.value })}
                                     />
                                 ) : (
-                                    <p className="text-blue-gray-700">{userData.bio}</p>
+                                   <Typography variant="small" className="font-normal text-blue-gray-500">{userData.bio}</Typography>
                                 )
                             }
                             details={{
@@ -143,7 +143,7 @@ export function Profile() {
                             action={
                                 isEditing ? (
                                     <>
-                                        <div className="flex space-x-2">
+                                        <div className="flex space-x-0">
                                             <button className="btn btn-sm border-0 bg-white flex items-center"
                                                     onClick={handleSaveChanges}>
                                                 <BookmarkIcon className="h-4 w-4 mr-1" strokeWidth={1.5}/>

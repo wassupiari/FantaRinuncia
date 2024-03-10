@@ -52,6 +52,7 @@ export function SignIn() {
                             type="text"
                             className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                             placeholder="Inserisci username"
+                            autoComplete="current-password"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />

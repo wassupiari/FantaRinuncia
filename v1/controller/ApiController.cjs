@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
 const pool = require("../config/db.cjs");
 const generateJWTToken = require('../config/generateJWTToken.cjs');
-const jwt = require("jsonwebtoken");
-const {SECRET_ACCESS_TOKEN} = require("../config/index.cjs");
+const fs = require("fs");
 const saltRounds = 10;
 
 exports.login = async (req, res) => {
@@ -80,14 +79,14 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const userId = req.userId;
-        const { nome, cognome, bio } = req.body;
+        const { immagine_profilo, bio } = req.body;
 
-        console.log('Dati ricevuti dalla richiesta:', { userId, nome, cognome, bio });
+        console.log('Dati ricevuti dalla richiesta:', { userId, immagine_profilo, bio });
 
-        const query = 'UPDATE fantarinuncia.utente SET nome = $1, cognome = $2, bio = $3 WHERE id = $4 RETURNING *';
+        const query = 'UPDATE fantarinuncia.utente SET immagine_profilo = $1, bio = $2 WHERE id = $3 RETURNING *';
         console.log('Query SQL:', query);
 
-        const result = await pool.query(query, [nome, cognome, bio, userId]);
+        const result = await pool.query(query, [immagine_profilo, bio, userId]);
 
         console.log('Risultato della query:', result.rows);
 
@@ -101,6 +100,23 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ message: 'Errore durante l\'aggiornamento del profilo' });
     }
 };
+
+
+exports.jsonFile = (req, res) => {
+    try {
+        // Leggi il contenuto del file JSON
+        const data = fs.readFileSync('./public/people.json', 'utf8');
+
+        console.log('Contenuto del file JSON caricato correttamente:');
+
+        // Invia i dati come risposta
+        res.json(JSON.parse(data));
+    } catch (error) {
+        console.error('Errore nel caricamento dei dati:', error);
+        res.status(500).send('Errore nel caricamento dei dati.');
+    }
+}
+
 
 
 

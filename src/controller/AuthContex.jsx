@@ -1,16 +1,29 @@
-import React, { createContext, useState, useContext } from 'react';
+// AuthContext.jsx
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
-
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
-    // Funzione per effettuare il login
+    useEffect(() => {
+        const checkLoggedIn = async () => {
+            try {
+                const loggedIn = await isUserLoggedIn();
+                if (loggedIn) {
+                    setUser(loggedIn);
+                }
+            } catch (error) {
+                console.error('Errore durante il controllo del login:', error);
+            }
+        };
+
+        checkLoggedIn();
+    }, []);
+
     const login = async (credentials) => {
         try {
             const response = await axios.post('/login', credentials);
@@ -25,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');
-        navigate('/login')
+        navigate('/login');
     };
 
     const register = async ({ username, password, nome, cognome }) => {
@@ -39,6 +52,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const isUserLoggedIn = async () => {
+        // Esempio di implementazione di base per verificare se l'utente è loggato
+        const token = localStorage.getItem('token');
+        return !!token; // Ritorna true se il token è presente, altrimenti false
+    };
+
     const contextValue = {
         user,
         login,
@@ -46,7 +65,6 @@ export const AuthProvider = ({ children }) => {
         register
     };
 
-    // Forniamo il contesto ai componenti figli
     return (
         <AuthContext.Provider value={contextValue}>
             {children}
@@ -54,5 +72,4 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Funzione di utilità per accedere al contesto di autenticazione
 export const useAuth = () => useContext(AuthContext);
