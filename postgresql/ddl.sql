@@ -1,6 +1,7 @@
 drop schema if exists fantarinuncia cascade;
 CREATE SCHEMA fantarinuncia;
 
+ALTER TABLE fantarinuncia.utente ADD badges VARCHAR(20);
 
 
 
