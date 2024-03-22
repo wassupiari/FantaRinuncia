@@ -354,6 +354,19 @@ def leaderboard():
 
 
 
+# manutenzione
+@app.before_request
+def check_maintenance():
+    if request.path != '/manutenzione':
+        return render_template('manutenzione.html'), 503
+
+@app.route('/manutenzione')
+def manutenzione():
+    return render_template('manutenzione.html')
+
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
